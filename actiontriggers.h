@@ -1,5 +1,5 @@
 class ActionTriggers
 {
 public:
-    static void spawnDebugger();
+    static void SpawnDebugger();
 };

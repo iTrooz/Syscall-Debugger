@@ -2,16 +2,13 @@ QT += widgets
 requires(qtConfig(listview))
 
 SOURCES   = \
-    actiontriggers.cpp \
-    creatorDialog/dialog.cpp \
-			debugWindow/window.cpp \
-			main.cpp \
-			newaddresstab.cpp
+    UI_debugWindow.cpp \
+	actiontriggers.cpp \
+	debugwindow.cpp \
+	main.cpp
 HEADERS   = \
     actiontriggers.h \
-    creatorDialog/dialog.h \
-			debugWindow/window.h \
-			newaddresstab.h
+	debugwindow.h \
 
 # install
 target.path = $$[QT_INSTALL_EXAMPLES]/widgets/itemviews/addressbook

@@ -48,27 +48,18 @@
 **
 ****************************************************************************/
 
-#include "creatorDialog/dialog.h"
+#include "debugWindow.h"
 
 #include <QApplication>
 
 //! [0]
 int main(int argc, char *argv[])
 {
-    CreatorDialog dialog;
-    dialog.exec();
+    QApplication app(argc, argv);
 
-    return QApplication::exec();;
+    DebugWindow win;
+    win.show();
+
+    return QApplication::exec();
 }
-
-
-
-void create(){
-
-    CreatorDialog dialog;
-    if(dialog.exec()){
-    }
-
-}
-
 //! [0]
