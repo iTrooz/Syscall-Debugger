@@ -3,12 +3,14 @@ requires(qtConfig(listview))
 
 SOURCES   = \
     UI_debugWindow.cpp \
-	actiontriggers.cpp \
 	debugwindow.cpp \
-	main.cpp
+	main.cpp \
+    process.cpp \
+    utils.cpp
 HEADERS   = \
-    actiontriggers.h \
 	debugwindow.h \
+    process.h \
+    utils.h
 
 # install
 target.path = $$[QT_INSTALL_EXAMPLES]/widgets/itemviews/addressbook
