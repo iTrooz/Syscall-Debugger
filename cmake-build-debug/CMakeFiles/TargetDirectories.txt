@@ -1,0 +1,4 @@
+/home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug/CMakeFiles/Syscall_Debugger.dir
+/home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug/CMakeFiles/Syscall_Debugger_autogen.dir
