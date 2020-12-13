@@ -1,3 +1,4 @@
+#include <iostream>
 #include "UI_debugWindow.h"
 #include "utils.h"
 #include "debugwindow.h"
@@ -13,23 +14,22 @@ DebugWindow::DebugWindow(){
 
 void DebugWindow::clear(){
 	UI.logs->clearContents();
+
+	UI.logs->contentsMargins()
 }
 
 void DebugWindow::run(){
     if(mainProcess!=nullptr)mainProcess->remove();
 
 
-    QString s = UI.cmd->toPlainText();
-    if(s.isEmpty()){
+    QString qs = UI.cmd->toPlainText();
+    if(qs.isEmpty()){
 		// TODO ERROR MESSAGE
 		return;
     }
 
-    pid_t pid = fork();
-    if(pid == 0){ // check if child
-
-    }
-
-    mainProcess = new Process(&pid);
+    mainProcess = new Process();
+    string s = qs.toStdString();
+    mainProcess->createProcess(s);
     mainProcess->startTrace();
 }

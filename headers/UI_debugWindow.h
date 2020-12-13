@@ -178,7 +178,7 @@ public:
 		processSelector->setSizePolicy(sizePolicy);
 		processSelector->setMaximumSize(QSize(16777215, 30));
 
-		verticalLayout->addWidget(processSelector);
+//		verticalLayout->addWidget(processSelector);
 
 		cmd = new QTextEdit(centralwidget);
 		cmd->setObjectName(QString::fromUtf8("cmd"));

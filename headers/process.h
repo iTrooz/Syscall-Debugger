@@ -20,7 +20,8 @@ public:
     vector<Process> subProcesses;
 
     void remove();
+    bool wait();
     void startTrace();
-    int createProcess(char* cmd);
+    void createProcess(string& cmd);
     int setupProcess(pid_t tracee);
 };
