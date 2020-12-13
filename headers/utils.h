@@ -1,8 +1,7 @@
-class Utils
-{
+#include "debugwindow.h"
+
+class Test{
 public:
-    static void SpawnDebugger();
-    static void a();
 };
 
-//void a();
+extern DebugWindow* mainWindow;

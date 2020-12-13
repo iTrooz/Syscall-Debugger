@@ -9,15 +9,23 @@
 #include <stdio.h>
 #include <errno.h>
 #include <string.h>
+#include <list>
+
+#include "syscall.h"
 
 
 using namespace std;
+
+#ifndef PROCESS
+#define PROCESS
 
 class Process
 {
 public:
     pid_t tracee;
     vector<Process> subProcesses;
+    list<Syscall> calls;
+
 
     void remove();
     bool wait();
@@ -25,3 +33,5 @@ public:
     void createProcess(string& cmd);
     int setupProcess(pid_t tracee);
 };
+
+#endif

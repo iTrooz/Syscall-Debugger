@@ -1,6 +1,7 @@
 #include <iostream>
 #include <sstream>
 #include "process.h"
+#include "utils.h"
 
 using namespace std;
 
@@ -27,6 +28,7 @@ bool Process::wait() {
 
 
 void Process::startTrace() {
+	cout << "START" << endl;
 	int temp;
 	waitpid(tracee, &temp, 0);
 	temp = ptrace(PTRACE_SETOPTIONS, tracee, 0, PTRACE_O_TRACESYSGOOD);
@@ -34,13 +36,20 @@ void Process::startTrace() {
 		cout << "PTRACE_SETOPTIONS failed : code " << temp << endl;
 		return;
 	}
+	Syscall* call;
+	cout << "salut" << endl;
 	while (true) {
+		call = new Syscall;
+
 		if (wait()) break;
-		temp = ptrace(PTRACE_PEEKUSER, tracee, sizeof(long) * ORIG_RAX);
-		fprintf(stderr, "syscall(%d) = ", temp); // syscall
+		call->id = ptrace(PTRACE_PEEKUSER, tracee, sizeof(long) * ORIG_RAX);
 		if (wait()) break;
-		temp = ptrace(PTRACE_PEEKUSER, tracee, sizeof(long) * RAX);
-		fprintf(stderr, "%d\n", temp); // retval
+		call->result = ptrace(PTRACE_PEEKUSER, tracee, sizeof(long) * RAX);
+
+		mainWindow->addEntry(*call);
+		calls.push_back(*call);
+
+		cout << "syscall received" << endl;
 	}
 	// program exited
 }
