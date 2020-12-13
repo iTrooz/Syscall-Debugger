@@ -16,9 +16,8 @@ void DebugWindow::clear(){
 }
 
 void DebugWindow::run(){
-    if(mainProcess!=nullptr){ // TODO MAKE CONFIRMATION
-        mainProcess->remove();
-    }
+    if(mainProcess!=nullptr)mainProcess->remove();
+
 
     QString s = UI.cmd->toPlainText();
     if(s.isEmpty()){
@@ -31,7 +30,6 @@ void DebugWindow::run(){
 
     }
 
-
-    mainProcess = new Process(pid);
+    mainProcess = new Process(&pid);
     mainProcess->startTrace();
 }

@@ -16,11 +16,11 @@ using namespace std;
 class Process
 {
 public:
-    pid_t* pid;
+    pid_t tracee;
     vector<Process> subProcesses;
 
     void remove();
     void startTrace();
-
-    Process(pid_t* tracee);
+    int createProcess(char* cmd);
+    int setupProcess(pid_t tracee);
 };
