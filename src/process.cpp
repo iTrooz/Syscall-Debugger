@@ -67,8 +67,8 @@ int Process::setupProcess(pid_t pid) {
 			cout << "PTRACE_ATTACH failed : code " << temp << endl;
 			return 1;
 		}
-
 	}
+	return 0;
 }
 
 char** convert(string& cmd){
