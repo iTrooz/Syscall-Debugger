@@ -5,8 +5,11 @@
 
 using namespace std;
 
-void Process::remove(){
+void Process::remove(){ // TODO jsp si ca marche
 	kill(tracee, 9);
+	for(Process &p : subProcesses){
+		p.remove();
+	}
 	delete this;
 }
 

@@ -37,6 +37,8 @@ void DebugWindow::run(){
 void DebugWindow::addEntry(Syscall& call) {
 	UI.logs->insertRow(0);
 
+
+
 	UI.logs->setItem(0, 0, new QTableWidgetItem(to_string(call.id).c_str()));
 	UI.logs->setItem(0, 1, new QTableWidgetItem(to_string(call.result).c_str()));
 }

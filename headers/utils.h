@@ -1,7 +1,4 @@
 #include "debugwindow.h"
-
-class Test{
-public:
-};
+#include "configFile.h"
 
 extern DebugWindow* mainWindow;
