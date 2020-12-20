@@ -1,7 +1,2 @@
-aa
-bb
-b
-b # salut
-b
-bf
-
+syscallPath=/usr/include/asm/unistd_64.h
+b=a

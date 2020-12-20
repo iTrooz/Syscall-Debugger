@@ -41,11 +41,12 @@ void Process::startTrace() {
 	}
 	Syscall* call;
 	cout << "salut" << endl;
+	int id;
 	while (true) {
-		call = new Syscall;
 
 		if (wait()) break;
-		call->id = ptrace(PTRACE_PEEKUSER, tracee, sizeof(long) * ORIG_RAX);
+		id = ptrace(PTRACE_PEEKUSER, tracee, sizeof(long) * ORIG_RAX);
+		call = new Syscall(id);
 		if (wait()) break;
 		call->result = ptrace(PTRACE_PEEKUSER, tracee, sizeof(long) * RAX);
 
@@ -54,7 +55,6 @@ void Process::startTrace() {
 
 		cout << "syscall received" << endl;
 	}
-	// program exited
 }
 
 int Process::setupProcess(pid_t pid) {
