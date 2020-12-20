@@ -1,2 +1,3 @@
 syscallPath=/usr/include/asm/unistd_64.h
-b=a
+ignoredSysCalls=fork,vfork,clone
+doChilds=1

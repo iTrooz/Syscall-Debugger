@@ -13,9 +13,10 @@ public:
     Ui_DebugWindow UI;
     Process* mainProcess = nullptr;
     string* cmd;
+    pid_t current;
 
     void clear();
-	void run();
+	void runCmd();
 	void addEntry(Syscall& call);
 	void setPID(char* pid);
 	void setState(char s);

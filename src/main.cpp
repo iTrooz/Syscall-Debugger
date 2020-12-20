@@ -18,11 +18,15 @@ int main(int argc, char *argv[]){
 		parseConfig();
 		assignConfig();
 		load_syscalls();
+		postAssignConfig();
+
 	}catch(exception& e){
+		cerr << "Eror occured !" << endl;
 		cerr << e.what() << endl;
 		// TODO Error box
 		return 1;
 	}catch(string& s){
+		cerr << "Eror occured !" << endl;
 		cerr << s << endl;
 		// TODO Error box
 		return 1;

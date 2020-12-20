@@ -7,7 +7,7 @@
 DebugWindow::DebugWindow(){
     UI.setupUi(this);
     connect(UI.buttonClear, &QPushButton::clicked, this, &DebugWindow::clear);
-    connect(UI.buttonRun, &QPushButton::clicked, this, &DebugWindow::run);
+    connect(UI.buttonRun, &QPushButton::clicked, this, &DebugWindow::runCmd);
 
 }
 
@@ -15,7 +15,7 @@ void DebugWindow::clear(){
 	UI.logs->clearContents();
 }
 
-void DebugWindow::run(){
+void DebugWindow::runCmd(){
     if(mainProcess!=nullptr){
     	cout << "deleting process.." << endl;
     	mainProcess->remove();
@@ -29,8 +29,7 @@ void DebugWindow::run(){
     }
 
     mainProcess = new Process();
-    string s = qs.toStdString();
-    mainProcess->createProcess(s);
+    current = mainProcess->createProcess(qs.toStdString());
     mainProcess->startTrace();
 }
 

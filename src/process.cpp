@@ -28,10 +28,7 @@ bool Process::wait() {
 	}
 }
 
-
-
 void Process::startTrace() {
-	cout << "START" << endl;
 	int temp;
 	waitpid(tracee, &temp, 0);
 	temp = ptrace(PTRACE_SETOPTIONS, tracee, 0, PTRACE_O_TRACESYSGOOD);
@@ -40,7 +37,6 @@ void Process::startTrace() {
 		return;
 	}
 	Syscall* call;
-	cout << "salut" << endl;
 	int id;
 	while (true) {
 
@@ -50,12 +46,31 @@ void Process::startTrace() {
 		if (wait()) break;
 		call->result = ptrace(PTRACE_PEEKUSER, tracee, sizeof(long) * RAX);
 
-		mainWindow->addEntry(*call);
 		calls.push_back(*call);
 
-		cout << "syscall received" << endl;
+		config::ignoredSysCalls;
+
+		// handle call
+		if(config::doChilds){
+			if(find(config::ignoredSysCalls.begin(), config::ignoredSysCalls.end(), id) != config::ignoredSysCalls.end()){
+				cout << "DETECTED SUBPROCESS" << endl;
+//				Process p;
+//				p.setupProcess();
+//				subProcesses.push_back();
+			}
+		}
+		if(mainWindow->current==tracee){
+			mainWindow->addEntry(*call);
+		}
 	}
 }
+
+/*
+ class Process{
+ 	public void setupProcess(){
+ 	}
+}
+ */
 
 int Process::setupProcess(pid_t pid) {
 	tracee = pid;
@@ -88,7 +103,7 @@ char** convert(string& cmd){
 }
 
 
-void Process::createProcess(string& cmd) {
+pid_t Process::createProcess(string cmd) {
 
 	char** cmdArgs = convert(cmd);
 
@@ -97,8 +112,9 @@ void Process::createProcess(string& cmd) {
 		ptrace(PTRACE_TRACEME);
 		kill(getpid(), SIGSTOP);
 		execvp(cmdArgs[0], cmdArgs); // stop le flow du code
-		return; // au cas ou
+		return 0; // au cas ou
 	}else{
 		tracee = child;
+		return child;
 	}
 }

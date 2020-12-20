@@ -30,7 +30,7 @@ public:
     void remove();
     bool wait();
     void startTrace();
-    void createProcess(string& cmd);
+    pid_t createProcess(string cmd);
     int setupProcess(pid_t tracee);
 };
 

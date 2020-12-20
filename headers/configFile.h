@@ -12,10 +12,12 @@ namespace config{
 
 	extern unordered_map<string, string> data;
 	extern string syscallPath;
+	extern bool doChilds;
 	extern vector<int> ignoredSysCalls;
 
 
 	string& getString(const string& key);
+	bool getBool(const string& key);
 	int getInt(string& key);
 }
 

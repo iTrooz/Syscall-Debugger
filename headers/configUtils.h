@@ -1,4 +1,5 @@
 #include <fstream>
+#include <sstream>
 
 void parseConfig(){
 	ifstream conf("config");
@@ -21,10 +22,20 @@ void parseConfig(){
 
 void assignConfig(){
 	config::syscallPath = config::getString("syscallPath");
+	config::doChilds = config::getBool("doChilds");
+}
 
-//	std::istringstream str(config::getString("ignoredSysCalls")); // TODO don't
-//	string s;
-//	while(getline(str, s)){
-//		config::ignoredSysCalls.push_back(stoi(s));
-//	}
+int getKey(string& val){
+	for(auto& c : syscalls){
+		if(c.second==val)return c.first;
+	}
+	throw "syscall "+val+" not found";
+}
+
+void postAssignConfig(){
+	std::istringstream str(config::getString("ignoredSysCalls"));
+	string s;
+	while(getline(str, s, ',')){
+		config::ignoredSysCalls.push_back(getKey(s));
+	}
 }
