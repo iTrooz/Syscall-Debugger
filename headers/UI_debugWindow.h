@@ -226,8 +226,8 @@ public:
 
 		processTree = new QTreeWidget(centralwidget);
 		QTreeWidgetItem *__qtreewidgetitem = new QTreeWidgetItem(processTree);
-		new QTreeWidgetItem(__qtreewidgetitem);
-		new QTreeWidgetItem(__qtreewidgetitem);
+//		new QTreeWidgetItem(__qtreewidgetitem);
+//		new QTreeWidgetItem(__qtreewidgetitem);
 		processTree->setObjectName(QString::fromUtf8("processTree"));
 		QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Expanding);
 		sizePolicy1.setHorizontalStretch(0);
@@ -308,12 +308,12 @@ public:
 
 		const bool __sortingEnabled = processTree->isSortingEnabled();
 		processTree->setSortingEnabled(false);
-		QTreeWidgetItem *___qtreewidgetitem1 = processTree->topLevelItem(0);
-		___qtreewidgetitem1->setText(0, QCoreApplication::translate("DebugWindow", "salut", nullptr));
-		QTreeWidgetItem *___qtreewidgetitem2 = ___qtreewidgetitem1->child(0);
-		___qtreewidgetitem2->setText(0, QCoreApplication::translate("DebugWindow", "test", nullptr));
-		QTreeWidgetItem *___qtreewidgetitem3 = ___qtreewidgetitem1->child(1);
-		___qtreewidgetitem3->setText(0, QCoreApplication::translate("DebugWindow", "test2", nullptr));
+//		QTreeWidgetItem *___qtreewidgetitem1 = processTree->topLevelItem(0);
+//		___qtreewidgetitem1->setText(0, QCoreApplication::translate("DebugWindow", "salut", nullptr));
+//		QTreeWidgetItem *___qtreewidgetitem2 = ___qtreewidgetitem1->child(0);
+//		___qtreewidgetitem2->setText(0, QCoreApplication::translate("DebugWindow", "test", nullptr));
+//		QTreeWidgetItem *___qtreewidgetitem3 = ___qtreewidgetitem1->child(1);
+//		___qtreewidgetitem3->setText(0, QCoreApplication::translate("DebugWindow", "test2", nullptr));
 		processTree->setSortingEnabled(__sortingEnabled);
 
 		menu_File->setTitle(QCoreApplication::translate("DebugWindow", "&File", nullptr));

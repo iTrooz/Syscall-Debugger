@@ -10,7 +10,7 @@ public:
 	Syscall(int id);
 
 	int id;
-	int result;
+	int result; // TODO long ? (et id ?)
 	string& name;
 public:
 };

@@ -5,11 +5,12 @@
 #include <sys/wait.h>
 #include <sys/types.h>
 #include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <errno.h>
-#include <string.h>
+#include <cstdlib>
+#include <cstdio>
+#include <cerrno>
+#include <string>
 #include <list>
+#include <QTreeWidgetItem>
 
 #include "syscall.h"
 
@@ -22,16 +23,10 @@ using namespace std;
 class Process
 {
 public:
-    pid_t tracee;
-    vector<Process> subProcesses;
+    pid_t pid;
     list<Syscall> calls;
-
-
-    void remove();
-    bool wait();
-    void startTrace();
-    pid_t createProcess(string cmd);
-    int setupProcess(pid_t tracee);
+    Syscall* currentCall = nullptr;
+	QTreeWidgetItem* treeItem;
 };
 
 #endif

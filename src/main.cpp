@@ -14,6 +14,8 @@ void load_syscalls();
 // TODO syscallPath : path different for Ubuntu/(Manjaro|Arch)/Kali (others?)
 
 int main(int argc, char *argv[]){
+	cout << "App PID : " << getpid() << endl;
+
 	try{
 		parseConfig();
 		assignConfig();
@@ -21,12 +23,12 @@ int main(int argc, char *argv[]){
 		postAssignConfig();
 
 	}catch(exception& e){
-		cerr << "Eror occured !" << endl;
+		cerr << "Error occured !" << endl;
 		cerr << e.what() << endl;
 		// TODO Error box
 		return 1;
 	}catch(string& s){
-		cerr << "Eror occured !" << endl;
+		cerr << "Error occured !" << endl;
 		cerr << s << endl;
 		// TODO Error box
 		return 1;

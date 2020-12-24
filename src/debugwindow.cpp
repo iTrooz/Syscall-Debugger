@@ -12,13 +12,16 @@ DebugWindow::DebugWindow(){
 }
 
 void DebugWindow::clear(){
-	UI.logs->clearContents();
+//	UI.logs->clearContents();
+
+	Syscall s = Syscall(1);
+	addEntryStart(s);
 }
 
 void DebugWindow::runCmd(){
     if(mainProcess!=nullptr){
     	cout << "deleting process.." << endl;
-    	mainProcess->remove();
+    	killProcess(true);
     }
 
 
@@ -28,15 +31,27 @@ void DebugWindow::runCmd(){
 		return;
     }
 
-    mainProcess = new Process();
-    current = mainProcess->createProcess(qs.toStdString());
-    mainProcess->startTrace();
+
+    cmd = std::move(qs.toStdString());
+
+    pid_t tracer = fork();
+    if(tracer==0){
+    	createProcess();
+    	displayed = mainProcess;
+    	startTrace();
+    }
 }
 
-void DebugWindow::addEntry(Syscall& call) {
+void DebugWindow::addEntryStart(Syscall& call){
 	UI.logs->insertRow(0);
+//	UI.logs->setItem(0, 0, new QTableWidgetItem(call.name.c_str()));
+	UI.logs->setItem(0, 0, new QTableWidgetItem("salut"));
+	UI.logs->setItem(0, 1, new QTableWidgetItem("?"));
+	cout << "added" << endl;
+	// TODO args
+}
 
-	UI.logs->setItem(0, 0, new QTableWidgetItem(call.name.c_str()));
+void DebugWindow::addEntryEnd(Syscall& call){
 	UI.logs->setItem(0, 1, new QTableWidgetItem(to_string(call.result).c_str()));
 }
 

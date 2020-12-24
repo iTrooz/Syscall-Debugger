@@ -6,8 +6,9 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ../final)
 
 file( GLOB SOURCES src/*.cpp )
 file( GLOB HEADERS headers/*.h )
-add_executable(Syscall_Debugger ${SOURCES} ${HEADERS} headers/configUtils.h)
+add_executable(Syscall_Debugger ${SOURCES} ${HEADERS})
 
 find_package(Qt5Widgets REQUIRED)
 target_link_libraries(Syscall_Debugger Qt5::Widgets)
+target_link_libraries(Syscall_Debugger pthread)
 target_include_directories(Syscall_Debugger PUBLIC headers)
