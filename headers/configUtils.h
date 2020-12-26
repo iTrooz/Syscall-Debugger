@@ -23,6 +23,8 @@ void parseConfig(){
 void assignConfig(){
 	config::syscallPath = config::getString("syscallPath");
 	config::doChilds = config::getBool("doChilds");
+	config::doChilds = config::getBool("doChilds");
+	config::displayLimit = config::getInt("displayLimit");
 }
 
 int getKey(string& val){

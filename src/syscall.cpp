@@ -11,4 +11,5 @@ string& guessName(int id){
 
 Syscall::Syscall(int id) : name(guessName(id)) {
 	this->id = id;
+	this->result = 0;
 }

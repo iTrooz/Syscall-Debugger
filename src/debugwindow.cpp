@@ -1,4 +1,5 @@
 #include <iostream>
+#include <QMessageBox>
 #include "UI_debugWindow.h"
 #include "utils.h"
 #include "debugwindow.h"
@@ -42,11 +43,11 @@ void DebugWindow::treeClick(QTreeWidgetItem* item){
 	cerr << "NOT SUPPOSED TO HAPPEN : Clicked process not found" << endl;
 }
 
-void DebugWindow::changeView(Process& p) const{
+void DebugWindow::changeView(Process& p) const {
 	UI.callsLogs->setRowCount(0);
-	for(Syscall& call : p.calls){
-		addEntryStart(call);
-		addEntryEnd(call);
+	for(Syscall* call : p.calls){
+		addEntryStart(*call);
+		addEntryEnd(*call);
 	}
 
 }
@@ -59,12 +60,17 @@ void DebugWindow::clearCallsLogs() const {
 }
 
 void DebugWindow::runCmd(){
-	cleanUpProcess();
 	cleanUpUI();
+	cleanUpProcess();
 
     QString qs = UI.cmd->toPlainText();
     if(qs.isEmpty()){
-		// TODO ERROR MESSAGE
+		auto* msg = new QMessageBox();
+		msg->setIcon(QMessageBox::Warning);
+
+		msg->setWindowTitle("Warning");
+		msg->setText("No command set !");
+		msg->show();
 		return;
     }
 

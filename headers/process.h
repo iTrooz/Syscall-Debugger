@@ -24,7 +24,7 @@ class Process
 public:
 	bool running = true;
     pid_t pid;
-    list<Syscall> calls;
+    list<Syscall*> calls;
     Syscall* currentCall = nullptr;
 	QTreeWidgetItem* treeItem;
 

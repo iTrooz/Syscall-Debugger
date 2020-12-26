@@ -1,5 +1,6 @@
 #include <debugwindow.h>
 #include <QApplication>
+#include <QMessageBox>
 #include <iostream>
 #include "utils.h"
 #include "configFile.h"
@@ -15,6 +16,7 @@ void load_syscalls();
 
 int main(int argc, char *argv[]){
 	cout << "App PID : " << getpid() << endl;
+	QApplication app(argc, argv);
 
 	try{
 		parseConfig();
@@ -22,19 +24,20 @@ int main(int argc, char *argv[]){
 		load_syscalls();
 		postAssignConfig();
 
-	}catch(exception& e){
-		cerr << "Error occured !" << endl;
+	}catch(exception& e) {
+		cerr << "An error occured !" << endl;
 		cerr << e.what() << endl;
-		// TODO Error box
-		return 1;
-	}catch(string& s){
-		cerr << "Error occured !" << endl;
-		cerr << s << endl;
-		// TODO Error box
-		return 1;
+
+		auto msg = QMessageBox();
+		msg.setIcon(QMessageBox::Critical);
+		msg.setText("Config loading error");
+
+		msg.setInformativeText(QString::fromStdString("Raison : "+(string) e.what()));
+		msg.setWindowTitle("Syscall Debugger - Startup Error");
+		msg.show();
+		return QApplication::exec();
 	}
 
-    QApplication app(argc, argv);
 
 	mainWindow = new DebugWindow;
     mainWindow->show();

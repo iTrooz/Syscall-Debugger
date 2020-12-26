@@ -9,10 +9,9 @@ using namespace std;
 
 void DebugWindow::remProcess(bool kil){ // TODO jsp si ca marche
 	for(Process* p : processes){
-		if(kil)kill(p->pid, 9);
-		delete p;
+		if(kil) kill(p->pid, 9);
+
 	}
-	delete this;
 }
 
 void DebugWindow::setupProcess(pid_t pid) {
@@ -52,8 +51,6 @@ void DebugWindow::createProcess() {
 	if(child==0){
 		ptrace(PTRACE_TRACEME);
 		kill(getpid(), SIGSTOP);
-		cout << cmdArgs[0] << endl;
-		cout << cmdArgs[1] << endl;
 		execvp(cmdArgs[0], cmdArgs); // stop le flow du code
 		throw runtime_error("NOT SUPPOSED TO HAPPEN : PROCESS ESCAPED"); // au cas ou
 	}else {
@@ -75,9 +72,6 @@ bool DebugWindow::waitProcess(pid_t& stopped) {
 			exit(0);
 		}
 
-//		if(((status >> 16) & 0xffff) == PTRACE_EVENT_CLONE){
-//			cout << "CLONE SIGNAL" << endl;
-//		}
 		if (WIFSTOPPED(status) && WSTOPSIG(status) & 0x80){
 			return false;
 		}
@@ -92,13 +86,10 @@ bool DebugWindow::waitProcess(pid_t& stopped) {
 
 void DebugWindow::startTrace() { // TODO way to kill tracer ?
 
-	cout << "Tracer PID : " << getpid() << endl;
-
 	int temp, stopped;
 	processes.insert(mainProcess);
 
 	waitpid(mainProcess->pid, &temp, 0);
-	cout << "Child PID : " << mainProcess->pid << endl;
 	temp = ptrace(PTRACE_SETOPTIONS, mainProcess->pid, 0, PTRACE_O_TRACESYSGOOD | PTRACE_O_TRACEFORK | PTRACE_O_TRACECLONE);
 	if(temp!=0)throw runtime_error("PTRACE_SETOPTIONS failed : "+to_string(temp));
 	temp = ptrace(PTRACE_SYSCALL, mainProcess->pid, 0, 0); // restart le thread + l'arrête au prochain syscall
@@ -148,10 +139,16 @@ void DebugWindow::startTrace() { // TODO way to kill tracer ?
 		if(proc->currentCall==nullptr){ // entry
 			temp = ptrace(PTRACE_PEEKUSER, stopped, sizeof(long) * ORIG_RAX);
 			proc->currentCall = new Syscall(temp);
-			proc->calls.push_back(*proc->currentCall);
+			proc->calls.push_back(proc->currentCall);
+
+
 			handleCallStart(*proc);
 		}else{ // exit
 			proc->currentCall->result = ptrace(PTRACE_PEEKUSER, stopped, sizeof(long) * RAX);
+
+			auto a = proc->calls.end();
+			a--;
+
 			handleCallReturn(*proc);
 			proc->currentCall = nullptr;
 		}
@@ -159,6 +156,11 @@ void DebugWindow::startTrace() { // TODO way to kill tracer ?
 		temp = ptrace(PTRACE_SYSCALL, stopped, 0, 0); // restart le thread + l'arrête au prochain syscall
 		if(temp!=0)cerr << "PTRACE_SYSCALL end-loop failed : " << temp << endl;
 	}
+
+//	cout << "-----------" << endl;
+//	for(Syscall& call : mainProcess->calls){
+//		cout << call.result << endl;
+//	}
 	cout << "fin" << endl;
 }
 

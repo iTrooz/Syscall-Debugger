@@ -5,7 +5,7 @@
 using namespace std;
 
 void Process::clearCalls(){
-	for(Syscall& c : calls){
-		delete &c;
+	for(Syscall* c : calls){
+		delete c;
 	}
 }

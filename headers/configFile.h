@@ -19,7 +19,7 @@ namespace config{
 
 	string& getString(const string& key);
 	bool getBool(const string& key);
-	int getInt(string& key);
+	int getInt(const string& key);
 }
 
 #endif

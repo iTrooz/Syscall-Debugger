@@ -21,7 +21,7 @@ namespace config {
 		return getString(key)!="0";
 	}
 
-	int getInt(string& key){
+	int getInt(const string& key){
 		return stoi(getString(key));
 	}
 }
