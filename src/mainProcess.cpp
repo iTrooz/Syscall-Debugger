@@ -7,23 +7,25 @@ using namespace std;
 
 
 void DebugWindow::killProcess(bool kil){ // TODO jsp si ca marche
-	for(Process* p : tracees){
+	for(Process* p : processes){
 		if(kil)kill(p->pid, 9);
 		delete p;
 	}
 	delete this;
 }
 
-int DebugWindow::setupProcess(pid_t pid) {
+void DebugWindow::setupProcess(pid_t pid) {
 	mainProcess = new Process;
 	mainProcess->pid = pid;
 	int temp;
 	temp = ptrace(PTRACE_ATTACH, pid, 0, 0);
 	if (temp != 0) {
-		cout << "PTRACE_ATTACH failed : code " << temp << endl;
-		return 1;
+		cerr << "PTRACE_ATTACH failed : code " << temp << endl;
+		return;
 	}
-	return 0;
+
+	displayed = mainProcess;
+	startTrace();
 }
 
 char** convert(string& cmd){
@@ -42,7 +44,7 @@ char** convert(string& cmd){
 	return (char**)cmdArgs;
 }
 
-pid_t DebugWindow::createProcess() {
+void DebugWindow::createProcess() {
 
 	char** cmdArgs = convert(cmd);
 
@@ -50,12 +52,16 @@ pid_t DebugWindow::createProcess() {
 	if(child==0){
 		ptrace(PTRACE_TRACEME);
 		kill(getpid(), SIGSTOP);
+		cout << cmdArgs[0] << endl;
+		cout << cmdArgs[1] << endl;
 		execvp(cmdArgs[0], cmdArgs); // stop le flow du code
 		throw runtime_error("NOT SUPPOSED TO HAPPEN : PROCESS ESCAPED"); // au cas ou
-	}else{
+	}else {
 		mainProcess = new Process;
 		mainProcess->pid = child;
-		return child;
+
+		displayed = mainProcess;
+		startTrace();
 	}
 }
 
@@ -66,7 +72,6 @@ bool DebugWindow::waitProcess(pid_t& stopped) {
 	while (true) {
 		stopped = waitpid(-1, &status, __WALL);
 		if(stopped==-1){
-			cout << "Nothing to trace anymore" << endl;
 			exit(0);
 		}
 
@@ -80,7 +85,7 @@ bool DebugWindow::waitProcess(pid_t& stopped) {
 			return true;
 		}
 		status=ptrace(PTRACE_SYSCALL, stopped, 0, 0); // restart le thread + l'arrête au prochain syscall
-		if(status!=0)cout << "failed wait_for_syscall : " << status << endl;
+		if(status!=0)cerr << "failed wait_for_syscall : " << status << endl;
 	}
 }
 
@@ -90,7 +95,7 @@ void DebugWindow::startTrace() { // TODO way to kill tracer ?
 	cout << "Tracer PID : " << getpid() << endl;
 
 	int temp, syscall, retval, stopped;
-	tracees.insert(mainProcess);
+	processes.insert(mainProcess);
 
 	waitpid(mainProcess->pid, &temp, 0);
 	cout << "Child PID : " << mainProcess->pid << endl;
@@ -103,33 +108,33 @@ void DebugWindow::startTrace() { // TODO way to kill tracer ?
 	mainProcess->treeItem->setText(0, QString(to_string(mainProcess->pid).c_str()));
 
 	Process* proc;
-	cout << "IN LOOP" << endl;
 	while (true) {
-		cout << endl;
 		if (waitProcess(stopped)) {
-			cout << "invalid return" << endl;
-			bool f = true;
-			for (Process *p : tracees) {
-				if (p->pid == stopped) {
-					tracees.erase(p);
-					delete p;
-					f = false;
-					break;
+			proc = nullptr;
+			bool empty = true;
+			for (Process *p : processes) {
+				if (p->running){
+					if(p->pid == stopped) {
+						p->running = false;
+						proc = p;
+					}else{
+						empty = false;
+						break;
+					}
 				}
 			}
-			if(f){
+			if(proc==nullptr){
 				cerr << "Invalid child exited : " << stopped << endl;
 				continue;
 			}else{
-
-				cout << "child " << stopped << " exited" << endl;
-				if (tracees.empty())break;
+				handleChildExit(*proc);
+				if (empty)break;
 				else continue;
 			}
 		}
 
 		proc = nullptr;
-		for (Process *p : tracees) {
+		for (Process *p : processes) {
 			if (p->pid == stopped) {
 				proc = p;
 				break;
@@ -149,7 +154,6 @@ void DebugWindow::startTrace() { // TODO way to kill tracer ?
 			proc->currentCall->result = ptrace(PTRACE_PEEKUSER, stopped, sizeof(long) * RAX);
 			handleCallReturn(*proc);
 			proc->currentCall = nullptr;
-//			cout << call->name << "->" << call->result << endl;
 		}
 
 		temp = ptrace(PTRACE_SYSCALL, stopped, 0, 0); // restart le thread + l'arrête au prochain syscall
@@ -163,9 +167,9 @@ void DebugWindow::handleCallReturn(Process& proc) {
 		Process *newChild = new Process();
 		newChild->pid = proc.currentCall->result;
 
-		tracees.insert(newChild);
+		processes.insert(newChild);
 		int temp = ptrace(PTRACE_SYSCALL, newChild, 0, 0); // restart le thread + l'arrête au prochain syscall
-		if (temp != 0) cout << "normal fail : " << temp << endl; // TODO NORMAL
+		if (temp != 0) cout << "normal fail : " << temp << endl; // TODO NORMAL ?
 
 
 		newChild->treeItem = new QTreeWidgetItem;
@@ -181,6 +185,13 @@ void DebugWindow::handleCallReturn(Process& proc) {
 void DebugWindow::handleCallStart(Process& proc) {
 	if(displayed->pid==proc.pid){
 		addEntryStart(*proc.currentCall);
+	}
+}
+
+void DebugWindow::handleChildExit(Process& proc){
+	if(displayed->pid==proc.pid){
+		displayed = nullptr;
+		// TODO Basculer sur les logs parent/main
 	}
 }
 

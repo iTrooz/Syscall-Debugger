@@ -1,5 +1,8 @@
-#include<vector>
 
+#ifndef PROCESS
+#define PROCESS
+
+#include<vector>
 #include <sys/ptrace.h>
 #include <sys/reg.h>
 #include <sys/wait.h>
@@ -17,16 +20,17 @@
 
 using namespace std;
 
-#ifndef PROCESS
-#define PROCESS
 
 class Process
 {
 public:
+	bool running = true;
     pid_t pid;
     list<Syscall> calls;
     Syscall* currentCall = nullptr;
 	QTreeWidgetItem* treeItem;
+
+	void clearCalls();
 };
 
 #endif

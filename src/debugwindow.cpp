@@ -2,28 +2,64 @@
 #include "UI_debugWindow.h"
 #include "utils.h"
 #include "debugwindow.h"
+#include "thread"
 
+void DebugWindow::cleanUpProcess() {
+	if (mainProcess != nullptr) {
+		killProcess(true);
+	}
+
+	for (auto *proc : processes) {
+		delete proc;
+	}
+	processes.clear();
+}
+
+void DebugWindow::cleanUpUI(){
+	UI.callsLogs->setRowCount(0);
+	UI.processTree->topLevelItem(0)->setText(0, "NA");
+	for(auto* i : UI.processTree->topLevelItem(0)->takeChildren()) {
+		delete i;
+	}
+	UI.stdLog->clear();
+}
 
 DebugWindow::DebugWindow(){
     UI.setupUi(this);
-    connect(UI.buttonClear, &QPushButton::clicked, this, &DebugWindow::clear);
+    connect(UI.buttonClear, &QPushButton::clicked, this, &DebugWindow::clearCallsLogs);
     connect(UI.buttonRun, &QPushButton::clicked, this, &DebugWindow::runCmd);
+    connect(UI.processTree, &QTreeWidget::itemClicked, this, &DebugWindow::treeClick);
+}
+
+void DebugWindow::treeClick(QTreeWidgetItem* item){
+	for(Process* proc : processes){
+		if(proc->treeItem==item){
+			changeView(*proc);
+			return;
+		}
+	}
+	cerr << "NOT SUPPOSED TO HAPPEN : Process clicked not found" << endl;
+}
+
+void DebugWindow::changeView(Process& p){
+	UI.callsLogs->setRowCount(0);
+	for(Syscall& call : p.calls){
+		addEntryStart(call);
+		addEntryEnd(call);
+	}
 
 }
 
-void DebugWindow::clear(){
-//	UI.logs->clearContents();
-
-	Syscall s = Syscall(1);
-	addEntryStart(s);
+void DebugWindow::clearCallsLogs(){
+	UI.callsLogs->setRowCount(0);
+	if(displayed!=nullptr){
+		displayed->clearCalls();
+	}
 }
 
 void DebugWindow::runCmd(){
-    if(mainProcess!=nullptr){
-    	cout << "deleting process.." << endl;
-    	killProcess(true);
-    }
-
+	cleanUpProcess();
+	cleanUpUI();
 
     QString qs = UI.cmd->toPlainText();
     if(qs.isEmpty()){
@@ -31,28 +67,21 @@ void DebugWindow::runCmd(){
 		return;
     }
 
-
     cmd = std::move(qs.toStdString());
 
-    pid_t tracer = fork();
-    if(tracer==0){
-    	createProcess();
-    	displayed = mainProcess;
-    	startTrace();
-    }
+    std::thread thr(&DebugWindow::createProcess, this);
+    thr.detach();
 }
 
 void DebugWindow::addEntryStart(Syscall& call){
-	UI.logs->insertRow(0);
-//	UI.logs->setItem(0, 0, new QTableWidgetItem(call.name.c_str()));
-	UI.logs->setItem(0, 0, new QTableWidgetItem("salut"));
-	UI.logs->setItem(0, 1, new QTableWidgetItem("?"));
-	cout << "added" << endl;
+	UI.callsLogs->insertRow(0);
+	UI.callsLogs->setItem(0, 0, new QTableWidgetItem(call.name.c_str()));
+	UI.callsLogs->setItem(0, 1, new QTableWidgetItem("?"));
 	// TODO args
 }
 
 void DebugWindow::addEntryEnd(Syscall& call){
-	UI.logs->setItem(0, 1, new QTableWidgetItem(to_string(call.result).c_str()));
+	UI.callsLogs->setItem(0, 1, new QTableWidgetItem(to_string(call.result).c_str()));
 }
 
 void DebugWindow::setPID(char* pid){

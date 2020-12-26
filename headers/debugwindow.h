@@ -14,29 +14,34 @@ public:
     Ui_DebugWindow UI;
     Process* mainProcess = nullptr;
     string cmd;
-    Process* displayed; // TODO juste mettre le PID ?
-
-    void clear();
-	void runCmd();
-	void setPID(char* pid);
-	void setState(char s);
-	void killProcess(bool kil);
+    Process* displayed = nullptr; // TODO juste mettre le PID ?
 
     DebugWindow();
 
+    void clearCallsLogs();
+	void runCmd();
+	void treeClick(QTreeWidgetItem* item);
+	void setPID(char* pid);
+	void setState(char s);
+
+	void cleanUpUI();
+	void cleanUpProcess();
+	void changeView(Process &p);
 
 	void addEntryStart(Syscall& call);
 	void addEntryEnd(Syscall& call);
 
 
-	unordered_set<Process*> tracees;
-	pid_t createProcess();
-	int setupProcess(pid_t tracee);
+	unordered_set<Process*> processes;
+	void createProcess();
+	void setupProcess(pid_t tracee);
+	void killProcess(bool kil);
 private:
 	void startTrace();
 	bool waitProcess(pid_t& stopped);
 	void handleCallReturn(Process& proc);
 	void handleCallStart(Process& proc);
+	void handleChildExit(Process &proc);
 
 private slots: // a voir pour suppr ?
 
