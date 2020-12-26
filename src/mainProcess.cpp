@@ -2,11 +2,12 @@
 #include<iostream>
 #include <sstream>
 #include <unordered_set>
+#include "configFile.h"
 
 using namespace std;
 
 
-void DebugWindow::killProcess(bool kil){ // TODO jsp si ca marche
+void DebugWindow::remProcess(bool kil){ // TODO jsp si ca marche
 	for(Process* p : processes){
 		if(kil)kill(p->pid, 9);
 		delete p;
@@ -17,8 +18,7 @@ void DebugWindow::killProcess(bool kil){ // TODO jsp si ca marche
 void DebugWindow::setupProcess(pid_t pid) {
 	mainProcess = new Process;
 	mainProcess->pid = pid;
-	int temp;
-	temp = ptrace(PTRACE_ATTACH, pid, 0, 0);
+	long temp = ptrace(PTRACE_ATTACH, pid, 0, 0);
 	if (temp != 0) {
 		cerr << "PTRACE_ATTACH failed : code " << temp << endl;
 		return;
@@ -84,7 +84,7 @@ bool DebugWindow::waitProcess(pid_t& stopped) {
 		if (WIFEXITED(status)){
 			return true;
 		}
-		status=ptrace(PTRACE_SYSCALL, stopped, 0, 0); // restart le thread + l'arrête au prochain syscall
+		status = ptrace(PTRACE_SYSCALL, stopped, 0, 0); // restart le thread + l'arrête au prochain syscall
 		if(status!=0)cerr << "failed wait_for_syscall : " << status << endl;
 	}
 }
@@ -94,7 +94,7 @@ void DebugWindow::startTrace() { // TODO way to kill tracer ?
 
 	cout << "Tracer PID : " << getpid() << endl;
 
-	int temp, syscall, retval, stopped;
+	int temp, stopped;
 	processes.insert(mainProcess);
 
 	waitpid(mainProcess->pid, &temp, 0);
@@ -163,8 +163,8 @@ void DebugWindow::startTrace() { // TODO way to kill tracer ?
 }
 
 void DebugWindow::handleCallReturn(Process& proc) {
-	if (proc.currentCall->id == 56) { // TODO 56 doit pas être hardcodé
-		Process *newChild = new Process();
+	if (config::doChilds && proc.currentCall->id == 56) { // TODO 56 doit pas être hardcodé
+		auto *newChild = new Process();
 		newChild->pid = proc.currentCall->result;
 
 		processes.insert(newChild);
@@ -182,10 +182,16 @@ void DebugWindow::handleCallReturn(Process& proc) {
 	}
 }
 
-void DebugWindow::handleCallStart(Process& proc) {
+void DebugWindow::handleCallStart(Process& proc) const {
 	if(displayed->pid==proc.pid){
 		addEntryStart(*proc.currentCall);
 	}
+
+	if(proc.calls.size()>=config::displayLimit){
+		proc.calls.pop_back();
+		UI.callsLogs->setRowCount(config::displayLimit);
+	}
+
 }
 
 void DebugWindow::handleChildExit(Process& proc){
@@ -194,16 +200,3 @@ void DebugWindow::handleChildExit(Process& proc){
 		// TODO Basculer sur les logs parent/main
 	}
 }
-
-
-//	if(config::doChilds){
-//		if(find(config::ignoredSysCalls.begin(), config::ignoredSysCalls.end(), call->id) != config::ignoredSysCalls.end()){
-//			cout << "DETECTED SUBPROCESS" << endl;
-//				Process p;
-//				p.setupProcess(call->result);
-//				subProcesses.push_back(p);
-//		}
-//	}
-//	if(mainWindow->current==tracee){
-//		mainWindow->addEntry(*call);
-//	}

@@ -13,6 +13,7 @@ namespace config{
 	extern unordered_map<string, string> data;
 	extern string syscallPath;
 	extern bool doChilds;
+	extern int displayLimit;
 	extern vector<int> ignoredSysCalls;
 
 

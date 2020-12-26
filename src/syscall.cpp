@@ -5,7 +5,7 @@
 
 string& guessName(int id){
 	auto s = syscalls.find(id);
-	if(s==syscalls.end()) throw "syscall not found";
+	if(s==syscalls.end()) throw runtime_error("syscall not found");
 	else return s->second;
 }
 

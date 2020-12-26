@@ -6,7 +6,7 @@
 
 void DebugWindow::cleanUpProcess() {
 	if (mainProcess != nullptr) {
-		killProcess(true);
+		remProcess(true);
 	}
 
 	for (auto *proc : processes) {
@@ -15,7 +15,7 @@ void DebugWindow::cleanUpProcess() {
 	processes.clear();
 }
 
-void DebugWindow::cleanUpUI(){
+void DebugWindow::cleanUpUI() const{
 	UI.callsLogs->setRowCount(0);
 	UI.processTree->topLevelItem(0)->setText(0, "NA");
 	for(auto* i : UI.processTree->topLevelItem(0)->takeChildren()) {
@@ -38,10 +38,11 @@ void DebugWindow::treeClick(QTreeWidgetItem* item){
 			return;
 		}
 	}
-	cerr << "NOT SUPPOSED TO HAPPEN : Process clicked not found" << endl;
+	if(item->text(0)=="NA")return;
+	cerr << "NOT SUPPOSED TO HAPPEN : Clicked process not found" << endl;
 }
 
-void DebugWindow::changeView(Process& p){
+void DebugWindow::changeView(Process& p) const{
 	UI.callsLogs->setRowCount(0);
 	for(Syscall& call : p.calls){
 		addEntryStart(call);
@@ -50,7 +51,7 @@ void DebugWindow::changeView(Process& p){
 
 }
 
-void DebugWindow::clearCallsLogs(){
+void DebugWindow::clearCallsLogs() const {
 	UI.callsLogs->setRowCount(0);
 	if(displayed!=nullptr){
 		displayed->clearCalls();
@@ -73,22 +74,22 @@ void DebugWindow::runCmd(){
     thr.detach();
 }
 
-void DebugWindow::addEntryStart(Syscall& call){
+void DebugWindow::addEntryStart(Syscall& call) const {
 	UI.callsLogs->insertRow(0);
 	UI.callsLogs->setItem(0, 0, new QTableWidgetItem(call.name.c_str()));
 	UI.callsLogs->setItem(0, 1, new QTableWidgetItem("?"));
 	// TODO args
 }
 
-void DebugWindow::addEntryEnd(Syscall& call){
+void DebugWindow::addEntryEnd(Syscall& call) const{
 	UI.callsLogs->setItem(0, 1, new QTableWidgetItem(to_string(call.result).c_str()));
 }
 
-void DebugWindow::setPID(char* pid){
+void DebugWindow::setPID(char* pid) const{
 	UI.labelPID->setText(QString(pid));
 }
 
-void DebugWindow::setState(char s){
+void DebugWindow::setState(char s) const{
 	switch(s){
 		case 0:{
 			UI.labelState->setText("NONE");

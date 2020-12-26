@@ -9,8 +9,8 @@ class Syscall {
 public:
 	Syscall(int id);
 
-	int id;
-	int result; // TODO long ? (et id ?)
+	int id; // TODO long ?
+	long result;
 	string& name;
 public:
 };

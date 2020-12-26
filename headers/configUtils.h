@@ -15,7 +15,7 @@ void parseConfig(){
 		}
 
 		t = line.find('=');
-		if(t==string::npos) throw ("Config parsing : line "+to_string(i)+" is invalid");
+		if(t==string::npos) throw runtime_error("Config parsing : line "+to_string(i)+" is invalid");
 		config::data.insert({line.substr(0, t), line.substr(t+1)});
 	}
 }
@@ -29,7 +29,7 @@ int getKey(string& val){
 	for(auto& c : syscalls){
 		if(c.second==val)return c.first;
 	}
-	throw "syscall "+val+" not found";
+	throw runtime_error("syscall "+val+" not found");
 }
 
 void postAssignConfig(){

@@ -36,12 +36,10 @@ int main(int argc, char *argv[]){
 
     QApplication app(argc, argv);
 
-	  mainWindow = new DebugWindow;
+	mainWindow = new DebugWindow;
     mainWindow->show();
 
-    return app.exec();
-
-	return 0;
+    return QApplication::exec();
 }
 
 
@@ -61,7 +59,7 @@ void load_syscalls(){
 		try{
 			syscalls.insert({stoi(line.substr(t+1)), line.substr(0, t)});
 		}catch(invalid_argument& e){
-			throw "Invalid number "+line.substr(t+1)+" for syscall"+line.substr(0, t);
+			throw runtime_error("Invalid number "+line.substr(t+1)+" for syscall"+line.substr(0, t));
 		}
 	}
 }

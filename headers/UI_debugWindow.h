@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'debugger-5UckWKX.ui'
+** Form generated from reading UI file 'debugger-5fIvVND.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef DEBUGGER_2D_5UCKWKX_H
-#define DEBUGGER_2D_5UCKWKX_H
+#ifndef DEBUGGER_2D_5FIVVND_H
+#define DEBUGGER_2D_5FIVVND_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
@@ -109,11 +109,7 @@ public:
 		verticalLayout_4 = new QVBoxLayout();
 		verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
 		processTree = new QTreeWidget(centralwidget);
-		QTreeWidgetItem *__qtreewidgetitem = new QTreeWidgetItem(processTree);
-		new QTreeWidgetItem(__qtreewidgetitem);
-		QTreeWidgetItem *__qtreewidgetitem1 = new QTreeWidgetItem(__qtreewidgetitem);
-		new QTreeWidgetItem(__qtreewidgetitem1);
-		new QTreeWidgetItem(__qtreewidgetitem);
+		new QTreeWidgetItem(processTree);
 		processTree->setObjectName(QString::fromUtf8("processTree"));
 		QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Expanding);
 		sizePolicy.setHorizontalStretch(0);
@@ -315,14 +311,6 @@ public:
 		processTree->setSortingEnabled(false);
 		QTreeWidgetItem *___qtreewidgetitem1 = processTree->topLevelItem(0);
 		___qtreewidgetitem1->setText(0, QCoreApplication::translate("DebugWindow", "NA", nullptr));
-		QTreeWidgetItem *___qtreewidgetitem2 = ___qtreewidgetitem1->child(0);
-		___qtreewidgetitem2->setText(0, QCoreApplication::translate("DebugWindow", "test", nullptr));
-		QTreeWidgetItem *___qtreewidgetitem3 = ___qtreewidgetitem1->child(1);
-		___qtreewidgetitem3->setText(0, QCoreApplication::translate("DebugWindow", "zaaz", nullptr));
-		QTreeWidgetItem *___qtreewidgetitem4 = ___qtreewidgetitem3->child(0);
-		___qtreewidgetitem4->setText(0, QCoreApplication::translate("DebugWindow", "ze", nullptr));
-		QTreeWidgetItem *___qtreewidgetitem5 = ___qtreewidgetitem1->child(2);
-		___qtreewidgetitem5->setText(0, QCoreApplication::translate("DebugWindow", "ez", nullptr));
 		processTree->setSortingEnabled(__sortingEnabled);
 
 		inputSender->setPlaceholderText(QCoreApplication::translate("DebugWindow", "Send Input", nullptr));
@@ -358,4 +346,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // DEBUGGER_2D_5UCKWKX_H
+#endif // DEBUGGER_2D_5FIVVND_H
