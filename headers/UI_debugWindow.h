@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'debugger-5fIvVND.ui'
+** Form generated from reading UI file 'debugger-6aYBsim.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef DEBUGGER_2D_5FIVVND_H
-#define DEBUGGER_2D_5FIVVND_H
+#ifndef DEBUGGER_2D_6AYBSIM_H
+#define DEBUGGER_2D_6AYBSIM_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
@@ -233,14 +233,33 @@ public:
 		verticalLayout_2 = new QVBoxLayout();
 		verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
 		callsLogs = new QTableWidget(centralwidget);
-		if (callsLogs->columnCount() < 2)
-			callsLogs->setColumnCount(2);
+		if (callsLogs->columnCount() < 8)
+			callsLogs->setColumnCount(8);
 		QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
 		callsLogs->setHorizontalHeaderItem(0, __qtablewidgetitem);
 		QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
 		callsLogs->setHorizontalHeaderItem(1, __qtablewidgetitem1);
+		QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
+		callsLogs->setHorizontalHeaderItem(2, __qtablewidgetitem2);
+		QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
+		callsLogs->setHorizontalHeaderItem(3, __qtablewidgetitem3);
+		QTableWidgetItem *__qtablewidgetitem4 = new QTableWidgetItem();
+		callsLogs->setHorizontalHeaderItem(4, __qtablewidgetitem4);
+		QTableWidgetItem *__qtablewidgetitem5 = new QTableWidgetItem();
+		callsLogs->setHorizontalHeaderItem(5, __qtablewidgetitem5);
+		QTableWidgetItem *__qtablewidgetitem6 = new QTableWidgetItem();
+		callsLogs->setHorizontalHeaderItem(6, __qtablewidgetitem6);
+		QTableWidgetItem *__qtablewidgetitem7 = new QTableWidgetItem();
+		callsLogs->setHorizontalHeaderItem(7, __qtablewidgetitem7);
 		callsLogs->setObjectName(QString::fromUtf8("callsLogs"));
+		QSizePolicy sizePolicy2(QSizePolicy::Expanding, QSizePolicy::Expanding);
+		sizePolicy2.setHorizontalStretch(0);
+		sizePolicy2.setVerticalStretch(0);
+		sizePolicy2.setHeightForWidth(callsLogs->sizePolicy().hasHeightForWidth());
+		callsLogs->setSizePolicy(sizePolicy2);
+		callsLogs->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContentsOnFirstShow);
 		callsLogs->setEditTriggers(QAbstractItemView::NoEditTriggers);
+		callsLogs->horizontalHeader()->setStretchLastSection(false);
 
 		verticalLayout_2->addWidget(callsLogs);
 
@@ -330,7 +349,19 @@ public:
 		QTableWidgetItem *___qtablewidgetitem = callsLogs->horizontalHeaderItem(0);
 		___qtablewidgetitem->setText(QCoreApplication::translate("DebugWindow", "ID", nullptr));
 		QTableWidgetItem *___qtablewidgetitem1 = callsLogs->horizontalHeaderItem(1);
-		___qtablewidgetitem1->setText(QCoreApplication::translate("DebugWindow", "args", nullptr));
+		___qtablewidgetitem1->setText(QCoreApplication::translate("DebugWindow", "arg1", nullptr));
+		QTableWidgetItem *___qtablewidgetitem2 = callsLogs->horizontalHeaderItem(2);
+		___qtablewidgetitem2->setText(QCoreApplication::translate("DebugWindow", "arg2", nullptr));
+		QTableWidgetItem *___qtablewidgetitem3 = callsLogs->horizontalHeaderItem(3);
+		___qtablewidgetitem3->setText(QCoreApplication::translate("DebugWindow", "arg3", nullptr));
+		QTableWidgetItem *___qtablewidgetitem4 = callsLogs->horizontalHeaderItem(4);
+		___qtablewidgetitem4->setText(QCoreApplication::translate("DebugWindow", "arg4", nullptr));
+		QTableWidgetItem *___qtablewidgetitem5 = callsLogs->horizontalHeaderItem(5);
+		___qtablewidgetitem5->setText(QCoreApplication::translate("DebugWindow", "arg5", nullptr));
+		QTableWidgetItem *___qtablewidgetitem6 = callsLogs->horizontalHeaderItem(6);
+		___qtablewidgetitem6->setText(QCoreApplication::translate("DebugWindow", "arg6", nullptr));
+		QTableWidgetItem *___qtablewidgetitem7 = callsLogs->horizontalHeaderItem(7);
+		___qtablewidgetitem7->setText(QCoreApplication::translate("DebugWindow", "result", nullptr));
 		filter->setPlaceholderText(QCoreApplication::translate("DebugWindow", "Filter", nullptr));
 		menu_File->setTitle(QCoreApplication::translate("DebugWindow", "&File", nullptr));
 		menu_Tools->setTitle(QCoreApplication::translate("DebugWindow", "&Tools", nullptr));
@@ -346,4 +377,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // DEBUGGER_2D_5FIVVND_H
+#endif // DEBUGGER_2D_6AYBSIM_H

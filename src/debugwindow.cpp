@@ -1,5 +1,6 @@
 #include <iostream>
 #include <QMessageBox>
+#include <QProcess>
 #include "UI_debugWindow.h"
 #include "utils.h"
 #include "debugwindow.h"
@@ -30,6 +31,9 @@ DebugWindow::DebugWindow(){
     connect(UI.buttonClear, &QPushButton::clicked, this, &DebugWindow::clearCallsLogs);
     connect(UI.buttonRun, &QPushButton::clicked, this, &DebugWindow::runCmd);
     connect(UI.processTree, &QTreeWidget::itemClicked, this, &DebugWindow::treeClick);
+
+	QHeaderView* header = UI.callsLogs->horizontalHeader();
+	header->setSectionResizeMode(QHeaderView::Stretch);
 }
 
 void DebugWindow::treeClick(QTreeWidgetItem* item){
@@ -49,7 +53,6 @@ void DebugWindow::changeView(Process& p) const {
 		addEntryStart(*call);
 		addEntryEnd(*call);
 	}
-
 }
 
 void DebugWindow::clearCallsLogs() const {
@@ -73,6 +76,9 @@ void DebugWindow::runCmd(){
 		msg->show();
 		return;
     }
+
+//    QProcess qp;
+//    qp.pid
 
     cmd = std::move(qs.toStdString());
 
