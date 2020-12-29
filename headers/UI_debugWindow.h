@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'debugger-6aYBsim.ui'
+** Form generated from reading UI file 'debugger-6gdqoAP.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef DEBUGGER_2D_6AYBSIM_H
-#define DEBUGGER_2D_6AYBSIM_H
+#ifndef DEBUGGER_2D_6GDQOAP_H
+#define DEBUGGER_2D_6GDQOAP_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
@@ -108,6 +108,7 @@ public:
 		gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
 		verticalLayout_4 = new QVBoxLayout();
 		verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
+		verticalLayout_4->setSizeConstraint(QLayout::SetDefaultConstraint);
 		processTree = new QTreeWidget(centralwidget);
 		new QTreeWidgetItem(processTree);
 		processTree->setObjectName(QString::fromUtf8("processTree"));
@@ -121,12 +122,16 @@ public:
 
 		stdLog = new QTextEdit(centralwidget);
 		stdLog->setObjectName(QString::fromUtf8("stdLog"));
+		sizePolicy.setHeightForWidth(stdLog->sizePolicy().hasHeightForWidth());
+		stdLog->setSizePolicy(sizePolicy);
 		stdLog->setReadOnly(true);
 
 		verticalLayout_4->addWidget(stdLog);
 
 		inputSender = new QTextEdit(centralwidget);
 		inputSender->setObjectName(QString::fromUtf8("inputSender"));
+		sizePolicy.setHeightForWidth(inputSender->sizePolicy().hasHeightForWidth());
+		inputSender->setSizePolicy(sizePolicy);
 		inputSender->setMaximumSize(QSize(16777215, 30));
 
 		verticalLayout_4->addWidget(inputSender);
@@ -257,7 +262,7 @@ public:
 		sizePolicy2.setVerticalStretch(0);
 		sizePolicy2.setHeightForWidth(callsLogs->sizePolicy().hasHeightForWidth());
 		callsLogs->setSizePolicy(sizePolicy2);
-		callsLogs->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContentsOnFirstShow);
+		callsLogs->setSizeAdjustPolicy(QAbstractScrollArea::AdjustIgnored);
 		callsLogs->setEditTriggers(QAbstractItemView::NoEditTriggers);
 		callsLogs->horizontalHeader()->setStretchLastSection(false);
 
@@ -377,4 +382,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // DEBUGGER_2D_6AYBSIM_H
+#endif // DEBUGGER_2D_6GDQOAP_H

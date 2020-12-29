@@ -2,16 +2,16 @@
 #define SYSCALL
 
 #include<string>
+#include<sys/ptrace.h>
 
 using namespace std;
 
 class Syscall {
 public:
-	Syscall(int id);
-
-	int id; // TODO long ?
-	long result;
+	Syscall(__ptrace_syscall_info&);
 	string& name;
+	__ptrace_syscall_info& info;
+
 public:
 };
 

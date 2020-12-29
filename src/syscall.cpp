@@ -9,7 +9,6 @@ string& guessName(int id){
 	else return s->second;
 }
 
-Syscall::Syscall(int id) : name(guessName(id)) {
-	this->id = id;
-	this->result = 0;
+Syscall::Syscall(__ptrace_syscall_info& info) : name(guessName(info.entry.nr)), info(info){
+
 }

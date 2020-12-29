@@ -89,12 +89,20 @@ void DebugWindow::runCmd(){
 void DebugWindow::addEntryStart(Syscall& call) const {
 	UI.callsLogs->insertRow(0);
 	UI.callsLogs->setItem(0, 0, new QTableWidgetItem(call.name.c_str()));
-	UI.callsLogs->setItem(0, 1, new QTableWidgetItem("?"));
-	// TODO args
+
+	// TODO format for arg type
+	for(int i=0;i<6;i++){
+		UI.callsLogs->setItem(0, i+1, new QTableWidgetItem(to_string(call.info.entry.args[i]).c_str()));
+	}
+	UI.callsLogs->setItem(0, 7, new QTableWidgetItem("?"));
 }
 
 void DebugWindow::addEntryEnd(Syscall& call) const{
-	UI.callsLogs->setItem(0, 1, new QTableWidgetItem(to_string(call.result).c_str()));
+	if(call.info.op==255){
+		UI.callsLogs->setItem(0, 7, new QTableWidgetItem("?"));
+	}else{
+		UI.callsLogs->setItem(0, 7, new QTableWidgetItem(to_string(call.info.exit.rval).c_str()));
+	}
 }
 
 void DebugWindow::setPID(char* pid) const{

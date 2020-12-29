@@ -1,7 +1,7 @@
 #include<debugwindow.h>
 #include<iostream>
-#include <sstream>
-#include <unordered_set>
+#include<sstream>
+#include<unordered_set>
 #include "configFile.h"
 
 using namespace std;
@@ -99,6 +99,9 @@ void DebugWindow::startTrace() { // TODO way to kill tracer ?
 	mainProcess->treeItem->setText(0, QString(to_string(mainProcess->pid).c_str()));
 
 	Process* proc;
+	__ptrace_syscall_info* info;
+	int size = sizeof(__ptrace_syscall_info);
+
 	while (true) {
 		if (waitProcess(stopped)) {
 			proc = nullptr;
@@ -137,14 +140,18 @@ void DebugWindow::startTrace() { // TODO way to kill tracer ?
 		}
 
 		if(proc->currentCall==nullptr){ // entry
-			temp = ptrace(PTRACE_PEEKUSER, stopped, sizeof(long) * ORIG_RAX);
-			proc->currentCall = new Syscall(temp);
+			info = new __ptrace_syscall_info();
+			info->op = PTRACE_SYSCALL_INFO_ENTRY;
+			ptrace(PTRACE_GET_SYSCALL_INFO, stopped, size, info);
+			info->op = 255;
+
+			proc->currentCall = new Syscall(*info);
 			proc->calls.push_back(proc->currentCall);
-
-
 			handleCallStart(*proc);
+
 		}else{ // exit
-			proc->currentCall->result = ptrace(PTRACE_PEEKUSER, stopped, sizeof(long) * RAX);
+			proc->currentCall->info.op = PTRACE_SYSCALL_INFO_EXIT;
+			ptrace(PTRACE_GET_SYSCALL_INFO, stopped, size, &proc->currentCall->info);
 
 			auto a = proc->calls.end();
 			a--;
@@ -156,18 +163,13 @@ void DebugWindow::startTrace() { // TODO way to kill tracer ?
 		temp = ptrace(PTRACE_SYSCALL, stopped, 0, 0); // restart le thread + l'arrête au prochain syscall
 		if(temp!=0)cerr << "PTRACE_SYSCALL end-loop failed : " << temp << endl;
 	}
-
-//	cout << "-----------" << endl;
-//	for(Syscall& call : mainProcess->calls){
-//		cout << call.result << endl;
-//	}
 	cout << "fin" << endl;
 }
 
 void DebugWindow::handleCallReturn(Process& proc) {
-	if (config::doChilds && proc.currentCall->id == 56) { // TODO 56 doit pas être hardcodé
+	if (config::doChilds && proc.currentCall->info.entry.nr == 56) { // TODO 56 doit pas être hardcodé
 		auto *newChild = new Process();
-		newChild->pid = proc.currentCall->result;
+		newChild->pid = proc.currentCall->info.exit.rval;
 
 		processes.insert(newChild);
 		int temp = ptrace(PTRACE_SYSCALL, newChild, 0, 0); // restart le thread + l'arrête au prochain syscall
