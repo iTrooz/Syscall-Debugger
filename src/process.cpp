@@ -12,5 +12,5 @@ void Process::delCalls(){
 
 Process::~Process() {
 	delCalls();
-	delete treeItem; // TODO pas nécessaire ? jsp
+//	delete treeItem; // TODO pas nécessaire ? jsp
 }

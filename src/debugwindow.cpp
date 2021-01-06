@@ -13,6 +13,7 @@ void DebugWindow::cleanUpProcess() {
 
 		mainProcess->treeItem = nullptr;
 		for (auto *proc : processes) {
+			fflush(stdout);
 			delete proc;
 		}
 

@@ -99,7 +99,6 @@ void DebugWindow::startTrace() { // TODO way to kill tracer ?
 	mainProcess->treeItem->setText(0, QString(to_string(mainProcess->pid).c_str()));
 
 	Process* proc;
-	__ptrace_syscall_info* info;
 	int size = sizeof(__ptrace_syscall_info);
 
 	while (true) {
@@ -167,9 +166,10 @@ void DebugWindow::handleCallReturn(Process& proc) {
 		auto* newChild = new Process();
 		newChild->pid = proc.currentCall->exit.rval;
 
+
 		processes.insert(newChild);
 		int temp = ptrace(PTRACE_SYSCALL, newChild, 0, 0); // restart le thread + l'arrête au prochain syscall
-		if (temp != 0) cout << "normal fail : " << temp << endl; // TODO NORMAL ?
+		if (temp != 0) cerr << "normal fail : " << temp << endl; // TODO NORMAL ?
 
 
 		newChild->treeItem = new QTreeWidgetItem;
