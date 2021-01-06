@@ -1,0 +1,110 @@
+The system is: Linux - 5.8.18-1-MANJARO - x86_64
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: /usr/bin/mingw32-gcc 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.exe"
+
+The C compiler identification is GNU, found in "/home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-windows/CMakeFiles/3.17.3/CompilerIdC/a.exe"
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+Compiler: /usr/bin/mingw32-g++ 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.exe"
+
+The CXX compiler identification is GNU, found in "/home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-windows/CMakeFiles/3.17.3/CompilerIdCXX/a.exe"
+
+Determining if the C compiler works passed with the following output:
+Change Dir: /home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-windows/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_74d6d/fast && /usr/bin/make  -f CMakeFiles/cmTC_74d6d.dir/build.make CMakeFiles/cmTC_74d6d.dir/build
+make[1] : on entre dans le répertoire « /home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-windows/CMakeFiles/CMakeTmp »
+Building C object CMakeFiles/cmTC_74d6d.dir/testCCompiler.c.o
+/usr/bin/mingw32-gcc    -o CMakeFiles/cmTC_74d6d.dir/testCCompiler.c.o   -c /home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-windows/CMakeFiles/CMakeTmp/testCCompiler.c
+Linking C executable cmTC_74d6d
+/var/lib/snapd/snap/clion/137/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_74d6d.dir/link.txt --verbose=1
+/usr/bin/mingw32-gcc      CMakeFiles/cmTC_74d6d.dir/testCCompiler.c.o  -o cmTC_74d6d 
+make[1] : on quitte le répertoire « /home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-windows/CMakeFiles/CMakeTmp »
+
+
+
+Determining if the CXX compiler works passed with the following output:
+Change Dir: /home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-windows/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_48998/fast && /usr/bin/make  -f CMakeFiles/cmTC_48998.dir/build.make CMakeFiles/cmTC_48998.dir/build
+make[1] : on entre dans le répertoire « /home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-windows/CMakeFiles/CMakeTmp »
+Building CXX object CMakeFiles/cmTC_48998.dir/testCXXCompiler.cxx.o
+/usr/bin/mingw32-g++     -o CMakeFiles/cmTC_48998.dir/testCXXCompiler.cxx.o -c /home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-windows/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
+Linking CXX executable cmTC_48998
+/var/lib/snapd/snap/clion/137/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_48998.dir/link.txt --verbose=1
+/usr/bin/mingw32-g++       CMakeFiles/cmTC_48998.dir/testCXXCompiler.cxx.o  -o cmTC_48998 
+make[1] : on quitte le répertoire « /home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-windows/CMakeFiles/CMakeTmp »
+
+
+
+The system is: Linux - 5.9.16-1-MANJARO - x86_64
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: /usr/bin/mingw32-gcc 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.exe"
+
+The C compiler identification is GNU, found in "/home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-windows/CMakeFiles/3.17.5/CompilerIdC/a.exe"
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+Compiler: /usr/bin/mingw32-g++ 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.exe"
+
+The CXX compiler identification is GNU, found in "/home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-windows/CMakeFiles/3.17.5/CompilerIdCXX/a.exe"
+
+Determining if the C compiler works passed with the following output:
+Change Dir: /home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-windows/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_6dd0f/fast && /usr/bin/make  -f CMakeFiles/cmTC_6dd0f.dir/build.make CMakeFiles/cmTC_6dd0f.dir/build
+make[1] : on entre dans le répertoire « /home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-windows/CMakeFiles/CMakeTmp »
+Building C object CMakeFiles/cmTC_6dd0f.dir/testCCompiler.c.o
+/usr/bin/mingw32-gcc    -o CMakeFiles/cmTC_6dd0f.dir/testCCompiler.c.o   -c /home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-windows/CMakeFiles/CMakeTmp/testCCompiler.c
+Linking C executable cmTC_6dd0f
+/var/lib/snapd/snap/clion/138/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_6dd0f.dir/link.txt --verbose=1
+/usr/bin/mingw32-gcc      CMakeFiles/cmTC_6dd0f.dir/testCCompiler.c.o  -o cmTC_6dd0f 
+make[1] : on quitte le répertoire « /home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-windows/CMakeFiles/CMakeTmp »
+
+
+
+Determining if the CXX compiler works passed with the following output:
+Change Dir: /home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-windows/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_1c9f6/fast && /usr/bin/make  -f CMakeFiles/cmTC_1c9f6.dir/build.make CMakeFiles/cmTC_1c9f6.dir/build
+make[1] : on entre dans le répertoire « /home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-windows/CMakeFiles/CMakeTmp »
+Building CXX object CMakeFiles/cmTC_1c9f6.dir/testCXXCompiler.cxx.o
+/usr/bin/mingw32-g++     -o CMakeFiles/cmTC_1c9f6.dir/testCXXCompiler.cxx.o -c /home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-windows/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
+Linking CXX executable cmTC_1c9f6
+/var/lib/snapd/snap/clion/138/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1c9f6.dir/link.txt --verbose=1
+/usr/bin/mingw32-g++       CMakeFiles/cmTC_1c9f6.dir/testCXXCompiler.cxx.o  -o cmTC_1c9f6 
+make[1] : on quitte le répertoire « /home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-windows/CMakeFiles/CMakeTmp »
+
+
+

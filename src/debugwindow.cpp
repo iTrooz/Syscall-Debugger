@@ -8,13 +8,16 @@
 
 void DebugWindow::cleanUpProcess() {
 	if (mainProcess != nullptr) {
-		remProcess(true);
-	}
 
-	for (auto *proc : processes) {
-		delete proc;
+		remProcess(true);
+
+		mainProcess->treeItem = nullptr;
+		for (auto *proc : processes) {
+			delete proc;
+		}
+
+		processes.clear();
 	}
-	processes.clear();
 }
 
 void DebugWindow::cleanUpUI() const{
@@ -58,7 +61,7 @@ void DebugWindow::changeView(Process& p) const {
 void DebugWindow::clearCallsLogs() const {
 	UI.callsLogs->setRowCount(0);
 	if(displayed!=nullptr){
-		displayed->clearCalls();
+		displayed->delCalls();
 	}
 }
 
@@ -88,20 +91,20 @@ void DebugWindow::runCmd(){
 
 void DebugWindow::addEntryStart(Syscall& call) const {
 	UI.callsLogs->insertRow(0);
-	UI.callsLogs->setItem(0, 0, new QTableWidgetItem(call.name.c_str()));
+	UI.callsLogs->setItem(0, 0, new QTableWidgetItem(call.name->c_str()));
 
 	// TODO format for arg type
 	for(int i=0;i<6;i++){
-		UI.callsLogs->setItem(0, i+1, new QTableWidgetItem(to_string(call.info.entry.args[i]).c_str()));
+		UI.callsLogs->setItem(0, i+1, new QTableWidgetItem(to_string(call.entry.args[i]).c_str()));
 	}
 	UI.callsLogs->setItem(0, 7, new QTableWidgetItem("?"));
 }
 
 void DebugWindow::addEntryEnd(Syscall& call) const{
-	if(call.info.op==255){
+	if(call.exit.op==255){
 		UI.callsLogs->setItem(0, 7, new QTableWidgetItem("?"));
 	}else{
-		UI.callsLogs->setItem(0, 7, new QTableWidgetItem(to_string(call.info.exit.rval).c_str()));
+		UI.callsLogs->setItem(0, 7, new QTableWidgetItem(to_string(call.exit.rval).c_str()));
 	}
 }
 

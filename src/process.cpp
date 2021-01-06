@@ -4,8 +4,13 @@
 
 using namespace std;
 
-void Process::clearCalls(){
+void Process::delCalls(){
 	for(Syscall* c : calls){
 		delete c;
 	}
+}
+
+Process::~Process() {
+	delCalls();
+	delete treeItem; // TODO pas nécessaire ? jsp
 }

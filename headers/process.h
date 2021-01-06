@@ -28,7 +28,8 @@ public:
     Syscall* currentCall = nullptr;
 	QTreeWidgetItem* treeItem;
 
-	void clearCalls();
+	void delCalls();
+	~Process();
 };
 
 #endif

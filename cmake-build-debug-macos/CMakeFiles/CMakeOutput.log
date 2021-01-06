@@ -1,0 +1,650 @@
+The system is: Linux - 5.8.18-1-MANJARO - x86_64
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: /usr/bin/o64-clang 
+Build flags: 
+Id flags: -c 
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CMakeCCompilerId.o"
+
+The C compiler identification is Clang, found in "/home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/3.17.3/CompilerIdC/CMakeCCompilerId.o"
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+Compiler: /usr/bin/o64-clang++ 
+Build flags: 
+Id flags: -c 
+
+The output was:
+0
+
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CMakeCXXCompilerId.o"
+
+The CXX compiler identification is Clang, found in "/home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/3.17.3/CompilerIdCXX/CMakeCXXCompilerId.o"
+
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: /usr/bin/o64-clang 
+Build flags: 
+Id flags: -c 
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CMakeCCompilerId.o"
+
+The C compiler identification is Clang, found in "/home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/3.17.3/CompilerIdC/CMakeCCompilerId.o"
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+Compiler: /usr/bin/o64-clang++ 
+Build flags: 
+Id flags: -c 
+
+The output was:
+0
+
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CMakeCXXCompilerId.o"
+
+The CXX compiler identification is Clang, found in "/home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/3.17.3/CompilerIdCXX/CMakeCXXCompilerId.o"
+
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: /usr/bin/o64-clang 
+Build flags: 
+Id flags: -c 
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CMakeCCompilerId.o"
+
+The C compiler identification is Clang, found in "/home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/3.17.3/CompilerIdC/CMakeCCompilerId.o"
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+Compiler: /usr/bin/o64-clang++ 
+Build flags: 
+Id flags: -c 
+
+The output was:
+0
+
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CMakeCXXCompilerId.o"
+
+The CXX compiler identification is Clang, found in "/home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/3.17.3/CompilerIdCXX/CMakeCXXCompilerId.o"
+
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: /usr/bin/o64-clang 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
+
+The C compiler identification is Clang, found in "/home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/3.17.3/CompilerIdC/a.out"
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+Compiler: /usr/bin/o64-clang++ 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
+
+The CXX compiler identification is Clang, found in "/home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/3.17.3/CompilerIdCXX/a.out"
+
+Determining if the C compiler works passed with the following output:
+Change Dir: /home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_745df/fast && /usr/bin/make  -f CMakeFiles/cmTC_745df.dir/build.make CMakeFiles/cmTC_745df.dir/build
+make[1] : on entre dans le répertoire « /home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/CMakeTmp »
+Building C object CMakeFiles/cmTC_745df.dir/testCCompiler.c.o
+/usr/bin/o64-clang    -o CMakeFiles/cmTC_745df.dir/testCCompiler.c.o   -c /home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/CMakeTmp/testCCompiler.c
+Linking C executable cmTC_745df
+/var/lib/snapd/snap/clion/137/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_745df.dir/link.txt --verbose=1
+/usr/bin/o64-clang      CMakeFiles/cmTC_745df.dir/testCCompiler.c.o  -o cmTC_745df 
+make[1] : on quitte le répertoire « /home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/CMakeTmp »
+
+
+
+Detecting C compiler ABI info compiled with the following output:
+Change Dir: /home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_3122e/fast && /usr/bin/make  -f CMakeFiles/cmTC_3122e.dir/build.make CMakeFiles/cmTC_3122e.dir/build
+make[1]: Entering directory '/home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_3122e.dir/CMakeCCompilerABI.c.o
+/usr/bin/o64-clang   -v -o CMakeFiles/cmTC_3122e.dir/CMakeCCompilerABI.c.o   -c /var/lib/snapd/snap/clion/137/bin/cmake/linux/share/cmake-3.17/Modules/CMakeCCompilerABI.c
+clang version 11.0.0
+Target: x86_64-apple-darwin17
+Thread model: posix
+InstalledDir: /usr/bin
+ (in-process)
+ "/usr/bin/clang-11" -cc1 -triple x86_64-apple-macosx10.6.0 -Wundef-prefix=TARGET_OS_ -Werror=undef-prefix -Wdeprecated-objc-isa-usage -Werror=deprecated-objc-isa-usage -emit-obj -mrelax-all -disable-free -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -mframe-pointer=all -fno-rounding-math -munwind-tables -faligned-alloc-unavailable -fcompatibility-qualified-id-block-type-checking -target-cpu core2 -debugger-tuning=lldb -target-linker-version 530 -v -resource-dir /usr/lib/clang/11.0.0 -isystem /usr/bin/../lib/clang/11.0.0/include -isysroot /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk -cxx-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1 -cxx-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1/x86_64-apple-darwin17 -cxx-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1/backward -internal-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/local/include -internal-isystem /usr/lib/clang/11.0.0/include -internal-externc-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include -Wno-liblto -fdebug-compilation-dir /home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/CMakeTmp -ferror-limit 19 -stack-protector 1 -fblocks -fencode-extended-block-signature -fregister-global-dtors-with-atexit -fgnuc-version=4.2.1 -fmax-type-align=16 -o CMakeFiles/cmTC_3122e.dir/CMakeCCompilerABI.c.o -x c /var/lib/snapd/snap/clion/137/bin/cmake/linux/share/cmake-3.17/Modules/CMakeCCompilerABI.c
+clang -cc1 version 11.0.0 based upon LLVM 11.0.0 default target x86_64-pc-linux-gnu
+ignoring nonexistent directory "/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1/x86_64-apple-darwin17"
+ignoring nonexistent directory "/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/local/include"
+ignoring nonexistent directory "/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/Library/Frameworks"
+ignoring duplicate directory "/usr/bin/../lib/clang/11.0.0/include"
+#include "..." search starts here:
+#include <...> search starts here:
+ /usr/bin/../lib/clang/11.0.0/include
+ /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include
+ /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/System/Library/Frameworks (framework directory)
+End of search list.
+Linking C executable cmTC_3122e
+/var/lib/snapd/snap/clion/137/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3122e.dir/link.txt --verbose=1
+/usr/bin/o64-clang     -v CMakeFiles/cmTC_3122e.dir/CMakeCCompilerABI.c.o  -o cmTC_3122e 
+clang version 11.0.0
+Target: x86_64-apple-darwin17
+Thread model: posix
+InstalledDir: /usr/bin
+ "/usr/lib/osxcross/bin/x86_64-apple-darwin17-ld" -demangle -lto_library /usr/lib/libLTO.dylib -dynamic -arch x86_64 -platform_version macos 10.6.0 0.0.0 -syslibroot /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk -o cmTC_3122e -lcrt1.10.6.o CMakeFiles/cmTC_3122e.dir/CMakeCCompilerABI.c.o -lSystem
+make[1]: Leaving directory '/home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/CMakeTmp'
+
+
+
+Parsed C implicit include dir info from above output: rv=done
+  found start of include info
+  found start of implicit include info
+    add: [/usr/bin/../lib/clang/11.0.0/include]
+    add: [/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include]
+  end of search list found
+  collapse include dir [/usr/bin/../lib/clang/11.0.0/include] ==> [/usr/lib/clang/11.0.0/include]
+  collapse include dir [/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include] ==> [/usr/lib/osxcross/SDK/MacOSX10.13.sdk/usr/include]
+  implicit include dirs: [/usr/lib/clang/11.0.0/include;/usr/lib/osxcross/SDK/MacOSX10.13.sdk/usr/include]
+
+
+Parsed C implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command(s):/usr/bin/make cmTC_3122e/fast && /usr/bin/make  -f CMakeFiles/cmTC_3122e.dir/build.make CMakeFiles/cmTC_3122e.dir/build]
+  ignore line: [make[1]: Entering directory '/home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/CMakeTmp']
+  ignore line: [Building C object CMakeFiles/cmTC_3122e.dir/CMakeCCompilerABI.c.o]
+  ignore line: [/usr/bin/o64-clang   -v -o CMakeFiles/cmTC_3122e.dir/CMakeCCompilerABI.c.o   -c /var/lib/snapd/snap/clion/137/bin/cmake/linux/share/cmake-3.17/Modules/CMakeCCompilerABI.c]
+  ignore line: [clang version 11.0.0]
+  ignore line: [Target: x86_64-apple-darwin17]
+  ignore line: [Thread model: posix]
+  ignore line: [InstalledDir: /usr/bin]
+  ignore line: [ (in-process)]
+  ignore line: [ "/usr/bin/clang-11" -cc1 -triple x86_64-apple-macosx10.6.0 -Wundef-prefix=TARGET_OS_ -Werror=undef-prefix -Wdeprecated-objc-isa-usage -Werror=deprecated-objc-isa-usage -emit-obj -mrelax-all -disable-free -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -mframe-pointer=all -fno-rounding-math -munwind-tables -faligned-alloc-unavailable -fcompatibility-qualified-id-block-type-checking -target-cpu core2 -debugger-tuning=lldb -target-linker-version 530 -v -resource-dir /usr/lib/clang/11.0.0 -isystem /usr/bin/../lib/clang/11.0.0/include -isysroot /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk -cxx-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1 -cxx-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1/x86_64-apple-darwin17 -cxx-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1/backward -internal-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/local/include -internal-isystem /usr/lib/clang/11.0.0/include -internal-externc-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include -Wno-liblto -fdebug-compilation-dir /home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/CMakeTmp -ferror-limit 19 -stack-protector 1 -fblocks -fencode-extended-block-signature -fregister-global-dtors-with-atexit -fgnuc-version=4.2.1 -fmax-type-align=16 -o CMakeFiles/cmTC_3122e.dir/CMakeCCompilerABI.c.o -x c /var/lib/snapd/snap/clion/137/bin/cmake/linux/share/cmake-3.17/Modules/CMakeCCompilerABI.c]
+  ignore line: [clang -cc1 version 11.0.0 based upon LLVM 11.0.0 default target x86_64-pc-linux-gnu]
+  ignore line: [ignoring nonexistent directory "/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1/x86_64-apple-darwin17"]
+  ignore line: [ignoring nonexistent directory "/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/local/include"]
+  ignore line: [ignoring nonexistent directory "/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/Library/Frameworks"]
+  ignore line: [ignoring duplicate directory "/usr/bin/../lib/clang/11.0.0/include"]
+  ignore line: [#include "..." search starts here:]
+  ignore line: [#include <...> search starts here:]
+  ignore line: [ /usr/bin/../lib/clang/11.0.0/include]
+  ignore line: [ /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include]
+  ignore line: [ /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/System/Library/Frameworks (framework directory)]
+  ignore line: [End of search list.]
+  ignore line: [Linking C executable cmTC_3122e]
+  ignore line: [/var/lib/snapd/snap/clion/137/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3122e.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/o64-clang     -v CMakeFiles/cmTC_3122e.dir/CMakeCCompilerABI.c.o  -o cmTC_3122e ]
+  ignore line: [clang version 11.0.0]
+  ignore line: [Target: x86_64-apple-darwin17]
+  ignore line: [Thread model: posix]
+  ignore line: [InstalledDir: /usr/bin]
+  link line: [ "/usr/lib/osxcross/bin/x86_64-apple-darwin17-ld" -demangle -lto_library /usr/lib/libLTO.dylib -dynamic -arch x86_64 -platform_version macos 10.6.0 0.0.0 -syslibroot /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk -o cmTC_3122e -lcrt1.10.6.o CMakeFiles/cmTC_3122e.dir/CMakeCCompilerABI.c.o -lSystem]
+    arg [/usr/lib/osxcross/bin/x86_64-apple-darwin17-ld] ==> ignore
+    arg [-demangle] ==> ignore
+    arg [-lto_library] ==> ignore, skip following value
+    arg [/usr/lib/libLTO.dylib] ==> skip value of -lto_library
+    arg [-dynamic] ==> ignore
+    arg [-arch] ==> ignore
+    arg [x86_64] ==> ignore
+    arg [-platform_version] ==> ignore
+    arg [macos] ==> ignore
+    arg [10.6.0] ==> ignore
+    arg [0.0.0] ==> ignore
+    arg [-syslibroot] ==> ignore
+    arg [/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTC_3122e] ==> ignore
+    arg [-lcrt1.10.6.o] ==> lib [crt1.10.6.o]
+    arg [CMakeFiles/cmTC_3122e.dir/CMakeCCompilerABI.c.o] ==> ignore
+    arg [-lSystem] ==> lib [System]
+  remove lib [crt1.10.6.o]
+  remove lib [System]
+  implicit libs: []
+  implicit dirs: []
+  implicit fwks: []
+
+
+Determining if the CXX compiler works passed with the following output:
+Change Dir: /home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_6f362/fast && /usr/bin/make  -f CMakeFiles/cmTC_6f362.dir/build.make CMakeFiles/cmTC_6f362.dir/build
+make[1] : on entre dans le répertoire « /home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/CMakeTmp »
+Building CXX object CMakeFiles/cmTC_6f362.dir/testCXXCompiler.cxx.o
+/usr/bin/o64-clang++     -o CMakeFiles/cmTC_6f362.dir/testCXXCompiler.cxx.o -c /home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
+Linking CXX executable cmTC_6f362
+/var/lib/snapd/snap/clion/137/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_6f362.dir/link.txt --verbose=1
+/usr/bin/o64-clang++       CMakeFiles/cmTC_6f362.dir/testCXXCompiler.cxx.o  -o cmTC_6f362 
+make[1] : on quitte le répertoire « /home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/CMakeTmp »
+
+
+
+Detecting CXX compiler ABI info compiled with the following output:
+Change Dir: /home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_4b7f0/fast && /usr/bin/make  -f CMakeFiles/cmTC_4b7f0.dir/build.make CMakeFiles/cmTC_4b7f0.dir/build
+make[1]: Entering directory '/home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_4b7f0.dir/CMakeCXXCompilerABI.cpp.o
+/usr/bin/o64-clang++    -v -o CMakeFiles/cmTC_4b7f0.dir/CMakeCXXCompilerABI.cpp.o -c /var/lib/snapd/snap/clion/137/bin/cmake/linux/share/cmake-3.17/Modules/CMakeCXXCompilerABI.cpp
+clang version 11.0.0
+Target: x86_64-apple-darwin17
+Thread model: posix
+InstalledDir: /usr/bin
+ (in-process)
+ "/usr/bin/clang-11" -cc1 -triple x86_64-apple-macosx10.6.0 -Wundef-prefix=TARGET_OS_ -Werror=undef-prefix -Wdeprecated-objc-isa-usage -Werror=deprecated-objc-isa-usage -emit-obj -mrelax-all -disable-free -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -mframe-pointer=all -fno-rounding-math -munwind-tables -faligned-alloc-unavailable -fcompatibility-qualified-id-block-type-checking -target-cpu core2 -debugger-tuning=lldb -target-linker-version 530 -v -resource-dir /usr/lib/clang/11.0.0 -isystem /usr/bin/../lib/clang/11.0.0/include -isysroot /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk -cxx-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1 -cxx-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1/x86_64-apple-darwin17 -cxx-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1/backward -stdlib=libstdc++ -internal-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1 -internal-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1/i686-apple-darwin10/x86_64 -internal-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1/backward -internal-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.0.0 -internal-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.0.0/i686-apple-darwin8 -internal-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.0.0/backward -internal-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/local/include -internal-isystem /usr/lib/clang/11.0.0/include -internal-externc-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include -Wno-liblto -fdeprecated-macro -fdebug-compilation-dir /home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/CMakeTmp -ferror-limit 19 -stack-protector 1 -fblocks -fencode-extended-block-signature -fregister-global-dtors-with-atexit -fgnuc-version=4.2.1 -fcxx-exceptions -fexceptions -fmax-type-align=16 -o CMakeFiles/cmTC_4b7f0.dir/CMakeCXXCompilerABI.cpp.o -x c++ /var/lib/snapd/snap/clion/137/bin/cmake/linux/share/cmake-3.17/Modules/CMakeCXXCompilerABI.cpp
+clang -cc1 version 11.0.0 based upon LLVM 11.0.0 default target x86_64-pc-linux-gnu
+ignoring nonexistent directory "/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1/x86_64-apple-darwin17"
+ignoring nonexistent directory "/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1/i686-apple-darwin10/x86_64"
+ignoring nonexistent directory "/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.0.0"
+ignoring nonexistent directory "/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.0.0/i686-apple-darwin8"
+ignoring nonexistent directory "/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.0.0/backward"
+ignoring nonexistent directory "/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/local/include"
+ignoring nonexistent directory "/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/Library/Frameworks"
+ignoring duplicate directory "/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1"
+ignoring duplicate directory "/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1/backward"
+ignoring duplicate directory "/usr/bin/../lib/clang/11.0.0/include"
+#include "..." search starts here:
+#include <...> search starts here:
+ /usr/bin/../lib/clang/11.0.0/include
+ /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1
+ /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1/backward
+ /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include
+ /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/System/Library/Frameworks (framework directory)
+End of search list.
+Linking CXX executable cmTC_4b7f0
+/var/lib/snapd/snap/clion/137/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4b7f0.dir/link.txt --verbose=1
+/usr/bin/o64-clang++      -v CMakeFiles/cmTC_4b7f0.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_4b7f0 
+clang version 11.0.0
+Target: x86_64-apple-darwin17
+Thread model: posix
+InstalledDir: /usr/bin
+ "/usr/lib/osxcross/bin/x86_64-apple-darwin17-ld" -demangle -lto_library /usr/lib/libLTO.dylib -dynamic -arch x86_64 -platform_version macos 10.6.0 0.0.0 -syslibroot /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk -o cmTC_4b7f0 -lcrt1.10.6.o CMakeFiles/cmTC_4b7f0.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lSystem
+make[1]: Leaving directory '/home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/CMakeTmp'
+
+
+
+Parsed CXX implicit include dir info from above output: rv=done
+  found start of include info
+  found start of implicit include info
+    add: [/usr/bin/../lib/clang/11.0.0/include]
+    add: [/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1]
+    add: [/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1/backward]
+    add: [/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include]
+  end of search list found
+  collapse include dir [/usr/bin/../lib/clang/11.0.0/include] ==> [/usr/lib/clang/11.0.0/include]
+  collapse include dir [/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1] ==> [/usr/lib/osxcross/SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1]
+  collapse include dir [/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1/backward] ==> [/usr/lib/osxcross/SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1/backward]
+  collapse include dir [/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include] ==> [/usr/lib/osxcross/SDK/MacOSX10.13.sdk/usr/include]
+  implicit include dirs: [/usr/lib/clang/11.0.0/include;/usr/lib/osxcross/SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1;/usr/lib/osxcross/SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1/backward;/usr/lib/osxcross/SDK/MacOSX10.13.sdk/usr/include]
+
+
+Parsed CXX implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command(s):/usr/bin/make cmTC_4b7f0/fast && /usr/bin/make  -f CMakeFiles/cmTC_4b7f0.dir/build.make CMakeFiles/cmTC_4b7f0.dir/build]
+  ignore line: [make[1]: Entering directory '/home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/CMakeTmp']
+  ignore line: [Building CXX object CMakeFiles/cmTC_4b7f0.dir/CMakeCXXCompilerABI.cpp.o]
+  ignore line: [/usr/bin/o64-clang++    -v -o CMakeFiles/cmTC_4b7f0.dir/CMakeCXXCompilerABI.cpp.o -c /var/lib/snapd/snap/clion/137/bin/cmake/linux/share/cmake-3.17/Modules/CMakeCXXCompilerABI.cpp]
+  ignore line: [clang version 11.0.0]
+  ignore line: [Target: x86_64-apple-darwin17]
+  ignore line: [Thread model: posix]
+  ignore line: [InstalledDir: /usr/bin]
+  ignore line: [ (in-process)]
+  ignore line: [ "/usr/bin/clang-11" -cc1 -triple x86_64-apple-macosx10.6.0 -Wundef-prefix=TARGET_OS_ -Werror=undef-prefix -Wdeprecated-objc-isa-usage -Werror=deprecated-objc-isa-usage -emit-obj -mrelax-all -disable-free -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -mframe-pointer=all -fno-rounding-math -munwind-tables -faligned-alloc-unavailable -fcompatibility-qualified-id-block-type-checking -target-cpu core2 -debugger-tuning=lldb -target-linker-version 530 -v -resource-dir /usr/lib/clang/11.0.0 -isystem /usr/bin/../lib/clang/11.0.0/include -isysroot /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk -cxx-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1 -cxx-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1/x86_64-apple-darwin17 -cxx-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1/backward -stdlib=libstdc++ -internal-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1 -internal-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1/i686-apple-darwin10/x86_64 -internal-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1/backward -internal-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.0.0 -internal-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.0.0/i686-apple-darwin8 -internal-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.0.0/backward -internal-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/local/include -internal-isystem /usr/lib/clang/11.0.0/include -internal-externc-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include -Wno-liblto -fdeprecated-macro -fdebug-compilation-dir /home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/CMakeTmp -ferror-limit 19 -stack-protector 1 -fblocks -fencode-extended-block-signature -fregister-global-dtors-with-atexit -fgnuc-version=4.2.1 -fcxx-exceptions -fexceptions -fmax-type-align=16 -o CMakeFiles/cmTC_4b7f0.dir/CMakeCXXCompilerABI.cpp.o -x c++ /var/lib/snapd/snap/clion/137/bin/cmake/linux/share/cmake-3.17/Modules/CMakeCXXCompilerABI.cpp]
+  ignore line: [clang -cc1 version 11.0.0 based upon LLVM 11.0.0 default target x86_64-pc-linux-gnu]
+  ignore line: [ignoring nonexistent directory "/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1/x86_64-apple-darwin17"]
+  ignore line: [ignoring nonexistent directory "/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1/i686-apple-darwin10/x86_64"]
+  ignore line: [ignoring nonexistent directory "/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.0.0"]
+  ignore line: [ignoring nonexistent directory "/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.0.0/i686-apple-darwin8"]
+  ignore line: [ignoring nonexistent directory "/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.0.0/backward"]
+  ignore line: [ignoring nonexistent directory "/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/local/include"]
+  ignore line: [ignoring nonexistent directory "/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/Library/Frameworks"]
+  ignore line: [ignoring duplicate directory "/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1"]
+  ignore line: [ignoring duplicate directory "/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1/backward"]
+  ignore line: [ignoring duplicate directory "/usr/bin/../lib/clang/11.0.0/include"]
+  ignore line: [#include "..." search starts here:]
+  ignore line: [#include <...> search starts here:]
+  ignore line: [ /usr/bin/../lib/clang/11.0.0/include]
+  ignore line: [ /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1]
+  ignore line: [ /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1/backward]
+  ignore line: [ /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include]
+  ignore line: [ /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/System/Library/Frameworks (framework directory)]
+  ignore line: [End of search list.]
+  ignore line: [Linking CXX executable cmTC_4b7f0]
+  ignore line: [/var/lib/snapd/snap/clion/137/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4b7f0.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/o64-clang++      -v CMakeFiles/cmTC_4b7f0.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_4b7f0 ]
+  ignore line: [clang version 11.0.0]
+  ignore line: [Target: x86_64-apple-darwin17]
+  ignore line: [Thread model: posix]
+  ignore line: [InstalledDir: /usr/bin]
+  link line: [ "/usr/lib/osxcross/bin/x86_64-apple-darwin17-ld" -demangle -lto_library /usr/lib/libLTO.dylib -dynamic -arch x86_64 -platform_version macos 10.6.0 0.0.0 -syslibroot /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk -o cmTC_4b7f0 -lcrt1.10.6.o CMakeFiles/cmTC_4b7f0.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lSystem]
+    arg [/usr/lib/osxcross/bin/x86_64-apple-darwin17-ld] ==> ignore
+    arg [-demangle] ==> ignore
+    arg [-lto_library] ==> ignore, skip following value
+    arg [/usr/lib/libLTO.dylib] ==> skip value of -lto_library
+    arg [-dynamic] ==> ignore
+    arg [-arch] ==> ignore
+    arg [x86_64] ==> ignore
+    arg [-platform_version] ==> ignore
+    arg [macos] ==> ignore
+    arg [10.6.0] ==> ignore
+    arg [0.0.0] ==> ignore
+    arg [-syslibroot] ==> ignore
+    arg [/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTC_4b7f0] ==> ignore
+    arg [-lcrt1.10.6.o] ==> lib [crt1.10.6.o]
+    arg [CMakeFiles/cmTC_4b7f0.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+    arg [-lstdc++] ==> lib [stdc++]
+    arg [-lSystem] ==> lib [System]
+  remove lib [crt1.10.6.o]
+  remove lib [System]
+  implicit libs: [stdc++]
+  implicit dirs: []
+  implicit fwks: []
+
+
+The system is: Linux - 5.9.16-1-MANJARO - x86_64
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: /usr/bin/o64-clang 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
+
+The C compiler identification is Clang, found in "/home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/3.17.5/CompilerIdC/a.out"
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+Compiler: /usr/bin/o64-clang++ 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
+
+The CXX compiler identification is Clang, found in "/home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/3.17.5/CompilerIdCXX/a.out"
+
+Determining if the C compiler works passed with the following output:
+Change Dir: /home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_da178/fast && /usr/bin/make  -f CMakeFiles/cmTC_da178.dir/build.make CMakeFiles/cmTC_da178.dir/build
+make[1] : on entre dans le répertoire « /home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/CMakeTmp »
+Building C object CMakeFiles/cmTC_da178.dir/testCCompiler.c.o
+/usr/bin/o64-clang    -o CMakeFiles/cmTC_da178.dir/testCCompiler.c.o   -c /home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/CMakeTmp/testCCompiler.c
+Linking C executable cmTC_da178
+/var/lib/snapd/snap/clion/138/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_da178.dir/link.txt --verbose=1
+/usr/bin/o64-clang      CMakeFiles/cmTC_da178.dir/testCCompiler.c.o  -o cmTC_da178 
+make[1] : on quitte le répertoire « /home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/CMakeTmp »
+
+
+
+Detecting C compiler ABI info compiled with the following output:
+Change Dir: /home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_f5370/fast && /usr/bin/make  -f CMakeFiles/cmTC_f5370.dir/build.make CMakeFiles/cmTC_f5370.dir/build
+make[1]: Entering directory '/home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_f5370.dir/CMakeCCompilerABI.c.o
+/usr/bin/o64-clang   -v -o CMakeFiles/cmTC_f5370.dir/CMakeCCompilerABI.c.o   -c /var/lib/snapd/snap/clion/138/bin/cmake/linux/share/cmake-3.17/Modules/CMakeCCompilerABI.c
+clang version 11.0.0
+Target: x86_64-apple-darwin17
+Thread model: posix
+InstalledDir: /usr/bin
+ (in-process)
+ "/usr/bin/clang-11" -cc1 -triple x86_64-apple-macosx10.6.0 -Wundef-prefix=TARGET_OS_ -Werror=undef-prefix -Wdeprecated-objc-isa-usage -Werror=deprecated-objc-isa-usage -emit-obj -mrelax-all -disable-free -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -mframe-pointer=all -fno-rounding-math -munwind-tables -faligned-alloc-unavailable -fcompatibility-qualified-id-block-type-checking -target-cpu core2 -debugger-tuning=lldb -target-linker-version 530 -v -resource-dir /usr/lib/clang/11.0.0 -isystem /usr/bin/../lib/clang/11.0.0/include -isysroot /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk -cxx-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1 -cxx-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1/x86_64-apple-darwin17 -cxx-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1/backward -internal-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/local/include -internal-isystem /usr/lib/clang/11.0.0/include -internal-externc-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include -Wno-liblto -fdebug-compilation-dir /home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/CMakeTmp -ferror-limit 19 -stack-protector 1 -fblocks -fencode-extended-block-signature -fregister-global-dtors-with-atexit -fgnuc-version=4.2.1 -fmax-type-align=16 -o CMakeFiles/cmTC_f5370.dir/CMakeCCompilerABI.c.o -x c /var/lib/snapd/snap/clion/138/bin/cmake/linux/share/cmake-3.17/Modules/CMakeCCompilerABI.c
+clang -cc1 version 11.0.0 based upon LLVM 11.0.0 default target x86_64-pc-linux-gnu
+ignoring nonexistent directory "/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1/x86_64-apple-darwin17"
+ignoring nonexistent directory "/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/local/include"
+ignoring nonexistent directory "/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/Library/Frameworks"
+ignoring duplicate directory "/usr/bin/../lib/clang/11.0.0/include"
+#include "..." search starts here:
+#include <...> search starts here:
+ /usr/bin/../lib/clang/11.0.0/include
+ /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include
+ /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/System/Library/Frameworks (framework directory)
+End of search list.
+Linking C executable cmTC_f5370
+/var/lib/snapd/snap/clion/138/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f5370.dir/link.txt --verbose=1
+/usr/bin/o64-clang     -v CMakeFiles/cmTC_f5370.dir/CMakeCCompilerABI.c.o  -o cmTC_f5370 
+clang version 11.0.0
+Target: x86_64-apple-darwin17
+Thread model: posix
+InstalledDir: /usr/bin
+ "/usr/lib/osxcross/bin/x86_64-apple-darwin17-ld" -demangle -lto_library /usr/lib/libLTO.dylib -dynamic -arch x86_64 -platform_version macos 10.6.0 0.0.0 -syslibroot /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk -o cmTC_f5370 -lcrt1.10.6.o CMakeFiles/cmTC_f5370.dir/CMakeCCompilerABI.c.o -lSystem
+make[1]: Leaving directory '/home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/CMakeTmp'
+
+
+
+Parsed C implicit include dir info from above output: rv=done
+  found start of include info
+  found start of implicit include info
+    add: [/usr/bin/../lib/clang/11.0.0/include]
+    add: [/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include]
+  end of search list found
+  collapse include dir [/usr/bin/../lib/clang/11.0.0/include] ==> [/usr/lib/clang/11.0.0/include]
+  collapse include dir [/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include] ==> [/usr/lib/osxcross/SDK/MacOSX10.13.sdk/usr/include]
+  implicit include dirs: [/usr/lib/clang/11.0.0/include;/usr/lib/osxcross/SDK/MacOSX10.13.sdk/usr/include]
+
+
+Parsed C implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command(s):/usr/bin/make cmTC_f5370/fast && /usr/bin/make  -f CMakeFiles/cmTC_f5370.dir/build.make CMakeFiles/cmTC_f5370.dir/build]
+  ignore line: [make[1]: Entering directory '/home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/CMakeTmp']
+  ignore line: [Building C object CMakeFiles/cmTC_f5370.dir/CMakeCCompilerABI.c.o]
+  ignore line: [/usr/bin/o64-clang   -v -o CMakeFiles/cmTC_f5370.dir/CMakeCCompilerABI.c.o   -c /var/lib/snapd/snap/clion/138/bin/cmake/linux/share/cmake-3.17/Modules/CMakeCCompilerABI.c]
+  ignore line: [clang version 11.0.0]
+  ignore line: [Target: x86_64-apple-darwin17]
+  ignore line: [Thread model: posix]
+  ignore line: [InstalledDir: /usr/bin]
+  ignore line: [ (in-process)]
+  ignore line: [ "/usr/bin/clang-11" -cc1 -triple x86_64-apple-macosx10.6.0 -Wundef-prefix=TARGET_OS_ -Werror=undef-prefix -Wdeprecated-objc-isa-usage -Werror=deprecated-objc-isa-usage -emit-obj -mrelax-all -disable-free -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -mframe-pointer=all -fno-rounding-math -munwind-tables -faligned-alloc-unavailable -fcompatibility-qualified-id-block-type-checking -target-cpu core2 -debugger-tuning=lldb -target-linker-version 530 -v -resource-dir /usr/lib/clang/11.0.0 -isystem /usr/bin/../lib/clang/11.0.0/include -isysroot /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk -cxx-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1 -cxx-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1/x86_64-apple-darwin17 -cxx-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1/backward -internal-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/local/include -internal-isystem /usr/lib/clang/11.0.0/include -internal-externc-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include -Wno-liblto -fdebug-compilation-dir /home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/CMakeTmp -ferror-limit 19 -stack-protector 1 -fblocks -fencode-extended-block-signature -fregister-global-dtors-with-atexit -fgnuc-version=4.2.1 -fmax-type-align=16 -o CMakeFiles/cmTC_f5370.dir/CMakeCCompilerABI.c.o -x c /var/lib/snapd/snap/clion/138/bin/cmake/linux/share/cmake-3.17/Modules/CMakeCCompilerABI.c]
+  ignore line: [clang -cc1 version 11.0.0 based upon LLVM 11.0.0 default target x86_64-pc-linux-gnu]
+  ignore line: [ignoring nonexistent directory "/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1/x86_64-apple-darwin17"]
+  ignore line: [ignoring nonexistent directory "/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/local/include"]
+  ignore line: [ignoring nonexistent directory "/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/Library/Frameworks"]
+  ignore line: [ignoring duplicate directory "/usr/bin/../lib/clang/11.0.0/include"]
+  ignore line: [#include "..." search starts here:]
+  ignore line: [#include <...> search starts here:]
+  ignore line: [ /usr/bin/../lib/clang/11.0.0/include]
+  ignore line: [ /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include]
+  ignore line: [ /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/System/Library/Frameworks (framework directory)]
+  ignore line: [End of search list.]
+  ignore line: [Linking C executable cmTC_f5370]
+  ignore line: [/var/lib/snapd/snap/clion/138/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f5370.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/o64-clang     -v CMakeFiles/cmTC_f5370.dir/CMakeCCompilerABI.c.o  -o cmTC_f5370 ]
+  ignore line: [clang version 11.0.0]
+  ignore line: [Target: x86_64-apple-darwin17]
+  ignore line: [Thread model: posix]
+  ignore line: [InstalledDir: /usr/bin]
+  link line: [ "/usr/lib/osxcross/bin/x86_64-apple-darwin17-ld" -demangle -lto_library /usr/lib/libLTO.dylib -dynamic -arch x86_64 -platform_version macos 10.6.0 0.0.0 -syslibroot /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk -o cmTC_f5370 -lcrt1.10.6.o CMakeFiles/cmTC_f5370.dir/CMakeCCompilerABI.c.o -lSystem]
+    arg [/usr/lib/osxcross/bin/x86_64-apple-darwin17-ld] ==> ignore
+    arg [-demangle] ==> ignore
+    arg [-lto_library] ==> ignore, skip following value
+    arg [/usr/lib/libLTO.dylib] ==> skip value of -lto_library
+    arg [-dynamic] ==> ignore
+    arg [-arch] ==> ignore
+    arg [x86_64] ==> ignore
+    arg [-platform_version] ==> ignore
+    arg [macos] ==> ignore
+    arg [10.6.0] ==> ignore
+    arg [0.0.0] ==> ignore
+    arg [-syslibroot] ==> ignore
+    arg [/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTC_f5370] ==> ignore
+    arg [-lcrt1.10.6.o] ==> lib [crt1.10.6.o]
+    arg [CMakeFiles/cmTC_f5370.dir/CMakeCCompilerABI.c.o] ==> ignore
+    arg [-lSystem] ==> lib [System]
+  remove lib [crt1.10.6.o]
+  remove lib [System]
+  implicit libs: []
+  implicit dirs: []
+  implicit fwks: []
+
+
+Determining if the CXX compiler works passed with the following output:
+Change Dir: /home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_11394/fast && /usr/bin/make  -f CMakeFiles/cmTC_11394.dir/build.make CMakeFiles/cmTC_11394.dir/build
+make[1] : on entre dans le répertoire « /home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/CMakeTmp »
+Building CXX object CMakeFiles/cmTC_11394.dir/testCXXCompiler.cxx.o
+/usr/bin/o64-clang++     -o CMakeFiles/cmTC_11394.dir/testCXXCompiler.cxx.o -c /home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
+Linking CXX executable cmTC_11394
+/var/lib/snapd/snap/clion/138/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_11394.dir/link.txt --verbose=1
+/usr/bin/o64-clang++       CMakeFiles/cmTC_11394.dir/testCXXCompiler.cxx.o  -o cmTC_11394 
+make[1] : on quitte le répertoire « /home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/CMakeTmp »
+
+
+
+Detecting CXX compiler ABI info compiled with the following output:
+Change Dir: /home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_7c08c/fast && /usr/bin/make  -f CMakeFiles/cmTC_7c08c.dir/build.make CMakeFiles/cmTC_7c08c.dir/build
+make[1]: Entering directory '/home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_7c08c.dir/CMakeCXXCompilerABI.cpp.o
+/usr/bin/o64-clang++    -v -o CMakeFiles/cmTC_7c08c.dir/CMakeCXXCompilerABI.cpp.o -c /var/lib/snapd/snap/clion/138/bin/cmake/linux/share/cmake-3.17/Modules/CMakeCXXCompilerABI.cpp
+clang version 11.0.0
+Target: x86_64-apple-darwin17
+Thread model: posix
+InstalledDir: /usr/bin
+ (in-process)
+ "/usr/bin/clang-11" -cc1 -triple x86_64-apple-macosx10.6.0 -Wundef-prefix=TARGET_OS_ -Werror=undef-prefix -Wdeprecated-objc-isa-usage -Werror=deprecated-objc-isa-usage -emit-obj -mrelax-all -disable-free -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -mframe-pointer=all -fno-rounding-math -munwind-tables -faligned-alloc-unavailable -fcompatibility-qualified-id-block-type-checking -target-cpu core2 -debugger-tuning=lldb -target-linker-version 530 -v -resource-dir /usr/lib/clang/11.0.0 -isystem /usr/bin/../lib/clang/11.0.0/include -isysroot /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk -cxx-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1 -cxx-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1/x86_64-apple-darwin17 -cxx-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1/backward -stdlib=libstdc++ -internal-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1 -internal-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1/i686-apple-darwin10/x86_64 -internal-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1/backward -internal-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.0.0 -internal-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.0.0/i686-apple-darwin8 -internal-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.0.0/backward -internal-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/local/include -internal-isystem /usr/lib/clang/11.0.0/include -internal-externc-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include -Wno-liblto -fdeprecated-macro -fdebug-compilation-dir /home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/CMakeTmp -ferror-limit 19 -stack-protector 1 -fblocks -fencode-extended-block-signature -fregister-global-dtors-with-atexit -fgnuc-version=4.2.1 -fcxx-exceptions -fexceptions -fmax-type-align=16 -o CMakeFiles/cmTC_7c08c.dir/CMakeCXXCompilerABI.cpp.o -x c++ /var/lib/snapd/snap/clion/138/bin/cmake/linux/share/cmake-3.17/Modules/CMakeCXXCompilerABI.cpp
+clang -cc1 version 11.0.0 based upon LLVM 11.0.0 default target x86_64-pc-linux-gnu
+ignoring nonexistent directory "/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1/x86_64-apple-darwin17"
+ignoring nonexistent directory "/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1/i686-apple-darwin10/x86_64"
+ignoring nonexistent directory "/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.0.0"
+ignoring nonexistent directory "/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.0.0/i686-apple-darwin8"
+ignoring nonexistent directory "/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.0.0/backward"
+ignoring nonexistent directory "/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/local/include"
+ignoring nonexistent directory "/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/Library/Frameworks"
+ignoring duplicate directory "/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1"
+ignoring duplicate directory "/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1/backward"
+ignoring duplicate directory "/usr/bin/../lib/clang/11.0.0/include"
+#include "..." search starts here:
+#include <...> search starts here:
+ /usr/bin/../lib/clang/11.0.0/include
+ /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1
+ /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1/backward
+ /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include
+ /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/System/Library/Frameworks (framework directory)
+End of search list.
+Linking CXX executable cmTC_7c08c
+/var/lib/snapd/snap/clion/138/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7c08c.dir/link.txt --verbose=1
+/usr/bin/o64-clang++      -v CMakeFiles/cmTC_7c08c.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_7c08c 
+clang version 11.0.0
+Target: x86_64-apple-darwin17
+Thread model: posix
+InstalledDir: /usr/bin
+ "/usr/lib/osxcross/bin/x86_64-apple-darwin17-ld" -demangle -lto_library /usr/lib/libLTO.dylib -dynamic -arch x86_64 -platform_version macos 10.6.0 0.0.0 -syslibroot /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk -o cmTC_7c08c -lcrt1.10.6.o CMakeFiles/cmTC_7c08c.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lSystem
+make[1]: Leaving directory '/home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/CMakeTmp'
+
+
+
+Parsed CXX implicit include dir info from above output: rv=done
+  found start of include info
+  found start of implicit include info
+    add: [/usr/bin/../lib/clang/11.0.0/include]
+    add: [/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1]
+    add: [/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1/backward]
+    add: [/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include]
+  end of search list found
+  collapse include dir [/usr/bin/../lib/clang/11.0.0/include] ==> [/usr/lib/clang/11.0.0/include]
+  collapse include dir [/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1] ==> [/usr/lib/osxcross/SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1]
+  collapse include dir [/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1/backward] ==> [/usr/lib/osxcross/SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1/backward]
+  collapse include dir [/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include] ==> [/usr/lib/osxcross/SDK/MacOSX10.13.sdk/usr/include]
+  implicit include dirs: [/usr/lib/clang/11.0.0/include;/usr/lib/osxcross/SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1;/usr/lib/osxcross/SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1/backward;/usr/lib/osxcross/SDK/MacOSX10.13.sdk/usr/include]
+
+
+Parsed CXX implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command(s):/usr/bin/make cmTC_7c08c/fast && /usr/bin/make  -f CMakeFiles/cmTC_7c08c.dir/build.make CMakeFiles/cmTC_7c08c.dir/build]
+  ignore line: [make[1]: Entering directory '/home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/CMakeTmp']
+  ignore line: [Building CXX object CMakeFiles/cmTC_7c08c.dir/CMakeCXXCompilerABI.cpp.o]
+  ignore line: [/usr/bin/o64-clang++    -v -o CMakeFiles/cmTC_7c08c.dir/CMakeCXXCompilerABI.cpp.o -c /var/lib/snapd/snap/clion/138/bin/cmake/linux/share/cmake-3.17/Modules/CMakeCXXCompilerABI.cpp]
+  ignore line: [clang version 11.0.0]
+  ignore line: [Target: x86_64-apple-darwin17]
+  ignore line: [Thread model: posix]
+  ignore line: [InstalledDir: /usr/bin]
+  ignore line: [ (in-process)]
+  ignore line: [ "/usr/bin/clang-11" -cc1 -triple x86_64-apple-macosx10.6.0 -Wundef-prefix=TARGET_OS_ -Werror=undef-prefix -Wdeprecated-objc-isa-usage -Werror=deprecated-objc-isa-usage -emit-obj -mrelax-all -disable-free -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -mframe-pointer=all -fno-rounding-math -munwind-tables -faligned-alloc-unavailable -fcompatibility-qualified-id-block-type-checking -target-cpu core2 -debugger-tuning=lldb -target-linker-version 530 -v -resource-dir /usr/lib/clang/11.0.0 -isystem /usr/bin/../lib/clang/11.0.0/include -isysroot /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk -cxx-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1 -cxx-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1/x86_64-apple-darwin17 -cxx-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1/backward -stdlib=libstdc++ -internal-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1 -internal-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1/i686-apple-darwin10/x86_64 -internal-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1/backward -internal-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.0.0 -internal-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.0.0/i686-apple-darwin8 -internal-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.0.0/backward -internal-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/local/include -internal-isystem /usr/lib/clang/11.0.0/include -internal-externc-isystem /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include -Wno-liblto -fdeprecated-macro -fdebug-compilation-dir /home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos/CMakeFiles/CMakeTmp -ferror-limit 19 -stack-protector 1 -fblocks -fencode-extended-block-signature -fregister-global-dtors-with-atexit -fgnuc-version=4.2.1 -fcxx-exceptions -fexceptions -fmax-type-align=16 -o CMakeFiles/cmTC_7c08c.dir/CMakeCXXCompilerABI.cpp.o -x c++ /var/lib/snapd/snap/clion/138/bin/cmake/linux/share/cmake-3.17/Modules/CMakeCXXCompilerABI.cpp]
+  ignore line: [clang -cc1 version 11.0.0 based upon LLVM 11.0.0 default target x86_64-pc-linux-gnu]
+  ignore line: [ignoring nonexistent directory "/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1/x86_64-apple-darwin17"]
+  ignore line: [ignoring nonexistent directory "/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1/i686-apple-darwin10/x86_64"]
+  ignore line: [ignoring nonexistent directory "/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.0.0"]
+  ignore line: [ignoring nonexistent directory "/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.0.0/i686-apple-darwin8"]
+  ignore line: [ignoring nonexistent directory "/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.0.0/backward"]
+  ignore line: [ignoring nonexistent directory "/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/local/include"]
+  ignore line: [ignoring nonexistent directory "/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/Library/Frameworks"]
+  ignore line: [ignoring duplicate directory "/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1"]
+  ignore line: [ignoring duplicate directory "/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1/backward"]
+  ignore line: [ignoring duplicate directory "/usr/bin/../lib/clang/11.0.0/include"]
+  ignore line: [#include "..." search starts here:]
+  ignore line: [#include <...> search starts here:]
+  ignore line: [ /usr/bin/../lib/clang/11.0.0/include]
+  ignore line: [ /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1]
+  ignore line: [ /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include/c++/4.2.1/backward]
+  ignore line: [ /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/usr/include]
+  ignore line: [ /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk/System/Library/Frameworks (framework directory)]
+  ignore line: [End of search list.]
+  ignore line: [Linking CXX executable cmTC_7c08c]
+  ignore line: [/var/lib/snapd/snap/clion/138/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7c08c.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/o64-clang++      -v CMakeFiles/cmTC_7c08c.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_7c08c ]
+  ignore line: [clang version 11.0.0]
+  ignore line: [Target: x86_64-apple-darwin17]
+  ignore line: [Thread model: posix]
+  ignore line: [InstalledDir: /usr/bin]
+  link line: [ "/usr/lib/osxcross/bin/x86_64-apple-darwin17-ld" -demangle -lto_library /usr/lib/libLTO.dylib -dynamic -arch x86_64 -platform_version macos 10.6.0 0.0.0 -syslibroot /usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk -o cmTC_7c08c -lcrt1.10.6.o CMakeFiles/cmTC_7c08c.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lSystem]
+    arg [/usr/lib/osxcross/bin/x86_64-apple-darwin17-ld] ==> ignore
+    arg [-demangle] ==> ignore
+    arg [-lto_library] ==> ignore, skip following value
+    arg [/usr/lib/libLTO.dylib] ==> skip value of -lto_library
+    arg [-dynamic] ==> ignore
+    arg [-arch] ==> ignore
+    arg [x86_64] ==> ignore
+    arg [-platform_version] ==> ignore
+    arg [macos] ==> ignore
+    arg [10.6.0] ==> ignore
+    arg [0.0.0] ==> ignore
+    arg [-syslibroot] ==> ignore
+    arg [/usr/lib/osxcross/bin/../SDK/MacOSX10.13.sdk] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTC_7c08c] ==> ignore
+    arg [-lcrt1.10.6.o] ==> lib [crt1.10.6.o]
+    arg [CMakeFiles/cmTC_7c08c.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+    arg [-lstdc++] ==> lib [stdc++]
+    arg [-lSystem] ==> lib [System]
+  remove lib [crt1.10.6.o]
+  remove lib [System]
+  implicit libs: [stdc++]
+  implicit dirs: []
+  implicit fwks: []
+
+

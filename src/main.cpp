@@ -15,7 +15,6 @@ void load_syscalls();
 // TODO syscallPath : path different for Ubuntu/(Manjaro|Arch)/Kali (others?)
 
 int main(int argc, char *argv[]){
-	cout << "App PID : " << getpid() << endl;
 	QApplication app(argc, argv);
 
 	try{

@@ -117,14 +117,12 @@ void DebugWindow::startTrace() { // TODO way to kill tracer ?
 					}
 				}
 			}
-			if(proc==nullptr){
-				cerr << "Invalid child exited : " << stopped << endl;
-				continue;
-			}else{
+			if(proc==nullptr) cerr << "Invalid child exited : " << stopped << endl;
+			else{
 				handleChildExit(*proc);
 				if (empty)break;
-				else continue;
 			}
+			continue;
 		}
 
 		proc = nullptr;
@@ -140,18 +138,17 @@ void DebugWindow::startTrace() { // TODO way to kill tracer ?
 		}
 
 		if(proc->currentCall==nullptr){ // entry
-			info = new __ptrace_syscall_info();
-			info->op = PTRACE_SYSCALL_INFO_ENTRY;
-			ptrace(PTRACE_GET_SYSCALL_INFO, stopped, size, info);
-			info->op = 255;
+			proc->currentCall = new Syscall();
+			proc->currentCall->entry.op = PTRACE_SYSCALL_INFO_ENTRY;
+			ptrace(PTRACE_GET_SYSCALL_INFO, stopped, size, &proc->currentCall->entry);
+			proc->currentCall->guessName();
 
-			proc->currentCall = new Syscall(*info);
 			proc->calls.push_back(proc->currentCall);
 			handleCallStart(*proc);
 
 		}else{ // exit
-			proc->currentCall->info.op = PTRACE_SYSCALL_INFO_EXIT;
-			ptrace(PTRACE_GET_SYSCALL_INFO, stopped, size, &proc->currentCall->info);
+			proc->currentCall->exit.op = PTRACE_SYSCALL_INFO_EXIT;
+			ptrace(PTRACE_GET_SYSCALL_INFO, stopped, size, &proc->currentCall->exit);
 
 			auto a = proc->calls.end();
 			a--;
@@ -163,13 +160,12 @@ void DebugWindow::startTrace() { // TODO way to kill tracer ?
 		temp = ptrace(PTRACE_SYSCALL, stopped, 0, 0); // restart le thread + l'arrête au prochain syscall
 		if(temp!=0)cerr << "PTRACE_SYSCALL end-loop failed : " << temp << endl;
 	}
-	cout << "fin" << endl;
 }
 
 void DebugWindow::handleCallReturn(Process& proc) {
-	if (config::doChilds && proc.currentCall->info.entry.nr == 56) { // TODO 56 doit pas être hardcodé
-		auto *newChild = new Process();
-		newChild->pid = proc.currentCall->info.exit.rval;
+	if (config::doChilds && proc.currentCall->entry.id == 56) { // TODO 56 doit pas être hardcodé
+		auto* newChild = new Process();
+		newChild->pid = proc.currentCall->exit.rval;
 
 		processes.insert(newChild);
 		int temp = ptrace(PTRACE_SYSCALL, newChild, 0, 0); // restart le thread + l'arrête au prochain syscall
@@ -199,8 +195,5 @@ void DebugWindow::handleCallStart(Process& proc) const {
 }
 
 void DebugWindow::handleChildExit(Process& proc){
-	if(displayed->pid==proc.pid){
-		displayed = nullptr;
-		// TODO Basculer sur les logs parent/main
-	}
+
 }
