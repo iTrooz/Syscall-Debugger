@@ -51,7 +51,8 @@ void DebugWindow::treeClick(QTreeWidgetItem* item){
 	cerr << "NOT SUPPOSED TO HAPPEN : Clicked process not found" << endl;
 }
 
-void DebugWindow::changeView(Process& p) const {
+void DebugWindow::changeView(Process& p) {
+	displayed = &p;
 	UI.callsLogs->setRowCount(0);
 	for(Syscall* call : p.calls){
 		addEntryStart(*call);

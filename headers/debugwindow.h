@@ -26,7 +26,7 @@ public:
 
 	void cleanUpUI() const;
 	void cleanUpProcess();
-	void changeView(Process &p) const;
+	void changeView(Process &p);
 
 	void addEntryStart(Syscall& call) const;
 	void addEntryEnd(Syscall& call) const;
