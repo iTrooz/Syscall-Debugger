@@ -2,6 +2,7 @@
 #include<iostream>
 #include<sstream>
 #include<unordered_set>
+#include<libexplain/ptrace.h>
 #include "configFile.h"
 
 using namespace std;
@@ -90,7 +91,7 @@ void DebugWindow::startTrace() { // TODO way to kill tracer ?
 	processes.insert(mainProcess);
 
 	waitpid(mainProcess->pid, &temp, 0);
-	temp = ptrace(PTRACE_SETOPTIONS, mainProcess->pid, 0, PTRACE_O_TRACESYSGOOD | PTRACE_O_TRACEFORK | PTRACE_O_TRACECLONE);
+	temp = ptrace(PTRACE_SETOPTIONS, mainProcess->pid, 0, PTRACE_O_TRACESYSGOOD | PTRACE_O_TRACEFORK | PTRACE_O_TRACECLONE | PTRACE_O_EXITKILL);
 	if(temp!=0)throw runtime_error("PTRACE_SETOPTIONS failed : "+to_string(temp));
 	temp = ptrace(PTRACE_SYSCALL, mainProcess->pid, 0, 0); // restart le thread + l'arrête au prochain syscall
 	if(temp!=0)throw runtime_error("FIRST PTRACE_SYSCALL normal-failed : "+to_string(temp)); // TODO C'est normal si ca throw ici !! enlever throw
@@ -136,17 +137,47 @@ void DebugWindow::startTrace() { // TODO way to kill tracer ?
 			continue;
 		}
 
+		cout << "call " << proc->pid << endl;
+		fflush(stdout);
+
 		if(proc->currentCall==nullptr){ // entry
 			proc->currentCall = new Syscall();
-			proc->currentCall->entry.op = PTRACE_SYSCALL_INFO_ENTRY;
+
+			__ptrace_syscall_info info{};
+			ptrace(PTRACE_GET_SYSCALL_INFO, stopped, size, &info);
+			temp = ptrace(PTRACE_PEEKUSER, stopped, sizeof(long)*ORIG_RAX);
+			if(info.op!=PTRACE_SYSCALL_INFO_ENTRY){
+				cout << "----- ENTRY -----" << endl;
+				cout << "OP=" << to_string(info.op) << endl;
+				cout << "PROC=" << to_string(proc->pid) << endl;
+				cout << info.entry.nr << endl;
+				cout << temp << endl;
+				cout << "------" << endl;
+				fflush(stdout);
+			}
+
 			ptrace(PTRACE_GET_SYSCALL_INFO, stopped, size, &proc->currentCall->entry);
-			proc->currentCall->guessName();
+			proc->currentCall->guessName(); // TODO ONLY GUESS NAME IF SELECTED (no useless calcs)
 
 			proc->calls.push_back(proc->currentCall);
 			handleCallStart(*proc);
 
 		}else{ // exit
-			proc->currentCall->exit.op = PTRACE_SYSCALL_INFO_EXIT;
+
+			__ptrace_syscall_info info{};
+			ptrace(PTRACE_GET_SYSCALL_INFO, stopped, size, &info);
+			temp = ptrace(PTRACE_PEEKUSER, stopped, sizeof(long)*ORIG_RAX);
+			if(info.op!=PTRACE_SYSCALL_INFO_EXIT){
+				cout << "----- EXIT -----" << endl;
+				cout << "OP=" << to_string(info.op) << endl;
+				cout << "PROC=" << to_string(proc->pid) << endl;
+				cout << info.entry.nr << endl;
+				cout << temp << endl;
+				cout << "------" << endl;
+				fflush(stdout);
+			}
+
+
 			ptrace(PTRACE_GET_SYSCALL_INFO, stopped, size, &proc->currentCall->exit);
 
 			auto a = proc->calls.end();
@@ -163,13 +194,23 @@ void DebugWindow::startTrace() { // TODO way to kill tracer ?
 
 void DebugWindow::handleCallReturn(Process& proc) {
 	if (config::doChilds && proc.currentCall->entry.id == 56) { // TODO 56 doit pas être hardcodé
+		int temp;
 		auto* newChild = new Process();
 		newChild->pid = proc.currentCall->exit.rval;
-
-
 		processes.insert(newChild);
-		int temp = ptrace(PTRACE_SYSCALL, newChild, 0, 0); // restart le thread + l'arrête au prochain syscall
-		if (temp != 0) cerr << "normal fail : " << temp << endl; // TODO NORMAL ?
+
+		cout << "New child " << to_string(newChild->pid) << endl;
+		fflush(stdout);
+
+		kill(SIGSTOP, newChild->pid);
+		waitpid(newChild->pid, &temp, 0);
+		temp = ptrace(PTRACE_SYSCALL, newChild->pid, 0, 0); // restart le thread + l'arrête au prochain syscall
+
+		if (temp != 0){
+			cerr << "normal fail : " << temp << endl; // TODO NORMAL ?
+			cerr << explain_ptrace(PTRACE_SYSCALL, newChild->pid, 0, 0) << endl;
+		}
+		fflush(stderr);
 
 
 		newChild->treeItem = new QTreeWidgetItem;
@@ -197,3 +238,5 @@ void DebugWindow::handleCallStart(Process& proc) const {
 void DebugWindow::handleChildExit(Process& proc){
 
 }
+
+// TODO SPLIT CE FICHIER EN 2/+ ?

@@ -8,6 +8,6 @@ using namespace std;
 
 void Syscall::guessName(){
 	auto s = syscalls.find(entry.id);
-	if(s==syscalls.end()) throw runtime_error("syscall not found");
+	if(s==syscalls.end()) throw runtime_error("syscall '"+to_string(entry.id)+"' not found");
 	name = &s->second;
 }
