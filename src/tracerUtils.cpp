@@ -1,15 +1,35 @@
 #include <debugwindow.h>
-#include <iostream>
 #include "configFile.h"
 
 using namespace std;
 
-void DebugWindow::handleCallStart(Process& proc) const {
-	if (config::doChilds && proc.currentCall->entry->nr == 56) {
-		cout << "Child creation init" << endl;
-		fflush(stdout);
+Process* DebugWindow::getProcess(pid_t pid){
+//	cout << "--" << endl;
+//	int i = 0;
+	for (Process *p : processes) {
+//		i++;
+//		if(i==2){
+//			kill(getpid(), SIGSTOP);
+//			waitpid(getpid(), nullptr, 0);
+//		}
+//		cout << p->pid << endl;
+		if (p->pid == pid) {
+			return p;
+		}
 	}
-		if(displayed->pid==proc.pid){
+	return nullptr;
+}
+
+void DebugWindow::killProcesses(){ // TODO hardcoder ca ?
+	for(Process* p : processes){
+		kill(p->pid, 9);
+	}
+}
+
+// -----------------------------------
+
+void DebugWindow::handleCallStart(Process& proc) const {
+	if(displayed->pid==proc.pid){
 		addEntryStart(*proc.currentCall);
 	}
 
@@ -20,31 +40,12 @@ void DebugWindow::handleCallStart(Process& proc) const {
 
 }
 
-void DebugWindow::handleChildExit(Process& proc){
-
-}
-
 
 void DebugWindow::handleCallReturn(Process& proc) {
 	if (config::doChilds && proc.currentCall->entry->nr == 56) { // TODO 56 doit pas être hardcodé
-		int temp;
-		auto* newChild = new Process();
-		newChild->pid = proc.currentCall->exit->rval;
-		processes.insert(newChild);
-
-		cout << "New child " << to_string(newChild->pid) << endl;
-		fflush(stdout);
-
-		kill(SIGSTOP, newChild->pid);
-		waitpid(newChild->pid, &temp, 0);
-		temp = ptrace(PTRACE_SYSCALL, newChild->pid, 0, 0); // restart le thread + l'arrête au prochain syscall
-
-		if (temp != 0){
-			cerr << "normal fail : " << temp << endl; // TODO NORMAL ?
-//			cerr << explain_ptrace(PTRACE_SYSCALL, newChild->pid, 0, 0) << endl;
-		}
-		fflush(stderr);
-
+		// TODO get le processus parent du child ? (maybe en faisant un syscall depuis le child)
+		Process* newChild = getProcess(proc.currentCall->exit->rval);
+		if(newChild==nullptr)newChild = handleChildCreate(proc.currentCall->exit->rval);
 
 		newChild->treeItem = new QTreeWidgetItem;
 		newChild->treeItem->setText(0, QString(to_string(newChild->pid).c_str()));
@@ -54,4 +55,16 @@ void DebugWindow::handleCallReturn(Process& proc) {
 	if(displayed->pid==proc.pid){
 		addEntryEnd(*proc.currentCall);
 	}
+}
+
+Process* DebugWindow::handleChildCreate(pid_t pid){ // Warning : Still need to apply Tree Item Widget
+	auto* newChild = new Process();
+	newChild->pid = pid;
+	processes.insert(newChild);
+
+	return newChild;
+}
+
+void DebugWindow::handleChildExit(Process& proc){
+
 }

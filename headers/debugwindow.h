@@ -35,13 +35,15 @@ public:
 	unordered_set<Process*> processes;
 	void createProcess();
 	void setupProcess(pid_t tracee);
-	void remProcess(bool kil);
+	void killProcesses();
+	Process* getProcess(pid_t pid);
 private:
 	void startTrace();
 	bool waitProcess(pid_t& stopped);
 	void handleCallReturn(Process& proc);
 	void handleCallStart(Process& proc) const;
 	void handleChildExit(Process &proc);
+	Process* handleChildCreate(pid_t pid);
 
 private slots: // a voir pour suppr ?
 

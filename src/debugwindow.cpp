@@ -9,7 +9,7 @@
 void DebugWindow::cleanUpProcess() {
 	if (mainProcess != nullptr) {
 
-		remProcess(true);
+		killProcesses();
 
 		mainProcess->treeItem = nullptr;
 		for (auto *proc : processes) {

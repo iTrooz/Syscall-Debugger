@@ -7,13 +7,6 @@
 using namespace std;
 
 
-void DebugWindow::remProcess(bool kil){ // TODO jsp si ca marche
-	for(Process* p : processes){
-		if(kil) kill(p->pid, 9);
-
-	}
-}
-
 void DebugWindow::setupProcess(pid_t pid) {
 	mainProcess = new Process;
 	mainProcess->pid = pid;
@@ -104,8 +97,13 @@ void DebugWindow::startTrace() { // TODO way to kill tracer ?
 	int size = sizeof(__ptrace_syscall_info);
 
 	while (true) {
-		cout << endl << "Start" << endl;
-		fflush(stdout);
+		waitProcess(stopped);
+		temp = ptrace(PTRACE_SYSCALL, stopped, 0, 0);
+	}
+	return;
+	while (true) {
+//		cout << endl << "Start" << endl;
+//		fflush(stdout);
 		if (waitProcess(stopped)) {
 			proc = nullptr;
 			bool empty = true;
@@ -128,24 +126,17 @@ void DebugWindow::startTrace() { // TODO way to kill tracer ?
 			}
 			continue;
 		}
-		cout << stopped << endl;
-		fflush(stdout);
+//		cout << stopped << endl;
+//		fflush(stdout);
 
-		proc = nullptr;
-		for (Process *p : processes) {
-			if (p->pid == stopped) {
-				proc = p;
-				break;
-			}
-		}
+		proc = getProcess(stopped);
 		if(proc==nullptr){
-			cout << "Received data from invalid child : " << stopped << endl;
-			fflush(stdout);
-			continue;
+			proc = handleChildCreate(stopped);
 		}
 
 		info = new syscall_data(); // TODO penser à delete les structs inutiles après utilisation
 		ptrace(PTRACE_GET_SYSCALL_INFO, stopped, size, info);
+
 		if(info->base.op==PTRACE_SYSCALL_INFO_ENTRY){
 			if(proc->currentCall!=nullptr) {
 				cout << "Warning " << stopped << " : waiting for syscall exit, got syscall entry" << endl;
