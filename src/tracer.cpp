@@ -2,7 +2,6 @@
 #include<iostream>
 #include<sstream>
 #include<unordered_set>
-#include<libexplain/ptrace.h>
 #include "configFile.h"
 
 using namespace std;
@@ -68,6 +67,7 @@ void DebugWindow::createProcess() {
 bool DebugWindow::waitProcess(pid_t& stopped) {
 	int status;
 	while (true) {
+
 		stopped = waitpid(-1, &status, __WALL);
 		if(stopped==-1){
 			exit(0);
@@ -100,9 +100,12 @@ void DebugWindow::startTrace() { // TODO way to kill tracer ?
 	mainProcess->treeItem->setText(0, QString(to_string(mainProcess->pid).c_str()));
 
 	Process* proc;
+	syscall_data* info;
 	int size = sizeof(__ptrace_syscall_info);
 
 	while (true) {
+		cout << endl << "Start" << endl;
+		fflush(stdout);
 		if (waitProcess(stopped)) {
 			proc = nullptr;
 			bool empty = true;
@@ -113,17 +116,20 @@ void DebugWindow::startTrace() { // TODO way to kill tracer ?
 						proc = p;
 					}else{
 						empty = false;
-						break;
 					}
+					if(!empty&&proc!=nullptr)break; // TODO jsp si vraiment opti
 				}
 			}
-			if(proc==nullptr) cerr << "Invalid child exited : " << stopped << endl;
-			else{
+			if(proc==nullptr){
+				cerr << "Invalid child exited : " << stopped << endl;
+			}else{
 				handleChildExit(*proc);
 				if (empty)break;
 			}
 			continue;
 		}
+		cout << stopped << endl;
+		fflush(stdout);
 
 		proc = nullptr;
 		for (Process *p : processes) {
@@ -133,110 +139,40 @@ void DebugWindow::startTrace() { // TODO way to kill tracer ?
 			}
 		}
 		if(proc==nullptr){
-			cerr << "Received data from invalid child : " << stopped << endl;
+			cout << "Received data from invalid child : " << stopped << endl;
+			fflush(stdout);
 			continue;
 		}
 
-		cout << "call " << proc->pid << endl;
-		fflush(stdout);
-
-		if(proc->currentCall==nullptr){ // entry
-			proc->currentCall = new Syscall();
-
-			__ptrace_syscall_info info{};
-			ptrace(PTRACE_GET_SYSCALL_INFO, stopped, size, &info);
-			temp = ptrace(PTRACE_PEEKUSER, stopped, sizeof(long)*ORIG_RAX);
-			if(info.op!=PTRACE_SYSCALL_INFO_ENTRY){
-				cout << "----- ENTRY -----" << endl;
-				cout << "OP=" << to_string(info.op) << endl;
-				cout << "PROC=" << to_string(proc->pid) << endl;
-				cout << info.entry.nr << endl;
-				cout << temp << endl;
-				cout << "------" << endl;
+		info = new syscall_data(); // TODO penser à delete les structs inutiles après utilisation
+		ptrace(PTRACE_GET_SYSCALL_INFO, stopped, size, info);
+		if(info->base.op==PTRACE_SYSCALL_INFO_ENTRY){
+			if(proc->currentCall!=nullptr) {
+				cout << "Warning " << stopped << " : waiting for syscall exit, got syscall entry" << endl;
 				fflush(stdout);
+			}else{
+				proc->currentCall = new Syscall();
+				proc->currentCall->entry = &info->entry;
+				proc->currentCall->guessName(); // TODO ONLY GUESS NAME IF SELECTED (no useless calcs)}
+				proc->calls.push_back(proc->currentCall);
+
+				handleCallStart(*proc);
 			}
 
-			ptrace(PTRACE_GET_SYSCALL_INFO, stopped, size, &proc->currentCall->entry);
-			proc->currentCall->guessName(); // TODO ONLY GUESS NAME IF SELECTED (no useless calcs)
-
-			proc->calls.push_back(proc->currentCall);
-			handleCallStart(*proc);
 
 		}else{ // exit
-
-			__ptrace_syscall_info info{};
-			ptrace(PTRACE_GET_SYSCALL_INFO, stopped, size, &info);
-			temp = ptrace(PTRACE_PEEKUSER, stopped, sizeof(long)*ORIG_RAX);
-			if(info.op!=PTRACE_SYSCALL_INFO_EXIT){
-				cout << "----- EXIT -----" << endl;
-				cout << "OP=" << to_string(info.op) << endl;
-				cout << "PROC=" << to_string(proc->pid) << endl;
-				cout << info.entry.nr << endl;
-				cout << temp << endl;
-				cout << "------" << endl;
+			if(proc->currentCall==nullptr) {
+				cout << "Warning " << stopped << " : waiting for syscall entry, got syscall exit" << endl;
 				fflush(stdout);
+			}else{
+				proc->currentCall->exit = &info->exit;
+
+				handleCallReturn(*proc);
+				proc->currentCall = nullptr;
 			}
-
-
-			ptrace(PTRACE_GET_SYSCALL_INFO, stopped, size, &proc->currentCall->exit);
-
-			auto a = proc->calls.end();
-			a--;
-
-			handleCallReturn(*proc);
-			proc->currentCall = nullptr;
 		}
 
 		temp = ptrace(PTRACE_SYSCALL, stopped, 0, 0); // restart le thread + l'arrête au prochain syscall
 		if(temp!=0)cerr << "PTRACE_SYSCALL end-loop failed : " << temp << endl;
 	}
 }
-
-void DebugWindow::handleCallReturn(Process& proc) {
-	if (config::doChilds && proc.currentCall->entry.id == 56) { // TODO 56 doit pas être hardcodé
-		int temp;
-		auto* newChild = new Process();
-		newChild->pid = proc.currentCall->exit.rval;
-		processes.insert(newChild);
-
-		cout << "New child " << to_string(newChild->pid) << endl;
-		fflush(stdout);
-
-		kill(SIGSTOP, newChild->pid);
-		waitpid(newChild->pid, &temp, 0);
-		temp = ptrace(PTRACE_SYSCALL, newChild->pid, 0, 0); // restart le thread + l'arrête au prochain syscall
-
-		if (temp != 0){
-			cerr << "normal fail : " << temp << endl; // TODO NORMAL ?
-			cerr << explain_ptrace(PTRACE_SYSCALL, newChild->pid, 0, 0) << endl;
-		}
-		fflush(stderr);
-
-
-		newChild->treeItem = new QTreeWidgetItem;
-		newChild->treeItem->setText(0, QString(to_string(newChild->pid).c_str()));
-		proc.treeItem->addChild(newChild->treeItem);
-	}
-
-	if(displayed->pid==proc.pid){
-		addEntryEnd(*proc.currentCall);
-	}
-}
-
-void DebugWindow::handleCallStart(Process& proc) const {
-	if(displayed->pid==proc.pid){
-		addEntryStart(*proc.currentCall);
-	}
-
-	if(proc.calls.size()>=config::displayLimit){
-		proc.calls.pop_back();
-		UI.callsLogs->setRowCount(config::displayLimit);
-	}
-
-}
-
-void DebugWindow::handleChildExit(Process& proc){
-
-}
-
-// TODO SPLIT CE FICHIER EN 2/+ ?
