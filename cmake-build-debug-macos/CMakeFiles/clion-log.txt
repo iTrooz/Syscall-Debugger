@@ -1,4 +1,0 @@
-/snap/clion/138/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_COMPILER=/usr/bin/o64-clang -DCMAKE_CXX_COMPILER=/usr/bin/o64-clang++ -G "CodeBlocks - Unix Makefiles" /home/itrooz/moi/workspaces/CLion/Syscall-Debugger
--- Configuring done
--- Generating done
--- Build files have been written to: /home/itrooz/moi/workspaces/CLion/Syscall-Debugger/cmake-build-debug-macos

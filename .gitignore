@@ -1,3 +1,1 @@
-cmake-build-debug-linux
-cmake-build-debug-windows
-cmake-build-debug-macos
+cmake-build*

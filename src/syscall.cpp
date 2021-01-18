@@ -11,3 +11,9 @@ void Syscall::guessName(){
 	if(s==syscalls.end()) throw runtime_error("syscall '" + to_string(entry->nr) + "' not found");
 	name = &s->second;
 }
+
+Syscall::~Syscall() {
+//	cout << entry << endl;
+//	delete entry;
+//	delete exit;
+}

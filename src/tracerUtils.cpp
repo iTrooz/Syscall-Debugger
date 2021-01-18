@@ -33,9 +33,15 @@ void DebugWindow::handleCallStart(Process& proc) const {
 		addEntryStart(*proc.currentCall);
 	}
 
-	if(proc.calls.size()>=config::displayLimit){
-		proc.calls.pop_back();
+	if(proc.calls.size()==config::displayLimit){
+		list<Syscall*>::iterator a = proc.calls.begin();
+		a++;
+		delete *a;
+		proc.calls.pop_front();
+
 		UI.callsLogs->setRowCount(config::displayLimit);
+	}else if(proc.calls.size()>config::displayLimit){
+		throw runtime_error("Calls list too large !");
 	}
 
 }
@@ -43,7 +49,6 @@ void DebugWindow::handleCallStart(Process& proc) const {
 
 void DebugWindow::handleCallReturn(Process& proc) {
 	if (config::doChilds && proc.currentCall->entry->nr == 56) { // TODO 56 doit pas être hardcodé
-		// TODO get le processus parent du child ? (maybe en faisant un syscall depuis le child)
 		Process* newChild = getProcess(proc.currentCall->exit->rval);
 		if(newChild==nullptr)newChild = handleChildCreate(proc.currentCall->exit->rval);
 
@@ -52,12 +57,12 @@ void DebugWindow::handleCallReturn(Process& proc) {
 		proc.treeItem->addChild(newChild->treeItem);
 	}
 
-	if(displayed->pid==proc.pid){
-		addEntryEnd(*proc.currentCall);
-	}
+//	if(displayed->pid==proc.pid){
+//		addEntryEnd(*proc.currentCall);
+//	}
 }
 
-Process* DebugWindow::handleChildCreate(pid_t pid){ // Warning : Still need to apply Tree Item Widget
+Process* DebugWindow::handleChildCreate(pid_t pid){ // Warning : Still need to apply Tree Item Widget. besoin = get parent parent from here
 	auto* newChild = new Process();
 	newChild->pid = pid;
 	processes.insert(newChild);

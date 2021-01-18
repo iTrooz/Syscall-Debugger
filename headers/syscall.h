@@ -38,9 +38,8 @@ struct syscall_data
 class Syscall {
 public:
 	void guessName();
+	~Syscall();
 	string* name;
-//	ptrace_entry entry;
-//	ptrace_exit exit{.op=255};
 	syscall_entry* entry;
 	syscall_exit* exit;
 
