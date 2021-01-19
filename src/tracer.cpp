@@ -101,7 +101,7 @@ void DebugWindow::startTrace() { // TODO way to kill tracer ?
 	mainProcess->treeItem->setText(0, QString(to_string(mainProcess->pid).c_str()));
 
 	Process* proc;
-	syscall_data* info;
+	__ptrace_syscall_info info{};
 	int size = sizeof(__ptrace_syscall_info);
 
 	bool empty;
@@ -134,31 +134,31 @@ void DebugWindow::startTrace() { // TODO way to kill tracer ?
 			proc = handleChildCreate(stopped);
 		}
 
-		info = new syscall_data(); // TODO si EXIT penser à del le surplus de ENTRY
-		ptrace(PTRACE_GET_SYSCALL_INFO, stopped, size, info);
+		ptrace(PTRACE_GET_SYSCALL_INFO, stopped, size, &info);
 
-		if(info->base.op==PTRACE_SYSCALL_INFO_ENTRY){
-			if(proc->currentCall!=nullptr) {
+		if(info.op==PTRACE_SYSCALL_INFO_ENTRY) {
+			if (proc->currentCall != nullptr) {
 				cerr << "Warning " << stopped << " : waiting for syscall exit, got syscall entry" << endl;
-			}else{
+			} else {
 				proc->currentCall = new Syscall();
-				proc->currentCall->entry = &info->entry;
+				proc->currentCall->entry = info;
 				proc->currentCall->guessName(); // TODO ONLY GUESS NAME IF SELECTED (no useless calcs)
 				proc->calls.push_back(proc->currentCall);
 
-//				handleCallStart(*proc);
+				handleCallStart(*proc);
 			}
 
-
-		}else{ // exit
+		}else if(info.op==PTRACE_SYSCALL_INFO_EXIT){
 			if(proc->currentCall==nullptr) {
 				cerr << "Warning " << stopped << " : waiting for syscall entry, got syscall exit" << endl;
 			}else{
-				proc->currentCall->exit = &info->exit;
+				proc->currentCall->exit = info;
 
-//				handleCallReturn(*proc);
+				handleCallReturn(*proc);
 				proc->currentCall = nullptr;
 			}
+		}else{
+			cerr << "Got unsupported OP " << to_string(info.op) << endl;
 		}
 
 		temp = ptrace(PTRACE_SYSCALL, stopped, 0, 0); // restart le thread + l'arrête au prochain syscall

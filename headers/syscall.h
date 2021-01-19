@@ -6,42 +6,34 @@
 
 using namespace std;
 
-
 struct syscall_entry {
-	__uint64_t nr;
+	__uint64_t id;
 	__uint64_t args[6];
+
+	syscall_entry() = default;
+	syscall_entry(const __ptrace_syscall_info& info){
+		id = info.entry.nr;
+		for(int i=0;i<6;i++)args[i] = info.entry.args[i];
+	}
 };
 
 struct syscall_exit {
 	__int64_t rval;
 	__uint8_t is_error;
-};
 
-struct syscall_base {
-	__uint8_t op;
-	__uint32_t arch __attribute__ ((__aligned__ (4)));
-	__uint64_t instruction_pointer;
-	__uint64_t stack_pointer;
+	syscall_exit() = default;
+	syscall_exit(const __ptrace_syscall_info& info){
+		rval = info.exit.rval;
+		is_error = info.exit.is_error;
+	}
 };
-
-struct syscall_data
-{
-	syscall_base base;
-	union
-	{
-		syscall_entry entry;
-		syscall_exit exit;
-	};
-};
-
 
 class Syscall {
 public:
 	void guessName();
-	~Syscall();
 	string* name;
-	syscall_entry* entry;
-	syscall_exit* exit;
+	syscall_entry entry{};
+	syscall_exit exit{};
 
 
 public:

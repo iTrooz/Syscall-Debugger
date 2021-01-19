@@ -48,9 +48,9 @@ void DebugWindow::handleCallStart(Process& proc) const {
 
 
 void DebugWindow::handleCallReturn(Process& proc) {
-	if (config::doChilds && proc.currentCall->entry->nr == 56) { // TODO 56 doit pas être hardcodé
-		Process* newChild = getProcess(proc.currentCall->exit->rval);
-		if(newChild==nullptr)newChild = handleChildCreate(proc.currentCall->exit->rval);
+	if (config::doChilds && proc.currentCall->entry.id == 56) { // TODO 56 doit pas être hardcodé
+		Process* newChild = getProcess(proc.currentCall->exit.rval);
+		if(newChild==nullptr)newChild = handleChildCreate(proc.currentCall->exit.rval);
 
 		newChild->treeItem = new QTreeWidgetItem;
 		newChild->treeItem->setText(0, QString(to_string(newChild->pid).c_str()));

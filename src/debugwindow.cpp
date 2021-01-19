@@ -96,16 +96,16 @@ void DebugWindow::addEntryStart(Syscall& call) const {
 
 	// TODO format for arg type
 	for(int i=0;i<6;i++){
-		UI.callsLogs->setItem(0, i+1, new QTableWidgetItem(to_string(call.entry->args[i]).c_str()));
+		UI.callsLogs->setItem(0, i+1, new QTableWidgetItem(to_string(call.entry.args[i]).c_str()));
 	}
 	UI.callsLogs->setItem(0, 7, new QTableWidgetItem("?"));
 }
 
 void DebugWindow::addEntryEnd(Syscall& call) const{
-	if(call.exit==nullptr){
+	if(call.exit.is_error==16){
 		UI.callsLogs->setItem(0, 7, new QTableWidgetItem("?"));
 	}else{
-		UI.callsLogs->setItem(0, 7, new QTableWidgetItem(to_string(call.exit->rval).c_str()));
+		UI.callsLogs->setItem(0, 7, new QTableWidgetItem(to_string(call.exit.rval).c_str()));
 	}
 }
 

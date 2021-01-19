@@ -7,13 +7,7 @@ using namespace std;
 // TODO IMPORT/EXPORT TO FILE FUNCTIONS ? (serialisation)
 
 void Syscall::guessName(){
-	auto s = syscalls.find(entry->nr);
-	if(s==syscalls.end()) throw runtime_error("syscall '" + to_string(entry->nr) + "' not found");
+	auto s = syscalls.find(entry.id);
+	if(s==syscalls.end()) throw runtime_error("syscall '" + to_string(entry.id) + "' not found");
 	name = &s->second;
-}
-
-Syscall::~Syscall() {
-//	cout << entry << endl;
-//	delete entry;
-//	delete exit;
 }
