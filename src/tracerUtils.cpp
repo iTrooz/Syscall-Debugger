@@ -4,15 +4,7 @@
 using namespace std;
 
 Process* DebugWindow::getProcess(pid_t pid){
-//	cout << "--" << endl;
-//	int i = 0;
 	for (Process *p : processes) {
-//		i++;
-//		if(i==2){
-//			kill(getpid(), SIGSTOP);
-//			waitpid(getpid(), nullptr, 0);
-//		}
-//		cout << p->pid << endl;
 		if (p->pid == pid) {
 			return p;
 		}
@@ -57,9 +49,9 @@ void DebugWindow::handleCallReturn(Process& proc) {
 		proc.treeItem->addChild(newChild->treeItem);
 	}
 
-//	if(displayed->pid==proc.pid){
-//		addEntryEnd(*proc.currentCall);
-//	}
+	if(displayed->pid==proc.pid){
+		addEntryEnd(*proc.currentCall);
+	}
 }
 
 Process* DebugWindow::handleChildCreate(pid_t pid){ // Warning : Still need to apply Tree Item Widget. besoin = get parent parent from here

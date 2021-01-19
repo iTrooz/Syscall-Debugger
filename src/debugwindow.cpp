@@ -1,10 +1,13 @@
 #include <iostream>
 #include <QMessageBox>
 #include <QProcess>
+#include <iostream>
 #include "UI_debugWindow.h"
 #include "utils.h"
 #include "debugwindow.h"
 #include "thread"
+
+using namespace std;
 
 void DebugWindow::cleanUpProcess() {
 	if (mainProcess != nullptr) {
@@ -101,8 +104,8 @@ void DebugWindow::addEntryStart(Syscall& call) const {
 	UI.callsLogs->setItem(0, 7, new QTableWidgetItem("?"));
 }
 
-void DebugWindow::addEntryEnd(Syscall& call) const{
-	if(call.exit.is_error==16){
+void DebugWindow::addEntryEnd(Syscall& call) const {
+	if(call.exit.is_error==0xF){
 		UI.callsLogs->setItem(0, 7, new QTableWidgetItem("?"));
 	}else{
 		UI.callsLogs->setItem(0, 7, new QTableWidgetItem(to_string(call.exit.rval).c_str()));

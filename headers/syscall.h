@@ -2,6 +2,7 @@
 #define SYSCALL
 
 #include<string>
+#include<iostream>
 #include<sys/ptrace.h>
 
 using namespace std;
@@ -18,8 +19,10 @@ struct syscall_entry {
 };
 
 struct syscall_exit {
+
 	__int64_t rval;
-	__uint8_t is_error;
+	__uint8_t is_error = 0xF;
+
 
 	syscall_exit() = default;
 	syscall_exit(const __ptrace_syscall_info& info){
@@ -34,7 +37,6 @@ public:
 	string* name;
 	syscall_entry entry{};
 	syscall_exit exit{};
-
 
 public:
 };
