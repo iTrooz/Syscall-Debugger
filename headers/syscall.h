@@ -14,6 +14,7 @@ struct syscall_entry {
 	syscall_entry() = default;
 	syscall_entry(const __ptrace_syscall_info& info){
 		id = info.entry.nr;
+		// TODO memcpy()
 		for(int i=0;i<6;i++)args[i] = info.entry.args[i];
 	}
 };
@@ -34,7 +35,7 @@ struct syscall_exit {
 class Syscall {
 public:
 	void guessName();
-	string* name;
+	string* name = nullptr;
 	syscall_entry entry{};
 	syscall_exit exit{};
 

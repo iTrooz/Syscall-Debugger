@@ -79,7 +79,6 @@ bool DebugWindow::waitProcess(pid_t& stopped) {
 		status = ptrace(PTRACE_SYSCALL, stopped, 0, WSTOPSIG(status)); // restart le thread + l'arrête au prochain syscall
 		if(status!=0){
 			cerr << "failed wait_for_syscall : " << status << endl;
-			cerr << explain_ptrace(PTRACE_SYSCALL, stopped, 0, (void*) WSTOPSIG(status)) << endl;
 		}
 	}
 }
@@ -90,7 +89,8 @@ void DebugWindow::startTrace() { // TODO way to kill tracer ?
 	processes.insert(mainProcess);
 
 	waitpid(mainProcess->pid, nullptr, 0);
-	temp = ptrace(PTRACE_SETOPTIONS, mainProcess->pid, 0, PTRACE_O_TRACESYSGOOD|PTRACE_O_TRACEFORK|PTRACE_O_TRACEVFORK|PTRACE_O_TRACECLONE|PTRACE_O_TRACEEXEC|PTRACE_O_TRACEEXIT);
+	temp = ptrace(PTRACE_SETOPTIONS, mainProcess->pid, 0, PTRACE_O_TRACESYSGOOD|PTRACE_O_TRACEFORK|PTRACE_O_TRACEVFORK|
+	PTRACE_O_TRACECLONE|PTRACE_O_TRACEEXEC|PTRACE_O_TRACEEXIT|PTRACE_O_EXITKILL);
 	if (temp != 0)throw runtime_error("PTRACE_SETOPTIONS failed : " + to_string(temp));
 
 	temp = ptrace(PTRACE_SYSCALL, mainProcess->pid, 0, 0);
@@ -140,10 +140,17 @@ void DebugWindow::startTrace() { // TODO way to kill tracer ?
 			if (proc->currentCall != nullptr) {
 				cerr << "Warning " << stopped << " : waiting for syscall exit, got syscall entry" << endl;
 			} else {
+				cout << "--" << endl;
+				fflush(stdout);
 				proc->currentCall = new Syscall();
 				proc->currentCall->entry = info;
-				proc->currentCall->guessName(); // TODO ONLY GUESS NAME IF SELECTED (no useless calcs)
 				proc->calls.push_back(proc->currentCall);
+
+				cout << info.entry.nr << endl;
+				fflush(stdout);
+				cout << proc->currentCall->entry.id << endl;
+				fflush(stdout);
+
 
 				handleCallStart(*proc);
 			}

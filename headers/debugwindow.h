@@ -1,5 +1,7 @@
 #include <QMainWindow>
 #include <unordered_set>
+#include <QMutex>
+
 #include "UI_debugWindow.h"
 #include "process.h"
 
@@ -18,13 +20,13 @@ public:
 
     DebugWindow();
 
-    void clearCallsLogs() const;
+    void clearCallsLogs();
 	void runCmd();
 	void treeClick(QTreeWidgetItem* item);
 	void setPID(char* pid) const;
 	void setState(char s) const;
 
-	void cleanUpUI() const;
+	void cleanUpUI();
 	void cleanUpProcess();
 	void changeView(Process &p);
 
@@ -41,9 +43,11 @@ private:
 	void startTrace();
 	bool waitProcess(pid_t& stopped);
 	void handleCallReturn(Process& proc);
-	void handleCallStart(Process& proc) const;
+	void handleCallStart(Process& proc);
 	void handleChildExit(Process &proc);
 	Process* handleChildCreate(pid_t pid);
+
+	QMutex tableMutex;
 
 private slots: // a voir pour suppr ?
 

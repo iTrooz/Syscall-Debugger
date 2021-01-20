@@ -2,6 +2,7 @@
 #include <QMessageBox>
 #include <QProcess>
 #include <iostream>
+
 #include "UI_debugWindow.h"
 #include "utils.h"
 #include "debugwindow.h"
@@ -23,12 +24,14 @@ void DebugWindow::cleanUpProcess() {
 	}
 }
 
-void DebugWindow::cleanUpUI() const{
-	UI.callsLogs->setRowCount(0);
+void DebugWindow::cleanUpUI() {
+	clearCallsLogs();
+
 	UI.processTree->topLevelItem(0)->setText(0, "NA");
 	for(auto* i : UI.processTree->topLevelItem(0)->takeChildren()) {
 		delete i;
 	}
+
 	UI.stdLog->clear();
 }
 
@@ -54,16 +57,20 @@ void DebugWindow::treeClick(QTreeWidgetItem* item){
 }
 
 void DebugWindow::changeView(Process& p) {
+	tableMutex.lock();
 	displayed = &p;
 	UI.callsLogs->setRowCount(0);
 	for(Syscall* call : p.calls){
 		addEntryStart(*call);
 		addEntryEnd(*call);
 	}
+	tableMutex.unlock();
 }
 
-void DebugWindow::clearCallsLogs() const {
+void DebugWindow::clearCallsLogs() {
+	tableMutex.lock();
 	UI.callsLogs->setRowCount(0);
+	tableMutex.unlock();
 	if(displayed!=nullptr){
 		displayed->delCalls();
 	}
@@ -94,8 +101,11 @@ void DebugWindow::runCmd(){
 }
 
 void DebugWindow::addEntryStart(Syscall& call) const {
+	call.guessName();
 	UI.callsLogs->insertRow(0);
-	UI.callsLogs->setItem(0, 0, new QTableWidgetItem(call.name->c_str()));
+	UI.callsLogs->setItem(0, 0, new QTableWidgetItem(
+			call.name->c_str())
+			);
 
 	// TODO format for arg type
 	for(int i=0;i<6;i++){
