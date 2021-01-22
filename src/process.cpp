@@ -8,6 +8,7 @@ void Process::delCalls(){
 	for(Syscall* c : calls){
 		delete c;
 	}
+	calls.clear();
 }
 
 Process::~Process() {

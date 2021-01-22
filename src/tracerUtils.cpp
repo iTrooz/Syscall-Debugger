@@ -21,21 +21,19 @@ void DebugWindow::killProcesses(){ // TODO hardcoder ca ?
 // -----------------------------------
 
 void DebugWindow::handleCallStart(Process& proc) {
-	if(displayed->pid==proc.pid){
-		tableMutex.lock();
-		addEntryStart(*proc.currentCall);
-		tableMutex.unlock();
-	}
+//	if(displayed->pid==proc.pid){
+//		dataMutex.lock();
+//		addEntryStart(*proc.currentCall);
+//		dataMutex.unlock();
+//	}
 
 	if(proc.calls.size()==config::displayLimit){
-		auto a = proc.calls.begin();
-		a++;
-		delete *a;
+		dataMutex.lock();
+		delete proc.calls.front();
 		proc.calls.pop_front();
 
-		tableMutex.lock();
 		UI.callsLogs->setRowCount(config::displayLimit);
-		tableMutex.unlock();
+		dataMutex.unlock();
 	}else if(proc.calls.size()>config::displayLimit){
 		throw runtime_error("Calls list too large !");
 	}
@@ -53,11 +51,11 @@ void DebugWindow::handleCallReturn(Process& proc) {
 		proc.treeItem->addChild(newChild->treeItem);
 	}
 
-	if(displayed->pid==proc.pid){
-		tableMutex.lock();
-		addEntryEnd(*proc.currentCall);
-		tableMutex.unlock();
-	}
+//	if(displayed->pid==proc.pid){
+//		dataMutex.lock();
+//		addEntryEnd(*proc.currentCall);
+//		dataMutex.unlock();
+//	}
 }
 
 Process* DebugWindow::handleChildCreate(pid_t pid){ // Warning : Still need to apply Tree Item Widget. besoin = get parent parent from here
@@ -70,4 +68,8 @@ Process* DebugWindow::handleChildCreate(pid_t pid){ // Warning : Still need to a
 
 void DebugWindow::handleChildExit(Process& proc){
 
+}
+
+void DebugWindow::testing(){
+	test = false;
 }

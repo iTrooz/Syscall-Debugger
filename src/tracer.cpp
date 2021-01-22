@@ -140,29 +140,20 @@ void DebugWindow::startTrace() { // TODO way to kill tracer ?
 			if (proc->currentCall != nullptr) {
 				cerr << "Warning " << stopped << " : waiting for syscall exit, got syscall entry" << endl;
 			} else {
-				cout << "--" << endl;
-				fflush(stdout);
-				proc->currentCall = new Syscall();
-				proc->currentCall->entry = info;
-				proc->calls.push_back(proc->currentCall);
-
-				cout << info.entry.nr << endl;
-				fflush(stdout);
-				cout << proc->currentCall->entry.id << endl;
-				fflush(stdout);
-
-
-				handleCallStart(*proc);
+					proc->currentCall = new Syscall();
+					proc->currentCall->entry = info;
+					proc->calls.push_back(proc->currentCall);
+					handleCallStart(*proc);
 			}
 
 		}else if(info.op==PTRACE_SYSCALL_INFO_EXIT){
 			if(proc->currentCall==nullptr) {
 				cerr << "Warning " << stopped << " : waiting for syscall entry, got syscall exit" << endl;
 			}else{
-				proc->currentCall->exit = info;
+					proc->currentCall->exit = info;
 
-				handleCallReturn(*proc);
-				proc->currentCall = nullptr;
+					handleCallReturn(*proc);
+					proc->currentCall = nullptr;
 			}
 		}else{
 			cerr << "Got unsupported OP " << to_string(info.op) << endl;

@@ -39,6 +39,7 @@ DebugWindow::DebugWindow(){
     UI.setupUi(this);
     connect(UI.buttonClear, &QPushButton::clicked, this, &DebugWindow::clearCallsLogs);
     connect(UI.buttonRun, &QPushButton::clicked, this, &DebugWindow::runCmd);
+    connect(UI.buttonStop, &QPushButton::clicked, this,  &DebugWindow::testing);
     connect(UI.processTree, &QTreeWidget::itemClicked, this, &DebugWindow::treeClick);
 
 	QHeaderView* header = UI.callsLogs->horizontalHeader();
@@ -57,23 +58,41 @@ void DebugWindow::treeClick(QTreeWidgetItem* item){
 }
 
 void DebugWindow::changeView(Process& p) {
-	tableMutex.lock();
+	dataMutex.lock();
 	displayed = &p;
 	UI.callsLogs->setRowCount(0);
 	for(Syscall* call : p.calls){
-		addEntryStart(*call);
-		addEntryEnd(*call);
+		if(call->entry.id>1000){
+			cout << "PROBLEME" << endl;
+			fflush(stdout);
+		}
+		call->guessName();
+		call->name->size();
+
+		if(call->name==nullptr){
+			cout << "GOT SOMETHING REAL NULL" << endl;
+			fflush(stdout);
+			continue;
+		}
+//		if(call->name->isNull()){
+//			cout << "GOT SOMETHING FAKE NULL" << endl;
+//			fflush(stdout);
+//			continue;
+//		}
+		call->name->size();
+//		addEntryStart(*call);
+//		addEntryEnd(*call);
 	}
-	tableMutex.unlock();
+	dataMutex.unlock();
 }
 
 void DebugWindow::clearCallsLogs() {
-	tableMutex.lock();
+	dataMutex.lock();
 	UI.callsLogs->setRowCount(0);
-	tableMutex.unlock();
 	if(displayed!=nullptr){
 		displayed->delCalls();
 	}
+	dataMutex.unlock();
 }
 
 void DebugWindow::runCmd(){
@@ -101,17 +120,27 @@ void DebugWindow::runCmd(){
 }
 
 void DebugWindow::addEntryStart(Syscall& call) const {
+	static QMutex lock;
+
+	lock.lock();
 	call.guessName();
+	if(call.name==nullptr){
+		cout << "WTF" << endl;
+		fflush(stdout);
+	}else{
+//		cout << call.name->toStdString() << endl;
+//		fflush(stdout);
+	}
 	UI.callsLogs->insertRow(0);
-	UI.callsLogs->setItem(0, 0, new QTableWidgetItem(
-			call.name->c_str())
-			);
+//	UI.callsLogs->setItem(0, 0, new QTableWidgetItem(*call.name));
 
 	// TODO format for arg type
 	for(int i=0;i<6;i++){
 		UI.callsLogs->setItem(0, i+1, new QTableWidgetItem(to_string(call.entry.args[i]).c_str()));
 	}
 	UI.callsLogs->setItem(0, 7, new QTableWidgetItem("?"));
+
+	lock.unlock();
 }
 
 void DebugWindow::addEntryEnd(Syscall& call) const {
@@ -122,11 +151,11 @@ void DebugWindow::addEntryEnd(Syscall& call) const {
 	}
 }
 
-void DebugWindow::setPID(char* pid) const{
+void DebugWindow::setPID(char* pid) const {
 	UI.labelPID->setText(QString(pid));
 }
 
-void DebugWindow::setState(char s) const{
+void DebugWindow::setState(char s) const {
 	switch(s){
 		case 0:{
 			UI.labelState->setText("NONE");

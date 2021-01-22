@@ -1,35 +1,25 @@
 #ifndef SYSCALL
 #define SYSCALL
 
-#include<string>
+#include<QString>
 #include<iostream>
 #include<sys/ptrace.h>
 
 using namespace std;
 
 struct syscall_entry {
-	__uint64_t id;
-	__uint64_t args[6];
+	__uint64_t id{};
+	__uint64_t args[6]{};
 
-	syscall_entry() = default;
-	syscall_entry(const __ptrace_syscall_info& info){
-		id = info.entry.nr;
-		// TODO memcpy()
-		for(int i=0;i<6;i++)args[i] = info.entry.args[i];
-	}
+	syscall_entry& operator=(const __ptrace_syscall_info& other);
 };
 
 struct syscall_exit {
 
-	__int64_t rval;
+	__int64_t rval{};
 	__uint8_t is_error = 0xF;
 
-
-	syscall_exit() = default;
-	syscall_exit(const __ptrace_syscall_info& info){
-		rval = info.exit.rval;
-		is_error = info.exit.is_error;
-	}
+	syscall_exit& operator=(const __ptrace_syscall_info& other);
 };
 
 class Syscall {

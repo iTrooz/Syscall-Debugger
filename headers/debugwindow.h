@@ -47,7 +47,10 @@ private:
 	void handleChildExit(Process &proc);
 	Process* handleChildCreate(pid_t pid);
 
-	QMutex tableMutex;
+	QMutex dataMutex;
+
+	bool test = true;
+	void testing();
 
 private slots: // a voir pour suppr ?
 
