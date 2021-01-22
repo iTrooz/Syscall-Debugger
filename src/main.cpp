@@ -9,7 +9,7 @@
 using namespace std;
 
 DebugWindow* mainWindow;
-unordered_map<int, string*> syscalls;
+unordered_map<int, QString*> syscalls;
 void load_syscalls();
 
 // TODO syscallPath : path different for Ubuntu/(Manjaro|Arch)/Kali (others?)
@@ -59,8 +59,7 @@ void load_syscalls(){
 		if(t==string::npos)continue;
 
 		try{
-			string* qs = new string(line.substr(0, t).c_str());
-			cout << "allocated " << qs << endl;
+			QString* qs = new QString(line.substr(0, t).c_str());
 			syscalls.insert({stoi(line.substr(t+1)), qs});
 		}catch(invalid_argument& e){
 			throw runtime_error("Invalid number "+line.substr(t+1)+" for syscall"+line.substr(0, t));

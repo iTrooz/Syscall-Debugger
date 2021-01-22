@@ -21,11 +21,11 @@ void DebugWindow::killProcesses(){ // TODO hardcoder ca ?
 // -----------------------------------
 
 void DebugWindow::handleCallStart(Process& proc) {
-//	if(displayed->pid==proc.pid){
-//		dataMutex.lock();
-//		addEntryStart(*proc.currentCall);
-//		dataMutex.unlock();
-//	}
+	if(displayed->pid==proc.pid){
+		dataMutex.lock();
+		addEntryStart(*proc.currentCall);
+		dataMutex.unlock();
+	}
 
 	if(proc.calls.size()==config::displayLimit){
 		dataMutex.lock();
@@ -68,8 +68,4 @@ Process* DebugWindow::handleChildCreate(pid_t pid){ // Warning : Still need to a
 
 void DebugWindow::handleChildExit(Process& proc){
 
-}
-
-void DebugWindow::testing(){
-	test = false;
 }

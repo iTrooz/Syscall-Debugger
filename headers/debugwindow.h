@@ -47,11 +47,7 @@ private:
 	void handleChildExit(Process &proc);
 	Process* handleChildCreate(pid_t pid);
 
-	QMutex dataMutex;
-
-	bool test = true;
-	void testing();
-
+	QMutex dataMutex; // for access to QTable and calls list
 private slots: // a voir pour suppr ?
 
 };

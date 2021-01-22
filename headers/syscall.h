@@ -25,7 +25,7 @@ struct syscall_exit {
 class Syscall {
 public:
 	void guessName();
-	string* name = nullptr;
+	QString* name = nullptr;
 	syscall_entry entry{};
 	syscall_exit exit{};
 

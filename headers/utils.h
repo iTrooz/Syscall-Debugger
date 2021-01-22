@@ -6,6 +6,6 @@
 #define UTILS
 
 extern DebugWindow* mainWindow;
-extern unordered_map<int, string*> syscalls;
+extern unordered_map<int, QString*> syscalls;
 
 #endif

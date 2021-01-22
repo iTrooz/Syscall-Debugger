@@ -29,7 +29,7 @@ void assignConfig(){
 
 int getKey(string& val){
 	for(auto& c : syscalls){
-		if(*c.second==val)return c.first;
+		if(c.second->toStdString()==val)return c.first;
 	}
 	throw runtime_error("syscall "+val+" not found");
 }
