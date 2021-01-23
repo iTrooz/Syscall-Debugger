@@ -44,18 +44,20 @@ void DebugWindow::handleCallStart(Process& proc) {
 void DebugWindow::handleCallReturn(Process& proc) {
 	if (config::doChilds && proc.currentCall->entry.id == 56) { // TODO 56 doit pas être hardcodé
 		Process* newChild = getProcess(proc.currentCall->exit.rval);
-		if(newChild==nullptr)newChild = handleChildCreate(proc.currentCall->exit.rval);
+		if(newChild==nullptr){
+			newChild = handleChildCreate(proc.currentCall->exit.rval);
+		}
 
 		newChild->treeItem = new QTreeWidgetItem;
 		newChild->treeItem->setText(0, QString(to_string(newChild->pid).c_str()));
 		proc.treeItem->addChild(newChild->treeItem);
 	}
 
-//	if(displayed->pid==proc.pid){
-//		dataMutex.lock();
-//		addEntryEnd(*proc.currentCall);
-//		dataMutex.unlock();
-//	}
+	if(displayed->pid==proc.pid){
+		dataMutex.lock();
+		addEntryEnd(*proc.currentCall);
+		dataMutex.unlock();
+	}
 }
 
 Process* DebugWindow::handleChildCreate(pid_t pid){ // Warning : Still need to apply Tree Item Widget. besoin = get parent parent from here
@@ -66,6 +68,25 @@ Process* DebugWindow::handleChildCreate(pid_t pid){ // Warning : Still need to a
 	return newChild;
 }
 
-void DebugWindow::handleChildExit(Process& proc){
+bool DebugWindow::handleChildExit(pid_t stopped){ // true is there is no more processes
 
+	Process* proc = nullptr;
+	bool empty = true;
+	for (Process *p : processes) {
+		if (p->running){
+			if(p->pid == stopped) {
+				p->running = false;
+				proc = p;
+			}else{
+				empty = false;
+			}
+			if(!empty&&proc!=nullptr)break; // TODO jsp si vraiment opti
+		}
+	}
+	if(proc==nullptr){
+		cerr << "Invalid child exited : " << stopped << endl;
+	}else{
+		return empty;
+	}
+	return false;
 }

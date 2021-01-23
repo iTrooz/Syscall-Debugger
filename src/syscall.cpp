@@ -7,10 +7,11 @@ using namespace std;
 // TODO IMPORT/EXPORT TO FILE FUNCTIONS ? (serialisation)
 
 void Syscall::guessName() {
-
-	auto s = syscalls.find(entry.id);
-	if (s == syscalls.end()) throw runtime_error("syscall '" + to_string(entry.id) + "' not found");
-	name = s->second;
+	if(name==nullptr){
+		auto s = syscalls.find(entry.id);
+		if (s == syscalls.end()) throw runtime_error("syscall '" + to_string(entry.id) + "' not found");
+		name = s->second;
+	}
 }
 
 syscall_entry& syscall_entry::operator=(const __ptrace_syscall_info &info) {

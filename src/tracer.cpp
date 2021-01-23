@@ -69,10 +69,14 @@ bool DebugWindow::waitProcess(pid_t& stopped) {
 
 		if (WSTOPSIG(status) & 0x80){
 			if(WIFSTOPPED(status))return false;
-			else cerr << "Not supposed to happens : status marked 0x80 but not stopped" << endl;
+			else throw runtime_error("Not supposed to happen : status marked 0x80 but not stopped");
 		}
 
+		// peut-être pas suffisant pour détecter quand le process s'arrête !
 		if (WIFEXITED(status)){
+			return true;
+		}
+		if (WIFSIGNALED(status)){
 			return true;
 		}
 
@@ -104,29 +108,11 @@ void DebugWindow::startTrace() { // TODO way to kill tracer ?
 	__ptrace_syscall_info info{};
 	int size = sizeof(__ptrace_syscall_info);
 
-	bool empty;
 	while (true) {
+		fflush(stderr);
 		if (waitProcess(stopped)) {
-			proc = nullptr;
-			empty = true;
-			for (Process *p : processes) {
-				if (p->running){
-					if(p->pid == stopped) {
-						p->running = false;
-						proc = p;
-					}else{
-						empty = false;
-					}
-					if(!empty&&proc!=nullptr)break; // TODO jsp si vraiment opti
-				}
-			}
-			if(proc==nullptr){
-				cerr << "Invalid child exited : " << stopped << endl;
-			}else{
-				handleChildExit(*proc);
-				if (empty)break;
-			}
-			continue;
+			if(handleChildExit(stopped))break;
+			else continue;
 		}
 
 		proc = getProcess(stopped);
@@ -140,20 +126,20 @@ void DebugWindow::startTrace() { // TODO way to kill tracer ?
 			if (proc->currentCall != nullptr) {
 				cerr << "Warning " << stopped << " : waiting for syscall exit, got syscall entry" << endl;
 			} else {
-					proc->currentCall = new Syscall();
-					proc->currentCall->entry = info;
-					proc->calls.push_back(proc->currentCall);
-					handleCallStart(*proc);
+				proc->currentCall = new Syscall();
+				proc->currentCall->entry = info;
+				proc->calls.push_back(proc->currentCall);
+				handleCallStart(*proc);
 			}
 
 		}else if(info.op==PTRACE_SYSCALL_INFO_EXIT){
 			if(proc->currentCall==nullptr) {
 				cerr << "Warning " << stopped << " : waiting for syscall entry, got syscall exit" << endl;
-			}else{
-					proc->currentCall->exit = info;
+			}else {
+				proc->currentCall->exit = info;
 
-					handleCallReturn(*proc);
-					proc->currentCall = nullptr;
+				handleCallReturn(*proc);
+				proc->currentCall = nullptr;
 			}
 		}else{
 			cerr << "Got unsupported OP " << to_string(info.op) << endl;

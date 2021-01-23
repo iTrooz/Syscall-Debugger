@@ -44,7 +44,7 @@ private:
 	bool waitProcess(pid_t& stopped);
 	void handleCallReturn(Process& proc);
 	void handleCallStart(Process& proc);
-	void handleChildExit(Process &proc);
+	bool handleChildExit(pid_t stopped);
 	Process* handleChildCreate(pid_t pid);
 
 	QMutex dataMutex; // for access to QTable and calls list
