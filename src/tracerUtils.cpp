@@ -32,7 +32,7 @@ void DebugWindow::handleCallStart(Process& proc) {
 		delete proc.calls.front();
 		proc.calls.pop_front();
 
-		UI.callsLogs->setRowCount(config::displayLimit);
+		UI.callLogs->setRowCount(config::displayLimit);
 		dataMutex.unlock();
 	}else if(proc.calls.size()>config::displayLimit){
 		throw runtime_error("Calls list too large !");

@@ -20,7 +20,7 @@ public:
 
     DebugWindow();
 
-    void clearCallsLogs();
+    void clearcallLogs();
 	void runCmd();
 	void treeClick(QTreeWidgetItem* item);
 	void setPID(char* pid) const;

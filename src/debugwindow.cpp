@@ -25,7 +25,7 @@ void DebugWindow::cleanUpProcess() {
 }
 
 void DebugWindow::cleanUpUI() {
-	clearCallsLogs();
+	clearcallLogs();
 
 	UI.processTree->topLevelItem(0)->setText(0, "NA");
 	for(auto* i : UI.processTree->topLevelItem(0)->takeChildren()) {
@@ -37,11 +37,11 @@ void DebugWindow::cleanUpUI() {
 
 DebugWindow::DebugWindow(){
     UI.setupUi(this);
-    connect(UI.buttonClear, &QPushButton::clicked, this, &DebugWindow::clearCallsLogs);
+    connect(UI.buttonClear, &QPushButton::clicked, this, &DebugWindow::clearcallLogs);
     connect(UI.buttonRun, &QPushButton::clicked, this, &DebugWindow::runCmd);
     connect(UI.processTree, &QTreeWidget::itemClicked, this, &DebugWindow::treeClick);
 
-	QHeaderView* header = UI.callsLogs->horizontalHeader();
+	QHeaderView* header = UI.callLogs->horizontalHeader();
 	header->setSectionResizeMode(QHeaderView::Stretch);
 }
 
@@ -59,7 +59,7 @@ void DebugWindow::treeClick(QTreeWidgetItem* item){
 void DebugWindow::changeView(Process& p) {
 	dataMutex.lock();
 	displayed = &p;
-	UI.callsLogs->setRowCount(0);
+	UI.callLogs->setRowCount(0);
 	for(Syscall* call : p.calls){
 		addEntryStart(*call);
 		addEntryEnd(*call);
@@ -67,9 +67,9 @@ void DebugWindow::changeView(Process& p) {
 	dataMutex.unlock();
 }
 
-void DebugWindow::clearCallsLogs() {
+void DebugWindow::clearcallLogs() {
 	dataMutex.lock();
-	UI.callsLogs->setRowCount(0);
+	UI.callLogs->setRowCount(0);
 	if(displayed!=nullptr){
 		displayed->delCalls();
 	}
@@ -102,22 +102,22 @@ void DebugWindow::runCmd(){
 
 void DebugWindow::addEntryStart(Syscall& call) const {
 	call.guessName();
-	UI.callsLogs->insertRow(0);
-	UI.callsLogs->setItem(0, 0, new QTableWidgetItem(*call.name));
+	UI.callLogs->insertRow(0);
+	UI.callLogs->setItem(0, 0, new QTableWidgetItem(*call.name));
 
 	// TODO format for arg type
 	for(int i=0;i<6;i++){
-		UI.callsLogs->setItem(0, i+1, new QTableWidgetItem(to_string(call.entry.args[i]).c_str()));
+		UI.callLogs->setItem(0, i+1, new QTableWidgetItem(to_string(call.entry.args[i]).c_str()));
 	}
-	UI.callsLogs->setItem(0, 7, new QTableWidgetItem("?"));
+	UI.callLogs->setItem(0, 7, new QTableWidgetItem("?"));
 
 }
 
 void DebugWindow::addEntryEnd(Syscall& call) const {
 	if(call.exit.is_error==0xF){
-		UI.callsLogs->setItem(0, 7, new QTableWidgetItem("?"));
+		UI.callLogs->setItem(0, 7, new QTableWidgetItem("?"));
 	}else{
-		UI.callsLogs->setItem(0, 7, new QTableWidgetItem(to_string(call.exit.rval).c_str()));
+		UI.callLogs->setItem(0, 7, new QTableWidgetItem(to_string(call.exit.rval).c_str()));
 	}
 }
 
