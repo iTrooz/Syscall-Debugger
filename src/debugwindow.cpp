@@ -1,12 +1,10 @@
 #include <iostream>
 #include <QMessageBox>
 #include <QProcess>
-#include <iostream>
 
 #include "UI_debugWindow.h"
 #include "utils.h"
 #include "debugwindow.h"
-#include "thread"
 
 using namespace std;
 
@@ -25,41 +23,29 @@ void DebugWindow::cleanUpProcess() {
 }
 
 void DebugWindow::cleanUpUI() {
-	clearcallLogs();
+	clearCallLogs();
 
 	UI.processTree->topLevelItem(0)->setText(0, "NA");
-	for(auto* i : UI.processTree->topLevelItem(0)->takeChildren()) {
+	for(auto* i : UI.processTree->topLevelItem(0)->takeChildren()) { // TODO jsp si utile (si utile, faire la même pour le tree des syscalls ?)
 		delete i;
 	}
-
-	UI.stdLog->clear();
 }
 
 DebugWindow::DebugWindow(){
     UI.setupUi(this);
-    connect(UI.buttonClear, &QPushButton::clicked, this, &DebugWindow::clearcallLogs);
-    connect(UI.buttonRun, &QPushButton::clicked, this, &DebugWindow::runCmd);
+    connect(UI.bRun, &QPushButton::clicked, this, &DebugWindow::runCmd);
+
+    connect(UI.bClearCallLogs, &QPushButton::clicked, this, &DebugWindow::clearCallLogs);
+    connect(UI.bPlayPauseTable, &QPushButton::clicked, this, &DebugWindow::playPauseTable);
+
     connect(UI.processTree, &QTreeWidget::itemClicked, this, &DebugWindow::treeClick);
-
-	QHeaderView* header = UI.callLogs->horizontalHeader();
-	header->setSectionResizeMode(QHeaderView::Stretch);
 }
 
-void DebugWindow::treeClick(QTreeWidgetItem* item){
-	for(Process* proc : processes){
-		if(proc->treeItem==item){
-			changeView(*proc);
-			return;
-		}
-	}
-	if(item->text(0)=="NA")return;
-	cerr << "NOT SUPPOSED TO HAPPEN : Clicked process not found" << endl;
-}
 
 void DebugWindow::changeView(Process& p) {
 	dataMutex.lock();
 	displayed = &p;
-	UI.callLogs->setRowCount(0);
+	UI.callLogs->clear();
 	for(Syscall* call : p.calls){
 		addEntryStart(*call);
 		addEntryEnd(*call);
@@ -67,59 +53,28 @@ void DebugWindow::changeView(Process& p) {
 	dataMutex.unlock();
 }
 
-void DebugWindow::clearcallLogs() {
-	dataMutex.lock();
-	UI.callLogs->setRowCount(0);
-	if(displayed!=nullptr){
-		displayed->delCalls();
-	}
-	dataMutex.unlock();
-}
-
-void DebugWindow::runCmd(){
-	cleanUpUI();
-	cleanUpProcess();
-
-    QString qs = UI.cmd->toPlainText();
-    if(qs.isEmpty()){
-		auto* msg = new QMessageBox();
-		msg->setIcon(QMessageBox::Warning);
-
-		msg->setWindowTitle("Warning");
-		msg->setText("No command set !");
-		msg->show();
-		return;
-    }
-
-//    QProcess qp;
-//    qp.pid
-
-    cmd = std::move(qs.toStdString());
-
-    std::thread thr(&DebugWindow::createProcess, this);
-    thr.detach();
-}
-
 void DebugWindow::addEntryStart(Syscall& call) const {
 	call.guessName();
-	UI.callLogs->insertRow(0);
-	UI.callLogs->setItem(0, 0, new QTableWidgetItem(*call.name));
+	QTreeWidgetItem* item = new QTreeWidgetItem();
+	UI.callLogs->addTopLevelItem(item);
 
+	item->setText(0, *call.name);
 	// TODO format for arg type
 	for(int i=0;i<6;i++){
-		UI.callLogs->setItem(0, i+1, new QTableWidgetItem(to_string(call.entry.args[i]).c_str()));
+		item->setText(i+1, QString::fromStdString(to_string(call.entry.args[i])));
 	}
-	UI.callLogs->setItem(0, 7, new QTableWidgetItem("?"));
+	item->setText(7, "?");
 
 }
 
 void DebugWindow::addEntryEnd(Syscall& call) const {
 	if(call.exit.is_error==0xF){
-		UI.callLogs->setItem(0, 7, new QTableWidgetItem("?"));
+		UI.callLogs->topLevelItem(0)->setText(7, "?");
 	}else{
-		UI.callLogs->setItem(0, 7, new QTableWidgetItem(to_string(call.exit.rval).c_str()));
+		UI.callLogs->topLevelItem(0)->setText(7, QString::fromStdString(to_string(call.exit.rval)));
 	}
 }
+
 
 void DebugWindow::setPID(char* pid) const {
 	UI.labelPID->setText(QString(pid));

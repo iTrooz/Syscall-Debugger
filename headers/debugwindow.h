@@ -1,12 +1,12 @@
+#ifndef DEBUGWINDOW
+#define DEBUGWINDOW
+
 #include <QMainWindow>
-#include <unordered_set>
 #include <QMutex>
+#include <unordered_set>
 
 #include "UI_debugWindow.h"
 #include "process.h"
-
-#ifndef DEBUGWINDOW
-#define DEBUGWINDOW
 
 class DebugWindow : public QMainWindow
 {
@@ -20,9 +20,6 @@ public:
 
     DebugWindow();
 
-    void clearcallLogs();
-	void runCmd();
-	void treeClick(QTreeWidgetItem* item);
 	void setPID(char* pid) const;
 	void setState(char s) const;
 
@@ -48,6 +45,13 @@ private:
 	Process* handleChildCreate(pid_t pid);
 
 	QMutex dataMutex; // for access to QTable and calls list
+
+	// Window actions
+	void playPauseTable();
+	void clearCallLogs();
+	void runCmd();
+	void treeClick(QTreeWidgetItem* item);
+
 private slots: // a voir pour suppr ?
 
 };
