@@ -4,7 +4,7 @@
 
 ------------------
 
-# General Infoa
+# General Info
 
 
 ### Directories explanation :
