@@ -17,6 +17,7 @@ public:
     Process* mainProcess = nullptr;
     string cmd;
     Process* displayed = nullptr; // TODO juste mettre le PID ?
+    char tableLocked = 0;
 
     DebugWindow();
 

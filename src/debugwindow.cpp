@@ -56,7 +56,7 @@ void DebugWindow::changeView(Process& p) {
 void DebugWindow::addEntryStart(Syscall& call) const {
 	call.guessName();
 	QTreeWidgetItem* item = new QTreeWidgetItem();
-	UI.callLogs->addTopLevelItem(item);
+	UI.callLogs->insertTopLevelItem(0, item);
 
 	item->setText(0, *call.name);
 	// TODO format for arg type

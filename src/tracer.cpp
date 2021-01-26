@@ -129,6 +129,7 @@ void DebugWindow::startTrace() { // TODO way to kill tracer ?
 				proc->currentCall = new Syscall();
 				proc->currentCall->entry = info;
 				proc->calls.push_back(proc->currentCall);
+
 				handleCallStart(*proc);
 			}
 
@@ -139,6 +140,7 @@ void DebugWindow::startTrace() { // TODO way to kill tracer ?
 				proc->currentCall->exit = info;
 
 				handleCallReturn(*proc);
+
 				proc->currentCall = nullptr;
 			}
 		}else{

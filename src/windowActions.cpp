@@ -4,7 +4,17 @@
 #include "debugwindow.h"
 
 void DebugWindow::playPauseTable(){
-
+	/*
+	 * 0 = enabled
+	 * 1 waiting for syscall end/disabled
+	 * 2 disabled
+	 */
+	if(tableLocked==0){ // need to lock
+		tableLocked = 1;
+	}else{
+		tableLocked = 0;
+		changeView(*displayed);
+	}
 }
 
 void DebugWindow::treeClick(QTreeWidgetItem* item){
