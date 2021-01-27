@@ -37,25 +37,24 @@ void DebugWindow::clearCallLogs() {
 	dataMutex.unlock();
 }
 
-void DebugWindow::runCmd(){
-	cleanUpUI();
-	cleanUpProcess();
+void DebugWindow::bRun(){
+	reset();
 
-	QString qs = UI.cmd->toPlainText();
+	QString qs = UI.cmd->text();
 	if(qs.isEmpty()){
-		auto* msg = new QMessageBox();
-		msg->setIcon(QMessageBox::Warning);
+		QMessageBox msg = QMessageBox();
+		msg.setIcon(QMessageBox::Warning);
 
-		msg->setWindowTitle("Warning");
-		msg->setText("No command set !");
-		msg->show();
+		msg.setWindowTitle("Warning");
+		msg.setText("No command set !");
+		msg.show();
 		return;
 	}
 
-	cmd = std::move(qs.toStdString());
-
-	std::thread thr(&DebugWindow::createProcess, this);
+	std::thread thr(&DebugWindow::createProcess, this, qs.toStdString());
 	thr.detach();
 }
 
+void DebugWindow::chooseProcess(){
 
+}

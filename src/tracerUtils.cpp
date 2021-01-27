@@ -14,7 +14,7 @@ Process* DebugWindow::getProcess(pid_t pid){
 
 void DebugWindow::killProcesses(){ // TODO hardcoder ca ?
 	for(Process* p : processes){
-		kill(p->pid, 9);
+		kill(p->pid, SIGKILL);
 	}
 }
 

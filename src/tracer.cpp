@@ -1,27 +1,13 @@
 #include<debugwindow.h>
 #include<iostream>
 #include<sstream>
-#include<libexplain/ptrace.h>
 #include<unordered_set>
 #include "configFile.h"
 
 using namespace std;
 
 
-void DebugWindow::setupProcess(pid_t pid) {
-	mainProcess = new Process;
-	mainProcess->pid = pid;
-	long temp = ptrace(PTRACE_ATTACH, pid, 0, 0);
-	if (temp != 0) {
-		cerr << "PTRACE_ATTACH failed : code " << temp << endl;
-		return;
-	}
-
-	displayed = mainProcess;
-	startTrace();
-}
-
-char** convert(string& cmd){
+char** convert(const string& cmd){
 	stringstream a(cmd);
 	vector<string> vec;
 	string s;
@@ -37,7 +23,8 @@ char** convert(string& cmd){
 	return (char**)cmdArgs;
 }
 
-void DebugWindow::createProcess() {
+void DebugWindow::createProcess(const string& cmd) {
+	tracer = gettid();
 
 	char** cmdArgs = convert(cmd);
 
@@ -52,8 +39,23 @@ void DebugWindow::createProcess() {
 		mainProcess->pid = child;
 
 		displayed = mainProcess;
-		startTrace();
+		startTracer();
 	}
+}
+
+void DebugWindow::setupProcess(pid_t pid) {
+	tracer = gettid();
+
+	mainProcess = new Process;
+	mainProcess->pid = pid;
+	long temp = ptrace(PTRACE_ATTACH, pid, 0, 0);
+	if (temp != 0) {
+		cerr << "PTRACE_ATTACH failed : code " << temp << endl;
+		return;
+	}
+
+	displayed = mainProcess;
+	startTracer();
 }
 
 
@@ -87,7 +89,7 @@ bool DebugWindow::waitProcess(pid_t& stopped) {
 	}
 }
 
-void DebugWindow::startTrace() { // TODO way to kill tracer ?
+void DebugWindow::startTracer() { // TODO way to kill tracer ?
 
 	int temp, stopped;
 	processes.insert(mainProcess);
@@ -108,7 +110,7 @@ void DebugWindow::startTrace() { // TODO way to kill tracer ?
 	__ptrace_syscall_info info{};
 	int size = sizeof(__ptrace_syscall_info);
 
-	while (true) {
+	while (runTracer) {
 		fflush(stderr);
 		if (waitProcess(stopped)) {
 			if(handleChildExit(stopped))break;

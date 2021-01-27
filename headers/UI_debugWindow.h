@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'debugger-7blppCz.ui'
+** Form generated from reading UI file 'debugger-7KRUBVf.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef DEBUGGER_2D_7BLPPCZ_H
-#define DEBUGGER_2D_7BLPPCZ_H
+#ifndef DEBUGGER_2D_7KRUBVF_H
+#define DEBUGGER_2D_7KRUBVF_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
@@ -18,6 +18,7 @@
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
@@ -61,8 +62,8 @@ public:
 	QLabel *labelState;
 	QLabel *labelPID;
 	QHBoxLayout *horizontalLayout_2;
-	QTextEdit *cmd;
-	QTextEdit *processSelector;
+	QLineEdit *cmd;
+	QLineEdit *processSelector;
 	QSpacerItem *verticalSpacer;
 	QTreeWidget *callLogs;
 	QPushButton *bClearCallLogs;
@@ -216,23 +217,13 @@ public:
 
 		horizontalLayout_2 = new QHBoxLayout();
 		horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-		cmd = new QTextEdit(frame);
+		cmd = new QLineEdit(frame);
 		cmd->setObjectName(QString::fromUtf8("cmd"));
-		QSizePolicy sizePolicy4(QSizePolicy::Expanding, QSizePolicy::Fixed);
-		sizePolicy4.setHorizontalStretch(0);
-		sizePolicy4.setVerticalStretch(0);
-		sizePolicy4.setHeightForWidth(cmd->sizePolicy().hasHeightForWidth());
-		cmd->setSizePolicy(sizePolicy4);
-		cmd->setMaximumSize(QSize(16777215, 30));
 
 		horizontalLayout_2->addWidget(cmd);
 
-		processSelector = new QTextEdit(frame);
+		processSelector = new QLineEdit(frame);
 		processSelector->setObjectName(QString::fromUtf8("processSelector"));
-		processSelector->setEnabled(true);
-		sizePolicy4.setHeightForWidth(processSelector->sizePolicy().hasHeightForWidth());
-		processSelector->setSizePolicy(sizePolicy4);
-		processSelector->setMaximumSize(QSize(16777215, 30));
 
 		horizontalLayout_2->addWidget(processSelector);
 
@@ -245,11 +236,11 @@ public:
 
 		callLogs = new QTreeWidget(frame);
 		callLogs->setObjectName(QString::fromUtf8("callLogs"));
-		QSizePolicy sizePolicy5(QSizePolicy::Ignored, QSizePolicy::Expanding);
-		sizePolicy5.setHorizontalStretch(0);
-		sizePolicy5.setVerticalStretch(0);
-		sizePolicy5.setHeightForWidth(callLogs->sizePolicy().hasHeightForWidth());
-		callLogs->setSizePolicy(sizePolicy5);
+		QSizePolicy sizePolicy4(QSizePolicy::Ignored, QSizePolicy::Expanding);
+		sizePolicy4.setHorizontalStretch(0);
+		sizePolicy4.setVerticalStretch(0);
+		sizePolicy4.setHeightForWidth(callLogs->sizePolicy().hasHeightForWidth());
+		callLogs->setSizePolicy(sizePolicy4);
 		callLogs->setMinimumSize(QSize(0, 0));
 
 		gridLayout_3->addWidget(callLogs, 3, 0, 1, 3);
@@ -345,11 +336,6 @@ public:
 		labelState->setText(QCoreApplication::translate("DebugWindow", "State: RUNNING", nullptr));
 		labelPID->setText(QCoreApplication::translate("DebugWindow", "PID: NA", nullptr));
 		cmd->setPlaceholderText(QCoreApplication::translate("DebugWindow", "Enter command", nullptr));
-		processSelector->setHtml(QCoreApplication::translate("DebugWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-																			"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-																			"p, li { white-space: pre-wrap; }\n"
-																			"</style></head><body style=\" font-family:'Noto Sans'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
-																			"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", nullptr));
 		processSelector->setPlaceholderText(QCoreApplication::translate("DebugWindow", "Enter process name", nullptr));
 		QTreeWidgetItem *___qtreewidgetitem2 = callLogs->headerItem();
 		___qtreewidgetitem2->setText(7, QCoreApplication::translate("DebugWindow", "result", nullptr));
@@ -377,4 +363,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // DEBUGGER_2D_7BLPPCZ_H
+#endif // DEBUGGER_2D_7KRUBVF_H

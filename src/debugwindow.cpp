@@ -1,6 +1,8 @@
 #include <iostream>
 #include <QMessageBox>
 #include <QProcess>
+#include <QCompleter>
+#include <QStandardItemModel>
 
 #include "UI_debugWindow.h"
 #include "utils.h"
@@ -8,7 +10,51 @@
 
 using namespace std;
 
-void DebugWindow::cleanUpProcess() {
+DebugWindow::DebugWindow(){
+	UI.setupUi(this);
+	connect(UI.bRun, &QPushButton::clicked, this, &DebugWindow::bRun);
+
+	connect(UI.bClearCallLogs, &QPushButton::clicked, this, &DebugWindow::clearCallLogs);
+	connect(UI.bPlayPauseTable, &QPushButton::clicked, this, &DebugWindow::playPauseTable);
+
+	connect(UI.processTree, &QTreeWidget::itemClicked, this, &DebugWindow::treeClick);
+
+
+	QCompleter* comp = new QCompleter();
+
+	QStringList words;
+	words.append("aaaa");
+	words.append("abbb");
+	words.append("accc");
+
+	QStandardItemModel* model = new QStandardItemModel(words.count(), 2, comp);
+	for (int i = 0; i < words.count(); ++i) {
+		QString pn = "Process name";
+		QIcon icon;
+		icon.addFile(QString::fromUtf8(":/images/pause.png"), QSize(), QIcon::Normal, QIcon::Off);
+
+		model->setData(model->index(i, 0), icon, Qt::DecorationRole);
+		model->setData(model->index(i, 0), pn);
+	}
+	comp->setModel(model);
+	comp.filter
+
+	QTreeView *treeView = new QTreeView;
+	comp->setPopup(treeView);
+	treeView->setRootIsDecorated(false);
+	treeView->header()->hide();
+//	treeView->header()->setStretchLastSection(false);
+//	treeView->header()->setSectionResizeMode(0, QHeaderView::Stretch);
+//	treeView->header()->setSectionResizeMode(1, QHeaderView::ResizeToContents);
+
+	UI.processSelector->setCompleter(comp);
+
+}
+
+
+void DebugWindow::cleanProcess() {
+
+
 	if (mainProcess != nullptr) {
 
 		killProcesses();
@@ -22,7 +68,7 @@ void DebugWindow::cleanUpProcess() {
 	}
 }
 
-void DebugWindow::cleanUpUI() {
+void DebugWindow::cleanUI() {
 	clearCallLogs();
 
 	UI.processTree->topLevelItem(0)->setText(0, "NA");
@@ -30,17 +76,6 @@ void DebugWindow::cleanUpUI() {
 		delete i;
 	}
 }
-
-DebugWindow::DebugWindow(){
-    UI.setupUi(this);
-    connect(UI.bRun, &QPushButton::clicked, this, &DebugWindow::runCmd);
-
-    connect(UI.bClearCallLogs, &QPushButton::clicked, this, &DebugWindow::clearCallLogs);
-    connect(UI.bPlayPauseTable, &QPushButton::clicked, this, &DebugWindow::playPauseTable);
-
-    connect(UI.processTree, &QTreeWidget::itemClicked, this, &DebugWindow::treeClick);
-}
-
 
 void DebugWindow::changeView(Process& p) {
 	dataMutex.lock();
@@ -99,4 +134,17 @@ void DebugWindow::setState(char s) const {
 			break;
 		}
 	}
+}
+
+void DebugWindow::stopTracer(){
+	if(tracer!=-1){
+		runTracer = false;
+		waitpid(tracer, nullptr, 0);
+	}
+}
+
+void DebugWindow::reset(){
+	stopTracer();
+	cleanUI();
+	cleanProcess();
 }
