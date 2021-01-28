@@ -2,11 +2,13 @@
 #include <QMessageBox>
 #include <QProcess>
 #include <QCompleter>
+#include <QTreeView>
 #include <QStandardItemModel>
 
 #include "UI_debugWindow.h"
 #include "utils.h"
 #include "debugwindow.h"
+#include "customqcompleter.h"
 
 using namespace std;
 
@@ -18,36 +20,33 @@ DebugWindow::DebugWindow(){
 	connect(UI.bPlayPauseTable, &QPushButton::clicked, this, &DebugWindow::playPauseTable);
 
 	connect(UI.processTree, &QTreeWidget::itemClicked, this, &DebugWindow::treeClick);
+//	connect(UI.processSelector, &QLineEdit::textEdited, this, &DebugWindow::searchProcess);
 
+//	UI.processTree->takeTopLevelItem(0).set
 
-	QCompleter* comp = new QCompleter();
+	// I.. guess it works ?
+	// https://forum.qt.io/topic/93556/how-to-implement-a-custom-matching-function-for-a-qcombobox-s-qcompleter/6
+	QCompleter* completer = new QCompleter();
+	model = new QStringListModel(completer);
+	QStringList list;
+	list << "aaaa";
+	list << "bbbb";
+	list << "dddd";
+	model->setStringList(list);
+//	model->setData(model->index(0, 0), "aa");
+//	model->setData(model->index(0, 1), "bb");
+//	model->setData(model->index(1, 0), "cc");
+//	model->setData(model->index(1, 1), "dd");
 
-	QStringList words;
-	words.append("aaaa");
-	words.append("abbb");
-	words.append("accc");
-
-	QStandardItemModel* model = new QStandardItemModel(words.count(), 2, comp);
-	for (int i = 0; i < words.count(); ++i) {
-		QString pn = "Process name";
-		QIcon icon;
-		icon.addFile(QString::fromUtf8(":/images/pause.png"), QSize(), QIcon::Normal, QIcon::Off);
-
-		model->setData(model->index(i, 0), icon, Qt::DecorationRole);
-		model->setData(model->index(i, 0), pn);
-	}
-	comp->setModel(model);
-	comp.filter
+	completer->setCompletionMode(QCompleter::UnfilteredPopupCompletion);
+	completer->setModel(model);
 
 	QTreeView *treeView = new QTreeView;
-	comp->setPopup(treeView);
+	completer->setPopup(treeView);
 	treeView->setRootIsDecorated(false);
 	treeView->header()->hide();
-//	treeView->header()->setStretchLastSection(false);
-//	treeView->header()->setSectionResizeMode(0, QHeaderView::Stretch);
-//	treeView->header()->setSectionResizeMode(1, QHeaderView::ResizeToContents);
 
-	UI.processSelector->setCompleter(comp);
+	UI.processSelector->setCompleter(completer);
 
 }
 

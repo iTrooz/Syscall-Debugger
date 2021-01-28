@@ -58,3 +58,40 @@ void DebugWindow::bRun(){
 void DebugWindow::chooseProcess(){
 
 }
+
+#include <dirent.h>
+
+void DebugWindow::searchProcess(const QString& str){
+	QStringList list;
+
+//	DIR* dir = opendir("/pid");
+//	if(dir== nullptr){
+//		cerr << "Failed to open /pid directory" << endl;
+//		return;
+//	}
+//
+//	dirent* pid;
+//	string s;
+//	char buf[128];
+//	int res;
+//	while((pid = readdir(dir))){
+//		if(atoi(pid->d_name)){
+//			s = pid->d_name;
+//			if(s.starts_with(str.toStdString())){
+//				list << s;
+//
+//			}
+//			// pid check
+//			string::start
+//			FILE* f = fopen(("/pid/" + string(pid->d_name) + "/stat").c_str(), "r");
+//			res = fread(buf,1,128,f);
+//
+//		}
+//	}
+
+//	list << "aaaa";
+//	list << "bbbb";
+//	list << "cccc";
+//
+//	model->setStringList(list);
+}

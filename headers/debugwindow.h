@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include <QMutex>
+#include <QCompleter>
+#include <QStringListModel>
 #include <unordered_set>
 
 #include "UI_debugWindow.h"
@@ -36,6 +38,7 @@ private:
 	// others ?
 	QMutex dataMutex; // for access to QTable and calls list
 	char tableLocked = 0;
+	QStringListModel* model;
 
 
 	// visual
@@ -66,6 +69,7 @@ private:
 	void chooseProcess();
 	void treeClick(QTreeWidgetItem* item);
 	void changeView(Process &p);
+	void searchProcess(const QString&);
 
 private slots: // a voir pour suppr ?
 
