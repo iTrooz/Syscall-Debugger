@@ -6,6 +6,7 @@
 #include <QCompleter>
 #include <QStringListModel>
 #include <unordered_set>
+#include <QStandardItemModel>
 
 #include "UI_debugWindow.h"
 #include "process.h"
@@ -38,7 +39,7 @@ private:
 	// others ?
 	QMutex dataMutex; // for access to QTable and calls list
 	char tableLocked = 0;
-	QStringListModel* model;
+	QStandardItemModel* model;
 
 
 	// visual

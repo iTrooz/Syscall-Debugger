@@ -8,7 +8,6 @@
 #include "UI_debugWindow.h"
 #include "utils.h"
 #include "debugwindow.h"
-#include "customqcompleter.h"
 
 using namespace std;
 
@@ -20,23 +19,14 @@ DebugWindow::DebugWindow(){
 	connect(UI.bPlayPauseTable, &QPushButton::clicked, this, &DebugWindow::playPauseTable);
 
 	connect(UI.processTree, &QTreeWidget::itemClicked, this, &DebugWindow::treeClick);
-//	connect(UI.processSelector, &QLineEdit::textEdited, this, &DebugWindow::searchProcess);
+	connect(UI.processSelector, &QLineEdit::textEdited, this, &DebugWindow::searchProcess);
 
-//	UI.processTree->takeTopLevelItem(0).set
+
 
 	// I.. guess it works ?
 	// https://forum.qt.io/topic/93556/how-to-implement-a-custom-matching-function-for-a-qcombobox-s-qcompleter/6
 	QCompleter* completer = new QCompleter();
-	model = new QStringListModel(completer);
-	QStringList list;
-	list << "aaaa";
-	list << "bbbb";
-	list << "dddd";
-	model->setStringList(list);
-//	model->setData(model->index(0, 0), "aa");
-//	model->setData(model->index(0, 1), "bb");
-//	model->setData(model->index(1, 0), "cc");
-//	model->setData(model->index(1, 1), "dd");
+	model = new QStandardItemModel(completer);
 
 	completer->setCompletionMode(QCompleter::UnfilteredPopupCompletion);
 	completer->setModel(model);

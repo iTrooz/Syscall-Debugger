@@ -62,36 +62,53 @@ void DebugWindow::chooseProcess(){
 #include <dirent.h>
 
 void DebugWindow::searchProcess(const QString& str){
-	QStringList list;
+	model->clear();
+	model->setColumnCount(2);
+	model->set
 
-//	DIR* dir = opendir("/pid");
-//	if(dir== nullptr){
-//		cerr << "Failed to open /pid directory" << endl;
-//		return;
-//	}
-//
-//	dirent* pid;
-//	string s;
-//	char buf[128];
-//	int res;
-//	while((pid = readdir(dir))){
-//		if(atoi(pid->d_name)){
-//			s = pid->d_name;
-//			if(s.starts_with(str.toStdString())){
-//				list << s;
-//
-//			}
-//			// pid check
-//			string::start
-//			FILE* f = fopen(("/pid/" + string(pid->d_name) + "/stat").c_str(), "r");
-//			res = fread(buf,1,128,f);
-//
-//		}
-//	}
+	DIR* dir = opendir("/proc");
+	if(dir==nullptr){
+		cerr << "Failed to open /proc directory" << endl;
+		return;
+	}
 
-//	list << "aaaa";
-//	list << "bbbb";
-//	list << "cccc";
-//
-//	model->setStringList(list);
+	dirent* pidFile;
+	QString pid;
+	QString name;
+
+	bool flag = false;
+	char buf[128];
+	int res;
+	char* pos;
+	int i = 0;
+	while((pidFile = readdir(dir))){
+		if(atoi(pidFile->d_name)){
+
+			pid = pidFile->d_name;
+			if(pid.startsWith(str, Qt::CaseInsensitive)) flag = true;
+
+			FILE* f = fopen(("/proc/"+pid.toStdString()+"/stat").c_str(), "r");
+			if(f==nullptr){
+				cerr << "failed to open stat file of pid " << pidFile->d_name << endl;
+				continue;
+			}
+
+			res = fread(buf,1,64,f); // useless to read more, UI would not even display it entirely
+			pos = std::find(buf, buf+res, ')');
+			*pos = '\0';
+			pos = std::find(buf, buf+res, '(');
+			name = pos+1;
+
+			if(name.contains(str, Qt::CaseSensitive)) flag = true;
+
+			if(flag){
+				model->setRowCount(i+1);
+				model->setData(model->index(i, 0), pid);
+				model->setData(model->index(i, 1), name);
+
+				flag = false;
+				i++;
+			}
+		}
+	}
 }
