@@ -23,10 +23,11 @@ DebugWindow::DebugWindow(){
 
 
 
+
 	// I.. guess it works ?
 	// https://forum.qt.io/topic/93556/how-to-implement-a-custom-matching-function-for-a-qcombobox-s-qcompleter/6
 	QCompleter* completer = new QCompleter();
-	model = new QStandardItemModel(completer);
+	model = new QStandardItemModel(0, 2, completer);
 
 	completer->setCompletionMode(QCompleter::UnfilteredPopupCompletion);
 	completer->setModel(model);
@@ -35,6 +36,8 @@ DebugWindow::DebugWindow(){
 	completer->setPopup(treeView);
 	treeView->setRootIsDecorated(false);
 	treeView->header()->hide();
+	treeView->header()->setStretchLastSection(false);
+	treeView->header()->setSectionResizeMode(0, QHeaderView::ResizeToContents);
 
 	UI.processSelector->setCompleter(completer);
 

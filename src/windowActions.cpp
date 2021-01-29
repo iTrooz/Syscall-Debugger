@@ -62,9 +62,7 @@ void DebugWindow::chooseProcess(){
 #include <dirent.h>
 
 void DebugWindow::searchProcess(const QString& str){
-	model->clear();
-	model->setColumnCount(2);
-	model->set
+	model->setRowCount(0);
 
 	DIR* dir = opendir("/proc");
 	if(dir==nullptr){
