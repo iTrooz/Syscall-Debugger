@@ -17,10 +17,11 @@ DebugWindow::DebugWindow(){
 	// -----
 
 	connect(UI.bRun, &QPushButton::clicked, this, &DebugWindow::bRun);
-
 	connect(UI.bClearCallLogs, &QPushButton::clicked, this, &DebugWindow::clearCallLogs);
 	connect(UI.bPlayPauseTable, &QPushButton::clicked, this, &DebugWindow::playPauseTable);
 	connect(UI.bProcessSelect, &QPushButton::clicked, this, &DebugWindow::chooseProcess);
+
+	connect(UI.processTree, &QTreeWidget::itemClicked, this, &DebugWindow::treeClick);
 }
 
 

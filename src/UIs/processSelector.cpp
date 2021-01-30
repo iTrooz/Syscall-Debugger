@@ -10,7 +10,17 @@ ProcessSelector::ProcessSelector() {
 	updateProcs("");
 
 	connect(UI.lineEdit, &QLineEdit::textEdited, this, &ProcessSelector::updateProcs);
+	connect(UI.tableWidget, &QTableWidget::itemDoubleClicked, this, &ProcessSelector::processChosen);
 
+}
+void ProcessSelector::processChosen(QTableWidgetItem* item){
+	item = UI.tableWidget->item(item->row(), 0);
+	bool ok;
+	int a = item->text().toInt(&ok);
+	if(ok)done(a);
+	else{
+		cerr << "Got invalid PID from QTable (choosing process) : " << a << endl;
+	}
 }
 
 void ProcessSelector::updateProcs(const QString& searchText) {

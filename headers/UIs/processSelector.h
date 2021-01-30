@@ -10,6 +10,7 @@ public:
 
 	Ui_SProc UI{};
 
+	void processChosen(QTableWidgetItem *item);
 };
 
 

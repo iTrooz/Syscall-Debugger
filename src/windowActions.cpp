@@ -56,5 +56,6 @@ void DebugWindow::bRun(){
 }
 
 void DebugWindow::chooseProcess(){
-	test.exec();
+	int a = test.exec();
+	cout << "Want : " << a << endl;
 }

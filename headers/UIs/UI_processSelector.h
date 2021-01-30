@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'dialog_sprocdjmXLJ.ui'
+** Form generated from reading UI file 'dialog_sprocaaJaiE.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef DIALOG_SPROCDJMXLJ_H
-#define DIALOG_SPROCDJMXLJ_H
+#ifndef DIALOG_SPROCAAJAIE_H
+#define DIALOG_SPROCAAJAIE_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
@@ -54,6 +54,8 @@ public:
 		QTableWidgetItem *__qtablewidgetitem4 = new QTableWidgetItem();
 		tableWidget->setItem(0, 1, __qtablewidgetitem4);
 		tableWidget->setObjectName(QString::fromUtf8("tableWidget"));
+		tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
+		tableWidget->setShowGrid(false);
 		tableWidget->horizontalHeader()->setCascadingSectionResizes(false);
 		tableWidget->horizontalHeader()->setStretchLastSection(true);
 		tableWidget->verticalHeader()->setCascadingSectionResizes(false);
@@ -82,9 +84,9 @@ public:
 		const bool __sortingEnabled = tableWidget->isSortingEnabled();
 		tableWidget->setSortingEnabled(false);
 		QTableWidgetItem *___qtablewidgetitem2 = tableWidget->item(0, 0);
-		___qtablewidgetitem2->setText(QCoreApplication::translate("SProc", "56298", nullptr));
+		___qtablewidgetitem2->setText(QCoreApplication::translate("SProc", "-999999", nullptr));
 		QTableWidgetItem *___qtablewidgetitem3 = tableWidget->item(0, 1);
-		___qtablewidgetitem3->setText(QCoreApplication::translate("SProc", "firefox", nullptr));
+		___qtablewidgetitem3->setText(QCoreApplication::translate("SProc", "TESTPROCESS", nullptr));
 		tableWidget->setSortingEnabled(__sortingEnabled);
 
 	} // retranslateUi
@@ -97,4 +99,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // DIALOG_SPROCDJMXLJ_H
+#endif // DIALOG_SPROCAAJAIE_H
