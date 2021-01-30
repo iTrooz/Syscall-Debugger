@@ -11,10 +11,10 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Syscall Debugger</string>
   </property>
   <property name="accessibleName">
-   <string>Syscall Debugger</string>
+   <string/>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout_4">
@@ -118,10 +118,13 @@
             <string>Enter command</string>
            </property>
           </widget>
-          <widget class="QWidget" name="">
+          <widget class="QWidget" name="layoutWidget">
            <layout class="QGridLayout" name="gridLayout_5">
             <item row="0" column="0">
              <widget class="QLineEdit" name="processSelect">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
               <property name="text">
                <string/>
               </property>
@@ -143,7 +146,7 @@
               </property>
               <property name="icon">
                <iconset resource="../res/ressources.qrc">
-                <normaloff>:/images/pause.png</normaloff>:/images/pause.png</iconset>
+                <normaloff>:/images/processSelect.png</normaloff>:/images/processSelect.png</iconset>
               </property>
              </widget>
             </item>

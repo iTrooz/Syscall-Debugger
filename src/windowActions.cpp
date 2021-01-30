@@ -56,5 +56,5 @@ void DebugWindow::bRun(){
 }
 
 void DebugWindow::chooseProcess(){
-
+	test.exec();
 }

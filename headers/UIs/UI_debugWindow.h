@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'debuggerngmlhL.ui'
+** Form generated from reading UI file 'debuggerGtUMRX.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef DEBUGGERNGMLHL_H
-#define DEBUGGERNGMLHL_H
+#ifndef DEBUGGERGTUMRX_H
+#define DEBUGGERGTUMRX_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
@@ -54,7 +54,7 @@ public:
 	QGridLayout *gridLayout_3;
 	QSplitter *splitter_2;
 	QLineEdit *cmd;
-	QWidget *widget;
+	QWidget *layoutWidget;
 	QGridLayout *gridLayout_5;
 	QLineEdit *processSelect;
 	QPushButton *bProcessSelect;
@@ -161,26 +161,27 @@ public:
 		cmd = new QLineEdit(splitter_2);
 		cmd->setObjectName(QString::fromUtf8("cmd"));
 		splitter_2->addWidget(cmd);
-		widget = new QWidget(splitter_2);
-		widget->setObjectName(QString::fromUtf8("widget"));
-		gridLayout_5 = new QGridLayout(widget);
+		layoutWidget = new QWidget(splitter_2);
+		layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
+		gridLayout_5 = new QGridLayout(layoutWidget);
 		gridLayout_5->setObjectName(QString::fromUtf8("gridLayout_5"));
 		gridLayout_5->setContentsMargins(0, 0, 0, 0);
-		processSelect = new QLineEdit(widget);
+		processSelect = new QLineEdit(layoutWidget);
 		processSelect->setObjectName(QString::fromUtf8("processSelect"));
+		processSelect->setEnabled(false);
 
 		gridLayout_5->addWidget(processSelect, 0, 0, 1, 1);
 
-		bProcessSelect = new QPushButton(widget);
+		bProcessSelect = new QPushButton(layoutWidget);
 		bProcessSelect->setObjectName(QString::fromUtf8("bProcessSelect"));
 		bProcessSelect->setMinimumSize(QSize(32, 0));
 		QIcon icon;
-		icon.addFile(QString::fromUtf8(":/images/pause.png"), QSize(), QIcon::Normal, QIcon::Off);
+		icon.addFile(QString::fromUtf8(":/images/processSelect.png"), QSize(), QIcon::Normal, QIcon::Off);
 		bProcessSelect->setIcon(icon);
 
 		gridLayout_5->addWidget(bProcessSelect, 0, 1, 1, 1);
 
-		splitter_2->addWidget(widget);
+		splitter_2->addWidget(layoutWidget);
 
 		gridLayout_3->addWidget(splitter_2, 1, 0, 1, 3);
 
@@ -196,7 +197,9 @@ public:
 		bPlayPauseTable = new QPushButton(frame);
 		bPlayPauseTable->setObjectName(QString::fromUtf8("bPlayPauseTable"));
 		bPlayPauseTable->setMinimumSize(QSize(32, 0));
-		bPlayPauseTable->setIcon(icon);
+		QIcon icon2;
+		icon2.addFile(QString::fromUtf8(":/images/pause.png"), QSize(), QIcon::Normal, QIcon::Off);
+		bPlayPauseTable->setIcon(icon2);
 
 		gridLayout_3->addWidget(bPlayPauseTable, 4, 1, 1, 1);
 
@@ -329,9 +332,9 @@ public:
 
 	void retranslateUi(QMainWindow *DebugWindow)
 	{
-		DebugWindow->setWindowTitle(QCoreApplication::translate("DebugWindow", "MainWindow", nullptr));
+		DebugWindow->setWindowTitle(QCoreApplication::translate("DebugWindow", "Syscall Debugger", nullptr));
 #if QT_CONFIG(accessibility)
-		DebugWindow->setAccessibleName(QCoreApplication::translate("DebugWindow", "Syscall Debugger", nullptr));
+		DebugWindow->setAccessibleName(QString());
 #endif // QT_CONFIG(accessibility)
 		actionSaveAs->setText(QCoreApplication::translate("DebugWindow", "&Save as", nullptr));
 		actionSettings->setText(QCoreApplication::translate("DebugWindow", "Settings", nullptr));
@@ -385,4 +388,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // DEBUGGERNGMLHL_H
+#endif // DEBUGGERGTUMRX_H

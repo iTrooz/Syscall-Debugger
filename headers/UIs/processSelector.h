@@ -3,7 +3,7 @@
 
 #include "UI_processSelector.h"
 
-class ProcessSelector : public QWidget {
+class ProcessSelector : public QDialog {
 public:
 	ProcessSelector();
 	void updateProcs(const QString&);

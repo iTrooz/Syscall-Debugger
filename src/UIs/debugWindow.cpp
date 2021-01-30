@@ -20,9 +20,7 @@ DebugWindow::DebugWindow(){
 
 	connect(UI.bClearCallLogs, &QPushButton::clicked, this, &DebugWindow::clearCallLogs);
 	connect(UI.bPlayPauseTable, &QPushButton::clicked, this, &DebugWindow::playPauseTable);
-	connect(UI.bprocessSelect, &QPushButton::clicked, this, &DebugWindow::searchProcess);
-
-//	connect(UI.processTree, &QTreeWidget::itemClicked, test, &ProcessSelector::show);
+	connect(UI.bProcessSelect, &QPushButton::clicked, this, &DebugWindow::chooseProcess);
 }
 
 

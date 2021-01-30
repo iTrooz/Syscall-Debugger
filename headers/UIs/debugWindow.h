@@ -19,7 +19,7 @@ class DebugWindow : public QMainWindow
 public:
 	DebugWindow();
 
-//    ProcessSelector test;
+    ProcessSelector test;
 
 private:
 	// base
