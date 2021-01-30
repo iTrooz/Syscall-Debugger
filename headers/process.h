@@ -1,4 +1,3 @@
-
 #ifndef PROCESS
 #define PROCESS
 
@@ -23,13 +22,16 @@ class Process
 {
 public:
 	bool running = true;
-    pid_t pid;
+    const pid_t pid;
     list<Syscall*> calls;
     Syscall* currentCall = nullptr;
 	QTreeWidgetItem* treeItem;
 
 	void delCalls();
 	~Process();
+	Process(int);
+
+	void setupTreeItem(QTreeWidgetItem *parent);
 };
 
 #endif

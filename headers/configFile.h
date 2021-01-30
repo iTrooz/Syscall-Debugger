@@ -1,12 +1,12 @@
 
+#ifndef CONFIGFILE
+#define CONFIGFILE
+
 #include<string>
 #include<vector>
 #include<unordered_map>
 
 using namespace std;
-
-#ifndef CONFIGFILE
-#define CONFIGFILE
 
 namespace config{
 

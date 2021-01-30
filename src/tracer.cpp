@@ -1,8 +1,9 @@
-#include<UIs/debugWindow.h>
-#include<iostream>
-#include<sstream>
-#include<unordered_set>
-#include "configFile.h"
+#include <iostream>
+#include <sstream>
+#include <fstream>
+#include <dirent.h>
+
+#include "UIs/debugWindow.h"
 
 using namespace std;
 
@@ -35,30 +36,92 @@ void DebugWindow::createProcess(const string& cmd) {
 		execvp(cmdArgs[0], cmdArgs); // stop le flow du code
 		throw runtime_error("NOT SUPPOSED TO HAPPEN : PROCESS ESCAPED"); // au cas ou
 	}else {
-		mainProcess = new Process;
-		mainProcess->pid = child;
+		waitpid(child, nullptr, 0);
 
+		mainProcess = new Process(child);
+		mainProcess->treeItem = UI.processTree->topLevelItem(0);
+		mainProcess->treeItem->setText(0, QString(to_string(mainProcess->pid).c_str()));
+		processes.insert(mainProcess);
 		displayed = mainProcess;
 		startTracer();
+	}
+}
+
+void recur(unordered_set<Process*>* set, Process* p){
+	string ps = to_string(p->pid);
+	DIR* dir = opendir(("/proc/"+ps+"/task").c_str());
+	if(dir==nullptr){
+		cerr << "Failed to open /proc/"<< ps << "/task directory" << endl;
+		return;
+	}
+
+	dirent* thread;
+	Process* child;
+	int pid, size;
+	char* pos;
+	ifstream file;
+	while((thread = readdir(dir))){
+		pid = atoi(thread->d_name);
+		if(pid){
+			child = new Process(pid);
+			child->setupTreeItem(p->treeItem);
+			set->insert(new Process(pid));  // adding thread
+
+			file.open(("/proc/" + ps + "/task/" + to_string(pid) + "/children").c_str(), std::ifstream::in);
+			if(!file.is_open()){
+				cerr << "failed to open children file of PID " << ps << "/" << pid << endl;
+				continue;
+			}
+
+			string tmp;
+			file >> tmp;
+			file.close();
+
+			// we won't be using string (because every erase would make a copy, and we can do better)
+			size = tmp.size();
+			if(size==0)continue;
+			char *buf = tmp.data();
+
+			while(true){
+				pos = std::find(buf, buf+size, ' ');
+
+				pos[0] = '\0';
+
+				pid = atoi(buf);
+				if(pid) {
+					child = new Process(pid);
+					child->setupTreeItem(p->treeItem);
+					recur(set, child);
+				}else{
+					cerr << "Got invalid PID in childen file : |" << buf << "|" << endl;
+				}
+
+				if(pos==buf+size)break;
+				buf = pos+1;
+			}
+		}
 	}
 }
 
 void DebugWindow::setupProcess(pid_t pid) {
 	tracer = gettid();
 
-	mainProcess = new Process;
-	mainProcess->pid = pid;
 	long temp = ptrace(PTRACE_ATTACH, pid, 0, 0);
 	if (temp != 0) {
 		cerr << "PTRACE_ATTACH failed : code " << temp << endl;
 		return;
 	}
+	waitpid(pid, nullptr, 0);
+
+	mainProcess = new Process(pid);
+	mainProcess->treeItem = UI.processTree->topLevelItem(0);
+	mainProcess->treeItem->setText(0, QString(to_string(mainProcess->pid).c_str()));
+
+	recur(&processes, mainProcess);
 
 	displayed = mainProcess;
 	startTracer();
 }
-
-
 
 bool DebugWindow::waitProcess(pid_t& stopped) {
 	int status;
@@ -91,10 +154,9 @@ bool DebugWindow::waitProcess(pid_t& stopped) {
 
 void DebugWindow::startTracer() { // TODO way to kill tracer ?
 
+	runTracer = true;
 	int temp, stopped;
-	processes.insert(mainProcess);
 
-	waitpid(mainProcess->pid, nullptr, 0);
 	temp = ptrace(PTRACE_SETOPTIONS, mainProcess->pid, 0, PTRACE_O_TRACESYSGOOD|PTRACE_O_TRACEFORK|PTRACE_O_TRACEVFORK|
 	PTRACE_O_TRACECLONE|PTRACE_O_TRACEEXEC|PTRACE_O_TRACEEXIT|PTRACE_O_EXITKILL);
 	if (temp != 0)throw runtime_error("PTRACE_SETOPTIONS failed : " + to_string(temp));
@@ -103,15 +165,11 @@ void DebugWindow::startTracer() { // TODO way to kill tracer ?
 	if (temp != 0)throw runtime_error("FIRST PTRACE_SYSCALL failed : " +
 									  to_string(temp));
 
-	mainProcess->treeItem = UI.processTree->topLevelItem(0);
-	mainProcess->treeItem->setText(0, QString(to_string(mainProcess->pid).c_str()));
-
 	Process* proc;
 	__ptrace_syscall_info info{};
 	int size = sizeof(__ptrace_syscall_info);
 
 	while (runTracer) {
-		fflush(stderr);
 		if (waitProcess(stopped)) {
 			if(handleChildExit(stopped))break;
 			else continue;
@@ -152,4 +210,11 @@ void DebugWindow::startTracer() { // TODO way to kill tracer ?
 		temp = ptrace(PTRACE_SYSCALL, stopped, 0, 0); // restart le thread + l'arrête au prochain syscall
 		if(temp!=0)cerr << "PTRACE_SYSCALL in-loop failed : " << temp << endl;
 	}
+
+//	QTreeWidgetItem* item = new QTreeWidgetItem;
+//	item->setText(0, "SALUUUUT");
+//	mainProcess->treeItem->addChild(item);
+//	mainProcess->treeItem->setText(0, "b");
+	cout << "EXITED" << endl;
+	runTracer = false;
 }

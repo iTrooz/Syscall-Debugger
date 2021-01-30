@@ -11,6 +11,17 @@ void Process::delCalls(){
 	calls.clear();
 }
 
+void Process::setupTreeItem(QTreeWidgetItem* parent){
+	treeItem = new QTreeWidgetItem;
+	treeItem->setText(0, QString::number(pid));
+	parent->addChild(treeItem);
+}
+
+
+Process::Process(int t) : pid(t){
+
+}
+
 Process::~Process() {
 	delCalls();
 //	delete treeItem; // TODO pas nécessaire ? jsp

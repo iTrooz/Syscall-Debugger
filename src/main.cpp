@@ -14,6 +14,18 @@ void load_syscalls();
 
 // TODO syscallPath : path different for Ubuntu/(Manjaro|Arch)/Kali (others?)
 
+
+//int main(){
+//	unordered_set<Process*> set;
+//	Process p(108093);
+//	p.treeItem = new QTreeWidgetItem;
+//	recur2(&set, &p);
+//	cout << "-----" << endl;
+//	for(auto i : set){
+//		cout << i << endl;
+//	}
+//}
+
 int main(int argc, char *argv[]){
 	QApplication app(argc, argv);
 
@@ -47,6 +59,7 @@ int main(int argc, char *argv[]){
 
 void load_syscalls(){
 	ifstream file(config::syscallPath);
+
 	string line;
 	size_t t;
 	while (getline(file,line)) {

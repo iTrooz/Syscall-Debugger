@@ -49,11 +49,12 @@ void ProcessSelector::updateProcs(const QString& searchText) {
 
 			FILE* f = fopen(("/proc/"+pid.toStdString()+"/stat").c_str(), "r");
 			if(f==nullptr){
-				cerr << "failed to open stat file of pid " << pidFile->d_name << endl;
+				cerr << "failed to open stat file of PID " << pidFile->d_name << endl;
 				continue;
 			}
+			res = fread(buf,1,64,f); // ~number, useless to read more, UI would not even display it entirely
+			fclose(f);
 
-			res = fread(buf,1,64,f); // useless to read more, UI would not even display it entirely
 			pos = std::find(buf, buf+res, ')');
 			*pos = '\0';
 			pos = std::find(buf, buf+res, '(');
@@ -62,7 +63,6 @@ void ProcessSelector::updateProcs(const QString& searchText) {
 			if(name.contains(searchText, Qt::CaseSensitive)) flag = true;
 
 			if(flag){
-				// TODO addRow existe
 				UI.tableWidget->insertRow(0);
 				UI.tableWidget->setItem(0, 0, new QTableWidgetItem(pid));
 				UI.tableWidget->setItem(0, 1, new QTableWidgetItem(name));

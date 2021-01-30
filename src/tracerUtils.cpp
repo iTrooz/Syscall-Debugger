@@ -25,7 +25,7 @@ void DebugWindow::handleCallStart(Process& proc) {
 	if (tableLocked==0){
 		if (displayed->pid == proc.pid) {
 			dataMutex.lock();
-//			addEntryStart(*proc.currentCall);
+			addEntryStart(*proc.currentCall);
 			dataMutex.unlock();
 		}
 		if(proc.calls.size()==config::displayLimit){
@@ -50,16 +50,18 @@ void DebugWindow::handleCallReturn(Process& proc) {
 			newChild = handleChildCreate(proc.currentCall->exit.rval);
 		}
 
-		newChild->treeItem = new QTreeWidgetItem;
-		newChild->treeItem->setText(0, QString(to_string(newChild->pid).c_str()));
-		proc.treeItem->addChild(newChild->treeItem);
+//		newChild->treeItem = new QTreeWidgetItem;
+//		newChild->treeItem->setText(0, QString(to_string(newChild->pid).c_str()));
+//		proc.treeItem->addChild(newChild->treeItem);
+		newChild->setupTreeItem(proc.treeItem);
+		cout << "Added child " << newChild->pid << " to " << proc.pid << endl;
 	}
 
 	if (tableLocked==0) {
 		d:
 		if (displayed->pid == proc.pid) {
 			dataMutex.lock();
-//			addEntryEnd(*proc.currentCall);
+			addEntryEnd(*proc.currentCall);
 			dataMutex.unlock();
 		}
 	}else if (tableLocked == 1){
@@ -70,8 +72,7 @@ void DebugWindow::handleCallReturn(Process& proc) {
 }
 
 Process* DebugWindow::handleChildCreate(pid_t pid){ // Warning : Still need to apply Tree Item Widget. besoin = get parent parent from here
-	auto* newChild = new Process();
-	newChild->pid = pid;
+	auto* newChild = new Process(pid);
 	processes.insert(newChild);
 
 	return newChild;

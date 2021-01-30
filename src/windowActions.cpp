@@ -58,4 +58,6 @@ void DebugWindow::bRun(){
 void DebugWindow::chooseProcess(){
 	int a = test.exec();
 	cout << "Want : " << a << endl;
+	std::thread thr(&DebugWindow::setupProcess, this, a);
+	thr.detach();
 }
