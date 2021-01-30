@@ -9,7 +9,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
 file( GLOB SOURCES src/*.cpp )
 file( GLOB HEADERS headers/*.h )
 file( GLOB RES res/* )
-add_executable(Syscall_Debugger ${SOURCES} ${HEADERS} ${RES} src/windowActions.cpp)
+add_executable(Syscall_Debugger ${SOURCES} ${HEADERS} ${RES} src/windowActions.cpp src/UIs/processSelector.cpp headers/UIs/processSelector.h headers/UIs/UI_processSelector.h)
 
 find_package(Qt5Widgets REQUIRED)
 target_link_libraries(Syscall_Debugger Qt5::Widgets)

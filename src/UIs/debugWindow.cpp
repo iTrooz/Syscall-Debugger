@@ -1,46 +1,28 @@
 #include <iostream>
 #include <QMessageBox>
 #include <QProcess>
-#include <QCompleter>
+#include <QComboBox>
 #include <QTreeView>
 #include <QStandardItemModel>
 
-#include "UI_debugWindow.h"
+#include "UIs/UI_debugWindow.h"
 #include "utils.h"
-#include "debugwindow.h"
+#include "UIs/debugWindow.h"
 
 using namespace std;
 
 DebugWindow::DebugWindow(){
 	UI.setupUi(this);
+
+	// -----
+
 	connect(UI.bRun, &QPushButton::clicked, this, &DebugWindow::bRun);
 
 	connect(UI.bClearCallLogs, &QPushButton::clicked, this, &DebugWindow::clearCallLogs);
 	connect(UI.bPlayPauseTable, &QPushButton::clicked, this, &DebugWindow::playPauseTable);
+	connect(UI.bprocessSelect, &QPushButton::clicked, this, &DebugWindow::searchProcess);
 
-	connect(UI.processTree, &QTreeWidget::itemClicked, this, &DebugWindow::treeClick);
-	connect(UI.processSelector, &QLineEdit::textEdited, this, &DebugWindow::searchProcess);
-
-
-
-
-	// I.. guess it works ?
-	// https://forum.qt.io/topic/93556/how-to-implement-a-custom-matching-function-for-a-qcombobox-s-qcompleter/6
-	QCompleter* completer = new QCompleter();
-	model = new QStandardItemModel(0, 2, completer);
-
-	completer->setCompletionMode(QCompleter::UnfilteredPopupCompletion);
-	completer->setModel(model);
-
-	QTreeView *treeView = new QTreeView;
-	completer->setPopup(treeView);
-	treeView->setRootIsDecorated(false);
-	treeView->header()->hide();
-	treeView->header()->setStretchLastSection(false);
-	treeView->header()->setSectionResizeMode(0, QHeaderView::ResizeToContents);
-
-	UI.processSelector->setCompleter(completer);
-
+//	connect(UI.processTree, &QTreeWidget::itemClicked, test, &ProcessSelector::show);
 }
 
 

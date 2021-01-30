@@ -3,12 +3,13 @@
 
 #include <QMainWindow>
 #include <QMutex>
-#include <QCompleter>
+#include <QComboBox>
 #include <QStringListModel>
 #include <unordered_set>
 #include <QStandardItemModel>
 
-#include "UI_debugWindow.h"
+#include "UIs/UI_debugWindow.h"
+#include "UIs/processSelector.h"
 #include "process.h"
 
 class DebugWindow : public QMainWindow
@@ -17,6 +18,8 @@ class DebugWindow : public QMainWindow
 
 public:
 	DebugWindow();
+
+//    ProcessSelector test;
 
 private:
 	// base
@@ -39,7 +42,8 @@ private:
 	// others ?
 	QMutex dataMutex; // for access to QTable and calls list
 	char tableLocked = 0;
-	QStandardItemModel* model;
+	QComboBox box;
+	QStandardItemModel model;
 
 
 	// visual
@@ -70,7 +74,6 @@ private:
 	void chooseProcess();
 	void treeClick(QTreeWidgetItem* item);
 	void changeView(Process &p);
-	void searchProcess(const QString&);
 
 private slots: // a voir pour suppr ?
 

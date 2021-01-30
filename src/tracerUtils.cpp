@@ -1,4 +1,4 @@
-#include <debugwindow.h>
+#include <UIs/debugWindow.h>
 #include "configFile.h"
 
 using namespace std;

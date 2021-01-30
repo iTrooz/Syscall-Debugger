@@ -1,7 +1,7 @@
 #include <thread>
 #include <QMessageBox>
 
-#include "debugwindow.h"
+#include "UIs/debugWindow.h"
 
 void DebugWindow::playPauseTable(){
 	/*
@@ -57,56 +57,4 @@ void DebugWindow::bRun(){
 
 void DebugWindow::chooseProcess(){
 
-}
-
-#include <dirent.h>
-
-void DebugWindow::searchProcess(const QString& str){
-	model->setRowCount(0);
-
-	DIR* dir = opendir("/proc");
-	if(dir==nullptr){
-		cerr << "Failed to open /proc directory" << endl;
-		return;
-	}
-
-	dirent* pidFile;
-	QString pid;
-	QString name;
-
-	bool flag = false;
-	char buf[128];
-	int res;
-	char* pos;
-	int i = 0;
-	while((pidFile = readdir(dir))){
-		if(atoi(pidFile->d_name)){
-
-			pid = pidFile->d_name;
-			if(pid.startsWith(str, Qt::CaseInsensitive)) flag = true;
-
-			FILE* f = fopen(("/proc/"+pid.toStdString()+"/stat").c_str(), "r");
-			if(f==nullptr){
-				cerr << "failed to open stat file of pid " << pidFile->d_name << endl;
-				continue;
-			}
-
-			res = fread(buf,1,64,f); // useless to read more, UI would not even display it entirely
-			pos = std::find(buf, buf+res, ')');
-			*pos = '\0';
-			pos = std::find(buf, buf+res, '(');
-			name = pos+1;
-
-			if(name.contains(str, Qt::CaseSensitive)) flag = true;
-
-			if(flag){
-				model->setRowCount(i+1);
-				model->setData(model->index(i, 0), pid);
-				model->setData(model->index(i, 1), name);
-
-				flag = false;
-				i++;
-			}
-		}
-	}
 }

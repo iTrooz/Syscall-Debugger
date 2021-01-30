@@ -1,4 +1,4 @@
-#include<debugwindow.h>
+#include<UIs/debugWindow.h>
 #include<iostream>
 #include<sstream>
 #include<unordered_set>
