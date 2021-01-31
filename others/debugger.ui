@@ -33,8 +33,11 @@
        <number>15</number>
       </property>
       <widget class="QFrame" name="frame_2">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+        <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
@@ -53,7 +56,7 @@
        </property>
        <property name="baseSize">
         <size>
-         <width>125</width>
+         <width>0</width>
          <height>0</height>
         </size>
        </property>
@@ -64,6 +67,9 @@
         <enum>QFrame::Raised</enum>
        </property>
        <layout class="QGridLayout" name="gridLayout_2">
+        <property name="sizeConstraint">
+         <enum>QLayout::SetDefaultConstraint</enum>
+        </property>
         <item row="0" column="0">
          <widget class="QTreeWidget" name="processTree">
           <property name="sizePolicy">
@@ -334,7 +340,7 @@
            <bool>false</bool>
           </attribute>
           <attribute name="horizontalHeaderStretchLastSection">
-           <bool>false</bool>
+           <bool>true</bool>
           </attribute>
           <attribute name="verticalHeaderVisible">
            <bool>false</bool>

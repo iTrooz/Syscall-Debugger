@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'debuggerwrdDPe.ui'
+** Form generated from reading UI file 'debuggeryqfrDh.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef DEBUGGERWRDDPE_H
-#define DEBUGGERWRDDPE_H
+#ifndef DEBUGGERYQFRDH_H
+#define DEBUGGERYQFRDH_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
@@ -49,7 +49,6 @@ public:
 	QSplitter *splitter;
 	QFrame *frame_2;
 	QGridLayout *gridLayout_2;
-	QSplitter *splitter_3;
 	QTreeWidget *processTree;
 	QFrame *frame;
 	QGridLayout *gridLayout_3;
@@ -119,34 +118,32 @@ public:
 		splitter->setHandleWidth(15);
 		frame_2 = new QFrame(splitter);
 		frame_2->setObjectName(QString::fromUtf8("frame_2"));
-		QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+		frame_2->setEnabled(true);
+		QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Preferred);
 		sizePolicy.setHorizontalStretch(0);
 		sizePolicy.setVerticalStretch(0);
 		sizePolicy.setHeightForWidth(frame_2->sizePolicy().hasHeightForWidth());
 		frame_2->setSizePolicy(sizePolicy);
 		frame_2->setMinimumSize(QSize(120, 0));
-		frame_2->setBaseSize(QSize(125, 0));
+		frame_2->setMaximumSize(QSize(250, 16777215));
+		frame_2->setBaseSize(QSize(0, 0));
 		frame_2->setFrameShape(QFrame::NoFrame);
 		frame_2->setFrameShadow(QFrame::Raised);
 		gridLayout_2 = new QGridLayout(frame_2);
 		gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
-		splitter_3 = new QSplitter(frame_2);
-		splitter_3->setObjectName(QString::fromUtf8("splitter_3"));
+		gridLayout_2->setSizeConstraint(QLayout::SetDefaultConstraint);
+		processTree = new QTreeWidget(frame_2);
+		new QTreeWidgetItem(processTree);
+		processTree->setObjectName(QString::fromUtf8("processTree"));
 		QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Expanding);
 		sizePolicy1.setHorizontalStretch(0);
 		sizePolicy1.setVerticalStretch(0);
-		sizePolicy1.setHeightForWidth(splitter_3->sizePolicy().hasHeightForWidth());
-		splitter_3->setSizePolicy(sizePolicy1);
-		splitter_3->setOrientation(Qt::Vertical);
-		processTree = new QTreeWidget(splitter_3);
-		new QTreeWidgetItem(processTree);
-		processTree->setObjectName(QString::fromUtf8("processTree"));
 		sizePolicy1.setHeightForWidth(processTree->sizePolicy().hasHeightForWidth());
 		processTree->setSizePolicy(sizePolicy1);
+		processTree->setMaximumSize(QSize(16777215, 16777215));
 		processTree->setBaseSize(QSize(0, 0));
-		splitter_3->addWidget(processTree);
 
-		gridLayout_2->addWidget(splitter_3, 0, 0, 1, 1);
+		gridLayout_2->addWidget(processTree, 0, 0, 1, 1);
 
 		splitter->addWidget(frame_2);
 		frame = new QFrame(splitter);
@@ -194,11 +191,8 @@ public:
 
 		frame_infos = new QFrame(frame);
 		frame_infos->setObjectName(QString::fromUtf8("frame_infos"));
-		QSizePolicy sizePolicy3(QSizePolicy::Fixed, QSizePolicy::Preferred);
-		sizePolicy3.setHorizontalStretch(0);
-		sizePolicy3.setVerticalStretch(0);
-		sizePolicy3.setHeightForWidth(frame_infos->sizePolicy().hasHeightForWidth());
-		frame_infos->setSizePolicy(sizePolicy3);
+		sizePolicy.setHeightForWidth(frame_infos->sizePolicy().hasHeightForWidth());
+		frame_infos->setSizePolicy(sizePolicy);
 		frame_infos->setFrameShape(QFrame::StyledPanel);
 		frame_infos->setFrameShadow(QFrame::Raised);
 		gridLayout = new QGridLayout(frame_infos);
@@ -274,11 +268,11 @@ public:
 		QTableWidgetItem *__qtablewidgetitem7 = new QTableWidgetItem();
 		callLogs->setHorizontalHeaderItem(7, __qtablewidgetitem7);
 		callLogs->setObjectName(QString::fromUtf8("callLogs"));
-		QSizePolicy sizePolicy4(QSizePolicy::Ignored, QSizePolicy::Expanding);
-		sizePolicy4.setHorizontalStretch(0);
-		sizePolicy4.setVerticalStretch(0);
-		sizePolicy4.setHeightForWidth(callLogs->sizePolicy().hasHeightForWidth());
-		callLogs->setSizePolicy(sizePolicy4);
+		QSizePolicy sizePolicy3(QSizePolicy::Ignored, QSizePolicy::Expanding);
+		sizePolicy3.setHorizontalStretch(0);
+		sizePolicy3.setVerticalStretch(0);
+		sizePolicy3.setHeightForWidth(callLogs->sizePolicy().hasHeightForWidth());
+		callLogs->setSizePolicy(sizePolicy3);
 		callLogs->setMinimumSize(QSize(0, 0));
 		callLogs->setAlternatingRowColors(false);
 		callLogs->horizontalHeader()->setCascadingSectionResizes(false);
@@ -421,4 +415,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // DEBUGGERWRDDPE_H
+#endif // DEBUGGERYQFRDH_H

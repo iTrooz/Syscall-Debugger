@@ -22,6 +22,9 @@ DebugWindow::DebugWindow(){
 	connect(UI.bProcessSelect, &QPushButton::clicked, this, &DebugWindow::chooseProcess);
 
 	connect(UI.processTree, &QTreeWidget::itemClicked, this, &DebugWindow::treeClick);
+
+	connect(this, &DebugWindow::test1, this, &DebugWindow::addEntryStart);
+	connect(this, &DebugWindow::test2, this, &DebugWindow::addEntryEnd);
 }
 
 
@@ -55,30 +58,30 @@ void DebugWindow::changeView(Process& p) {
 	displayed = &p;
 	UI.callLogs->clear();
 	for(Syscall* call : p.calls){
-		addEntryStart(*call);
-		addEntryEnd(*call);
+		addEntryStart(call);
+		addEntryEnd(call);
 	}
 	dataMutex.unlock();
 }
 
-void DebugWindow::addEntryStart(Syscall& call) const {
-	call.guessName();
+void DebugWindow::addEntryStart(Syscall* call) const {
+	call->guessName();
 	UI.callLogs->insertRow(0);
 
-	UI.callLogs->setItem(0, 0, new QTableWidgetItem(*call.name));
+	UI.callLogs->setItem(0, 0, new QTableWidgetItem(*call->name));
 	// TODO format for arg type
 	for(int i=0;i<6;i++){
-		UI.callLogs->setItem(0, i+1, new QTableWidgetItem(QString::number(call.entry.args[i])));
+		UI.callLogs->setItem(0, i+1, new QTableWidgetItem(QString::number(call->entry.args[i])));
 	}
 		UI.callLogs->setItem(0, 7, new QTableWidgetItem("?"));
 
 }
 
-void DebugWindow::addEntryEnd(Syscall& call) const {
-	if(call.exit.is_error==0xF){
+void DebugWindow::addEntryEnd(Syscall* call) const {
+	if(call->exit.is_error==0xF){
 		UI.callLogs->item(0, 7)->setText("?");
 	}else{
-		UI.callLogs->item(0, 7)->setText(QString::number(call.exit.rval));
+		UI.callLogs->item(0, 7)->setText(QString::number(call->exit.rval));
 	}
 }
 

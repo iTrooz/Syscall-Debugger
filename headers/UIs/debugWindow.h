@@ -12,6 +12,7 @@
 #include "UIs/processSelector.h"
 #include "process.h"
 
+Q_DECLARE_METATYPE(Syscall*);
 class DebugWindow : public QMainWindow
 {
     Q_OBJECT
@@ -55,8 +56,6 @@ private:
 
 	void cleanUI();
 	void cleanProcess();
-	void addEntryStart(Syscall& call) const;
-	void addEntryEnd(Syscall& call) const;
 
 
 	// process
@@ -75,8 +74,13 @@ private:
 	void treeClick(QTreeWidgetItem* item);
 	void changeView(Process &p);
 
-private slots: // a voir pour suppr ?
-
+private slots:
+	void addEntryStart(Syscall*) const;
+	void addEntryEnd(Syscall*) const;
+signals:
+	void test1(Syscall*);
+	void test2(Syscall*);
 };
+
 
 #endif
