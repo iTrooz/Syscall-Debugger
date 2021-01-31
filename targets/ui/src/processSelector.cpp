@@ -52,7 +52,7 @@ void ProcessSelector::updateProcs(const QString& searchText) {
 				cerr << "failed to open stat file of PID " << pidFile->d_name << endl;
 				continue;
 			}
-			res = fread(buf,1,64,f); // ~number, useless to read more, UI would not even display it entirely
+			res = fread(buf,1,64,f); // ~number, useless to read more, QtUI would not even display it entirely
 			fclose(f);
 
 			pos = std::find(buf, buf+res, ')');

@@ -11,4 +11,4 @@
 - src/headers : source and headers, respectively
 - res : external ressources
 - final : output directory
-- others : files not need in app compilation (like UI files)
+- others : files not need in app compilation (like QtUI files)

@@ -1,9 +1,9 @@
 /********************************************************************************
-** Form generated from reading UI file 'dialog_sprocaaJaiE.ui_build'
+** Form generated from reading QtUI file 'dialog_sprocaaJaiE.ui_build'
 **
 ** Created by: Qt User Interface Compiler version 5.15.2
 **
-** WARNING! All changes made in this file will be lost when recompiling UI file!
+** WARNING! All changes made in this file will be lost when recompiling QtUI file!
 ********************************************************************************/
 
 #ifndef DIALOG_SPROCAAJAIE_H

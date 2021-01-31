@@ -8,9 +8,10 @@
 #include <unordered_set>
 #include <QStandardItemModel>
 
-#include "UIs/UI_debugWindow.h"
-#include "UIs/processSelector.h"
-#include "common/process.h"
+#include "UI_debugWindow.h"
+#include "processSelector.h"
+#include "process.h"
+#include "tracer.h"
 
 Q_DECLARE_METATYPE(Syscall*);
 class DebugWindow : public QMainWindow
@@ -24,25 +25,18 @@ public:
 
 private:
 	// base
+	Ui_DebugWindow QtUI{};
+	Tracer* tracer;
     void reset();
 
-
-	// tracer things
-	void startTracer();
-	void stopTracer();
-	pid_t tracer = -1;
-	bool runTracer = false;
 
 
 	// others ?
 	QMutex dataMutex; // for access to QTable and calls list
 	char tableLocked = 0;
-	QComboBox box;
-	QStandardItemModel model;
 
 
 	// visual
-	Ui_DebugWindow UI{};
 	Process* mainProcess = nullptr;
 	Process* displayed = nullptr;
 	void setPID(char* pid) const;
@@ -51,11 +45,6 @@ private:
 	void cleanUI();
 	void cleanProcess();
 
-
-	// process
-	unordered_set<Process*> processes;
-	Process* getProcess(pid_t pid);
-	void killProcesses();
 
 
 	// Window actions

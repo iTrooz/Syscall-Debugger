@@ -5,23 +5,23 @@
 #include <QTreeView>
 #include <QStandardItemModel>
 
-#include "UIs/UI_debugWindow.h"
-#include "common/utils.h"
-#include "UIs/debugWindow.h"
+#include "UI_debugWindow.h"
+#include "utils.h"
+#include "debugWindow.h"
 
 using namespace std;
 
 DebugWindow::DebugWindow(){
-	UI.setupUi(this);
+	QtUI.setupUI(this);
 
 	// -----
 
-	connect(UI.bRun, &QPushButton::clicked, this, &DebugWindow::bRun);
-	connect(UI.bClearCallLogs, &QPushButton::clicked, this, &DebugWindow::clearCallLogs);
-	connect(UI.bPlayPauseTable, &QPushButton::clicked, this, &DebugWindow::playPauseTable);
-	connect(UI.bProcessSelect, &QPushButton::clicked, this, &DebugWindow::chooseProcess);
+	connect(QtUI.bRun, &QPushButton::clicked, this, &DebugWindow::bRun);
+	connect(QtUI.bClearCallLogs, &QPushButton::clicked, this, &DebugWindow::clearCallLogs);
+	connect(QtUI.bPlayPauseTable, &QPushButton::clicked, this, &DebugWindow::playPauseTable);
+	connect(QtUI.bProcessSelect, &QPushButton::clicked, this, &DebugWindow::chooseProcess);
 
-	connect(UI.processTree, &QTreeWidget::itemClicked, this, &DebugWindow::treeClick);
+	connect(QtUI.processTree, &QTreeWidget::itemClicked, this, &DebugWindow::treeClick);
 
 	connect(this, &DebugWindow::test1, this, &DebugWindow::addEntryStart);
 	connect(this, &DebugWindow::test2, this, &DebugWindow::addEntryEnd);
@@ -47,8 +47,8 @@ void DebugWindow::cleanProcess() {
 void DebugWindow::cleanUI() {
 	clearCallLogs();
 
-	UI.processTree->topLevelItem(0)->setText(0, "NA");
-	for(auto* i : UI.processTree->topLevelItem(0)->takeChildren()) { // TODO jsp si utile (si utile, faire la même pour le tree des syscalls ?)
+	QtUI.processTree->topLevelItem(0)->setText(0, "NA");
+	for(auto* i : QtUI.processTree->topLevelItem(0)->takeChildren()) { // TODO jsp si utile (si utile, faire la même pour le tree des syscalls ?)
 		delete i;
 	}
 }
@@ -56,7 +56,7 @@ void DebugWindow::cleanUI() {
 void DebugWindow::changeView(Process& p) {
 	dataMutex.lock();
 	displayed = &p;
-	UI.callLogs->clear();
+	QtUI.callLogs->clear();
 	for(Syscall* call : p.calls){
 		addEntryStart(call);
 		addEntryEnd(call);
@@ -66,46 +66,46 @@ void DebugWindow::changeView(Process& p) {
 
 void DebugWindow::addEntryStart(Syscall* call) const {
 	call->guessName();
-	UI.callLogs->insertRow(0);
+	QtUI.callLogs->insertRow(0);
 
-	UI.callLogs->setItem(0, 0, new QTableWidgetItem(*call->name));
+	QtUI.callLogs->setItem(0, 0, new QTableWidgetItem(*call->name));
 	// TODO format for arg type
 	for(int i=0;i<6;i++){
-		UI.callLogs->setItem(0, i+1, new QTableWidgetItem(QString::number(call->entry.args[i])));
+		QtUI.callLogs->setItem(0, i+1, new QTableWidgetItem(QString::number(call->entry.args[i])));
 	}
-		UI.callLogs->setItem(0, 7, new QTableWidgetItem("?"));
+		QtUI.callLogs->setItem(0, 7, new QTableWidgetItem("?"));
 
 }
 
 void DebugWindow::addEntryEnd(Syscall* call) const {
 	if(call->exit.is_error==0xF){
-		UI.callLogs->item(0, 7)->setText("?");
+		QtUI.callLogs->item(0, 7)->setText("?");
 	}else{
-		UI.callLogs->item(0, 7)->setText(QString::number(call->exit.rval));
+		QtUI.callLogs->item(0, 7)->setText(QString::number(call->exit.rval));
 	}
 }
 
 
 void DebugWindow::setPID(char* pid) const {
-	UI.labelPID->setText(QString(pid));
+	QtUI.labelPID->setText(QString(pid));
 }
 
 void DebugWindow::setState(char s) const {
 	switch(s){
 		case 0:{
-			UI.labelState->setText("NONE");
+			QtUI.labelState->setText("NONE");
 			break;
 		}
 		case 1:{
-			UI.labelState->setText("RUNNING");
+			QtUI.labelState->setText("RUNNING");
 			break;
 		}
 		case 2:{
-			UI.labelState->setText("EXITED");
+			QtUI.labelState->setText("EXITED");
 			break;
 		}
 		default:{
-			UI.labelState->setText("UNKNOWN");
+			QtUI.labelState->setText("UNKNOWN");
 			break;
 		}
 	}
@@ -120,6 +120,6 @@ void DebugWindow::stopTracer(){
 
 void DebugWindow::reset(){
 	stopTracer();
-	cleanUI();
+	cleanQtUI();
 	cleanProcess();
 }
