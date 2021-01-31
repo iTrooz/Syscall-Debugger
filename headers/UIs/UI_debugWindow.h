@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'debuggerGtUMRX.ui'
+** Form generated from reading UI file 'debuggerwrdDPe.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef DEBUGGERGTUMRX_H
-#define DEBUGGERGTUMRX_H
+#ifndef DEBUGGERWRDDPE_H
+#define DEBUGGERWRDDPE_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
@@ -26,6 +26,7 @@
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QSplitter>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QTableWidget>
 #include <QtWidgets/QTextEdit>
 #include <QtWidgets/QTreeWidget>
 #include <QtWidgets/QWidget>
@@ -52,14 +53,6 @@ public:
 	QTreeWidget *processTree;
 	QFrame *frame;
 	QGridLayout *gridLayout_3;
-	QSplitter *splitter_2;
-	QLineEdit *cmd;
-	QWidget *layoutWidget;
-	QGridLayout *gridLayout_5;
-	QLineEdit *processSelect;
-	QPushButton *bProcessSelect;
-	QPushButton *bClearCallLogs;
-	QPushButton *bPlayPauseTable;
 	QHBoxLayout *horizontalLayout;
 	QPushButton *bRun;
 	QPushButton *bFreeze;
@@ -69,9 +62,17 @@ public:
 	QGridLayout *gridLayout;
 	QLabel *labelState;
 	QLabel *labelPID;
+	QSplitter *splitter_2;
+	QLineEdit *cmd;
+	QWidget *layoutWidget;
+	QGridLayout *gridLayout_5;
+	QLineEdit *processSelect;
+	QPushButton *bProcessSelect;
 	QSpacerItem *verticalSpacer;
+	QTableWidget *callLogs;
+	QPushButton *bClearCallLogs;
+	QPushButton *bPlayPauseTable;
 	QTextEdit *filter;
-	QTreeWidget *callLogs;
 	QMenuBar *menubar;
 	QMenu *menu_File;
 	QMenu *menu_Tools;
@@ -154,55 +155,6 @@ public:
 		frame->setFrameShadow(QFrame::Raised);
 		gridLayout_3 = new QGridLayout(frame);
 		gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
-		splitter_2 = new QSplitter(frame);
-		splitter_2->setObjectName(QString::fromUtf8("splitter_2"));
-		splitter_2->setOrientation(Qt::Horizontal);
-		splitter_2->setHandleWidth(15);
-		cmd = new QLineEdit(splitter_2);
-		cmd->setObjectName(QString::fromUtf8("cmd"));
-		splitter_2->addWidget(cmd);
-		layoutWidget = new QWidget(splitter_2);
-		layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
-		gridLayout_5 = new QGridLayout(layoutWidget);
-		gridLayout_5->setObjectName(QString::fromUtf8("gridLayout_5"));
-		gridLayout_5->setContentsMargins(0, 0, 0, 0);
-		processSelect = new QLineEdit(layoutWidget);
-		processSelect->setObjectName(QString::fromUtf8("processSelect"));
-		processSelect->setEnabled(false);
-
-		gridLayout_5->addWidget(processSelect, 0, 0, 1, 1);
-
-		bProcessSelect = new QPushButton(layoutWidget);
-		bProcessSelect->setObjectName(QString::fromUtf8("bProcessSelect"));
-		bProcessSelect->setMinimumSize(QSize(32, 0));
-		QIcon icon;
-		icon.addFile(QString::fromUtf8(":/images/processSelect.png"), QSize(), QIcon::Normal, QIcon::Off);
-		bProcessSelect->setIcon(icon);
-
-		gridLayout_5->addWidget(bProcessSelect, 0, 1, 1, 1);
-
-		splitter_2->addWidget(layoutWidget);
-
-		gridLayout_3->addWidget(splitter_2, 1, 0, 1, 3);
-
-		bClearCallLogs = new QPushButton(frame);
-		bClearCallLogs->setObjectName(QString::fromUtf8("bClearCallLogs"));
-		bClearCallLogs->setMinimumSize(QSize(32, 0));
-		QIcon icon1;
-		icon1.addFile(QString::fromUtf8(":/images/clean.png"), QSize(), QIcon::Normal, QIcon::Off);
-		bClearCallLogs->setIcon(icon1);
-
-		gridLayout_3->addWidget(bClearCallLogs, 4, 0, 1, 1);
-
-		bPlayPauseTable = new QPushButton(frame);
-		bPlayPauseTable->setObjectName(QString::fromUtf8("bPlayPauseTable"));
-		bPlayPauseTable->setMinimumSize(QSize(32, 0));
-		QIcon icon2;
-		icon2.addFile(QString::fromUtf8(":/images/pause.png"), QSize(), QIcon::Normal, QIcon::Off);
-		bPlayPauseTable->setIcon(icon2);
-
-		gridLayout_3->addWidget(bPlayPauseTable, 4, 1, 1, 1);
-
 		horizontalLayout = new QHBoxLayout();
 		horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
 		bRun = new QPushButton(frame);
@@ -267,17 +219,60 @@ public:
 
 		gridLayout_3->addLayout(horizontalLayout, 0, 0, 1, 3);
 
+		splitter_2 = new QSplitter(frame);
+		splitter_2->setObjectName(QString::fromUtf8("splitter_2"));
+		splitter_2->setOrientation(Qt::Horizontal);
+		splitter_2->setHandleWidth(12);
+		cmd = new QLineEdit(splitter_2);
+		cmd->setObjectName(QString::fromUtf8("cmd"));
+		splitter_2->addWidget(cmd);
+		layoutWidget = new QWidget(splitter_2);
+		layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
+		gridLayout_5 = new QGridLayout(layoutWidget);
+		gridLayout_5->setObjectName(QString::fromUtf8("gridLayout_5"));
+		gridLayout_5->setContentsMargins(0, 0, 0, 0);
+		processSelect = new QLineEdit(layoutWidget);
+		processSelect->setObjectName(QString::fromUtf8("processSelect"));
+		processSelect->setEnabled(false);
+
+		gridLayout_5->addWidget(processSelect, 0, 0, 1, 1);
+
+		bProcessSelect = new QPushButton(layoutWidget);
+		bProcessSelect->setObjectName(QString::fromUtf8("bProcessSelect"));
+		bProcessSelect->setMinimumSize(QSize(32, 0));
+		QIcon icon;
+		icon.addFile(QString::fromUtf8(":/images/processSelect.png"), QSize(), QIcon::Normal, QIcon::Off);
+		bProcessSelect->setIcon(icon);
+
+		gridLayout_5->addWidget(bProcessSelect, 0, 1, 1, 1);
+
+		splitter_2->addWidget(layoutWidget);
+
+		gridLayout_3->addWidget(splitter_2, 1, 0, 1, 3);
+
 		verticalSpacer = new QSpacerItem(20, 30, QSizePolicy::Minimum, QSizePolicy::Maximum);
 
 		gridLayout_3->addItem(verticalSpacer, 2, 2, 1, 1);
 
-		filter = new QTextEdit(frame);
-		filter->setObjectName(QString::fromUtf8("filter"));
-		filter->setMaximumSize(QSize(16777215, 30));
-
-		gridLayout_3->addWidget(filter, 4, 2, 1, 1);
-
-		callLogs = new QTreeWidget(frame);
+		callLogs = new QTableWidget(frame);
+		if (callLogs->columnCount() < 8)
+			callLogs->setColumnCount(8);
+		QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
+		callLogs->setHorizontalHeaderItem(0, __qtablewidgetitem);
+		QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
+		callLogs->setHorizontalHeaderItem(1, __qtablewidgetitem1);
+		QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
+		callLogs->setHorizontalHeaderItem(2, __qtablewidgetitem2);
+		QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
+		callLogs->setHorizontalHeaderItem(3, __qtablewidgetitem3);
+		QTableWidgetItem *__qtablewidgetitem4 = new QTableWidgetItem();
+		callLogs->setHorizontalHeaderItem(4, __qtablewidgetitem4);
+		QTableWidgetItem *__qtablewidgetitem5 = new QTableWidgetItem();
+		callLogs->setHorizontalHeaderItem(5, __qtablewidgetitem5);
+		QTableWidgetItem *__qtablewidgetitem6 = new QTableWidgetItem();
+		callLogs->setHorizontalHeaderItem(6, __qtablewidgetitem6);
+		QTableWidgetItem *__qtablewidgetitem7 = new QTableWidgetItem();
+		callLogs->setHorizontalHeaderItem(7, __qtablewidgetitem7);
 		callLogs->setObjectName(QString::fromUtf8("callLogs"));
 		QSizePolicy sizePolicy4(QSizePolicy::Ignored, QSizePolicy::Expanding);
 		sizePolicy4.setHorizontalStretch(0);
@@ -285,9 +280,40 @@ public:
 		sizePolicy4.setHeightForWidth(callLogs->sizePolicy().hasHeightForWidth());
 		callLogs->setSizePolicy(sizePolicy4);
 		callLogs->setMinimumSize(QSize(0, 0));
-		callLogs->setRootIsDecorated(false);
+		callLogs->setAlternatingRowColors(false);
+		callLogs->horizontalHeader()->setCascadingSectionResizes(false);
+		callLogs->horizontalHeader()->setMinimumSectionSize(50);
+		callLogs->horizontalHeader()->setDefaultSectionSize(80);
+		callLogs->horizontalHeader()->setHighlightSections(true);
+		callLogs->horizontalHeader()->setProperty("showSortIndicator", QVariant(false));
+		callLogs->horizontalHeader()->setStretchLastSection(false);
+		callLogs->verticalHeader()->setVisible(false);
 
 		gridLayout_3->addWidget(callLogs, 3, 0, 1, 3);
+
+		bClearCallLogs = new QPushButton(frame);
+		bClearCallLogs->setObjectName(QString::fromUtf8("bClearCallLogs"));
+		bClearCallLogs->setMinimumSize(QSize(32, 0));
+		QIcon icon1;
+		icon1.addFile(QString::fromUtf8(":/images/clean.png"), QSize(), QIcon::Normal, QIcon::Off);
+		bClearCallLogs->setIcon(icon1);
+
+		gridLayout_3->addWidget(bClearCallLogs, 4, 0, 1, 1);
+
+		bPlayPauseTable = new QPushButton(frame);
+		bPlayPauseTable->setObjectName(QString::fromUtf8("bPlayPauseTable"));
+		bPlayPauseTable->setMinimumSize(QSize(32, 0));
+		QIcon icon2;
+		icon2.addFile(QString::fromUtf8(":/images/pause.png"), QSize(), QIcon::Normal, QIcon::Off);
+		bPlayPauseTable->setIcon(icon2);
+
+		gridLayout_3->addWidget(bPlayPauseTable, 4, 1, 1, 1);
+
+		filter = new QTextEdit(frame);
+		filter->setObjectName(QString::fromUtf8("filter"));
+		filter->setMaximumSize(QSize(16777215, 30));
+
+		gridLayout_3->addWidget(filter, 4, 2, 1, 1);
 
 		splitter->addWidget(frame);
 
@@ -353,27 +379,34 @@ public:
 		___qtreewidgetitem1->setText(0, QCoreApplication::translate("DebugWindow", "NA", nullptr));
 		processTree->setSortingEnabled(__sortingEnabled);
 
-		cmd->setPlaceholderText(QCoreApplication::translate("DebugWindow", "Enter command", nullptr));
-		processSelect->setText(QString());
-		processSelect->setPlaceholderText(QCoreApplication::translate("DebugWindow", "Choose running process", nullptr));
-		bProcessSelect->setText(QString());
-		bClearCallLogs->setText(QString());
-		bPlayPauseTable->setText(QString());
 		bRun->setText(QCoreApplication::translate("DebugWindow", "Run", nullptr));
 		bFreeze->setText(QCoreApplication::translate("DebugWindow", "Freeze", nullptr));
 		bStop->setText(QCoreApplication::translate("DebugWindow", "Stop", nullptr));
 		labelState->setText(QCoreApplication::translate("DebugWindow", "State: RUNNING", nullptr));
 		labelPID->setText(QCoreApplication::translate("DebugWindow", "PID: NA", nullptr));
+		cmd->setPlaceholderText(QCoreApplication::translate("DebugWindow", "Enter command", nullptr));
+		processSelect->setText(QString());
+		processSelect->setPlaceholderText(QCoreApplication::translate("DebugWindow", "Choose running process", nullptr));
+		bProcessSelect->setText(QString());
+		QTableWidgetItem *___qtablewidgetitem = callLogs->horizontalHeaderItem(0);
+		___qtablewidgetitem->setText(QCoreApplication::translate("DebugWindow", "ID", nullptr));
+		QTableWidgetItem *___qtablewidgetitem1 = callLogs->horizontalHeaderItem(1);
+		___qtablewidgetitem1->setText(QCoreApplication::translate("DebugWindow", "arg1", nullptr));
+		QTableWidgetItem *___qtablewidgetitem2 = callLogs->horizontalHeaderItem(2);
+		___qtablewidgetitem2->setText(QCoreApplication::translate("DebugWindow", "arg2", nullptr));
+		QTableWidgetItem *___qtablewidgetitem3 = callLogs->horizontalHeaderItem(3);
+		___qtablewidgetitem3->setText(QCoreApplication::translate("DebugWindow", "arg3", nullptr));
+		QTableWidgetItem *___qtablewidgetitem4 = callLogs->horizontalHeaderItem(4);
+		___qtablewidgetitem4->setText(QCoreApplication::translate("DebugWindow", "arg4", nullptr));
+		QTableWidgetItem *___qtablewidgetitem5 = callLogs->horizontalHeaderItem(5);
+		___qtablewidgetitem5->setText(QCoreApplication::translate("DebugWindow", "arg5", nullptr));
+		QTableWidgetItem *___qtablewidgetitem6 = callLogs->horizontalHeaderItem(6);
+		___qtablewidgetitem6->setText(QCoreApplication::translate("DebugWindow", "arg6", nullptr));
+		QTableWidgetItem *___qtablewidgetitem7 = callLogs->horizontalHeaderItem(7);
+		___qtablewidgetitem7->setText(QCoreApplication::translate("DebugWindow", "result", nullptr));
+		bClearCallLogs->setText(QString());
+		bPlayPauseTable->setText(QString());
 		filter->setPlaceholderText(QCoreApplication::translate("DebugWindow", "Filter", nullptr));
-		QTreeWidgetItem *___qtreewidgetitem2 = callLogs->headerItem();
-		___qtreewidgetitem2->setText(7, QCoreApplication::translate("DebugWindow", "result", nullptr));
-		___qtreewidgetitem2->setText(6, QCoreApplication::translate("DebugWindow", "arg6", nullptr));
-		___qtreewidgetitem2->setText(5, QCoreApplication::translate("DebugWindow", "arg5", nullptr));
-		___qtreewidgetitem2->setText(4, QCoreApplication::translate("DebugWindow", "arg4", nullptr));
-		___qtreewidgetitem2->setText(3, QCoreApplication::translate("DebugWindow", "arg3", nullptr));
-		___qtreewidgetitem2->setText(2, QCoreApplication::translate("DebugWindow", "arg2", nullptr));
-		___qtreewidgetitem2->setText(1, QCoreApplication::translate("DebugWindow", "arg1", nullptr));
-		___qtreewidgetitem2->setText(0, QCoreApplication::translate("DebugWindow", "ID", nullptr));
 		menu_File->setTitle(QCoreApplication::translate("DebugWindow", "&File", nullptr));
 		menu_Tools->setTitle(QCoreApplication::translate("DebugWindow", "&Tools", nullptr));
 		menuQuickRun->setTitle(QCoreApplication::translate("DebugWindow", "Quick Run", nullptr));
@@ -388,4 +421,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // DEBUGGERGTUMRX_H
+#endif // DEBUGGERWRDDPE_H

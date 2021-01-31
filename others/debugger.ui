@@ -45,6 +45,12 @@
          <height>0</height>
         </size>
        </property>
+       <property name="maximumSize">
+        <size>
+         <width>250</width>
+         <height>16777215</height>
+        </size>
+       </property>
        <property name="baseSize">
         <size>
          <width>125</width>
@@ -59,40 +65,35 @@
        </property>
        <layout class="QGridLayout" name="gridLayout_2">
         <item row="0" column="0">
-         <widget class="QSplitter" name="splitter_3">
+         <widget class="QTreeWidget" name="processTree">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>16777215</height>
+           </size>
           </property>
-          <widget class="QTreeWidget" name="processTree">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
+          <property name="baseSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+          <column>
+           <property name="text">
+            <string>Process Tree</string>
            </property>
-           <property name="baseSize">
-            <size>
-             <width>0</width>
-             <height>0</height>
-            </size>
+          </column>
+          <item>
+           <property name="text">
+            <string>NA</string>
            </property>
-           <column>
-            <property name="text">
-             <string>Process Tree</string>
-            </property>
-           </column>
-           <item>
-            <property name="text">
-             <string>NA</string>
-            </property>
-           </item>
-          </widget>
+          </item>
          </widget>
         </item>
        </layout>
@@ -105,89 +106,6 @@
         <enum>QFrame::Raised</enum>
        </property>
        <layout class="QGridLayout" name="gridLayout_3">
-        <item row="1" column="0" colspan="3">
-         <widget class="QSplitter" name="splitter_2">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="handleWidth">
-           <number>15</number>
-          </property>
-          <widget class="QLineEdit" name="cmd">
-           <property name="placeholderText">
-            <string>Enter command</string>
-           </property>
-          </widget>
-          <widget class="QWidget" name="layoutWidget">
-           <layout class="QGridLayout" name="gridLayout_5">
-            <item row="0" column="0">
-             <widget class="QLineEdit" name="processSelect">
-              <property name="enabled">
-               <bool>false</bool>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-              <property name="placeholderText">
-               <string>Choose running process</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QPushButton" name="bProcessSelect">
-              <property name="minimumSize">
-               <size>
-                <width>32</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-              <property name="icon">
-               <iconset resource="../res/ressources.qrc">
-                <normaloff>:/images/processSelect.png</normaloff>:/images/processSelect.png</iconset>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-         </widget>
-        </item>
-        <item row="4" column="0">
-         <widget class="QPushButton" name="bClearCallLogs">
-          <property name="minimumSize">
-           <size>
-            <width>32</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="icon">
-           <iconset resource="../res/ressources.qrc">
-            <normaloff>:/images/clean.png</normaloff>:/images/clean.png</iconset>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="1">
-         <widget class="QPushButton" name="bPlayPauseTable">
-          <property name="minimumSize">
-           <size>
-            <width>32</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="icon">
-           <iconset resource="../res/ressources.qrc">
-            <normaloff>:/images/pause.png</normaloff>:/images/pause.png</iconset>
-          </property>
-         </widget>
-        </item>
         <item row="0" column="0" colspan="3">
          <layout class="QHBoxLayout" name="horizontalLayout">
           <item>
@@ -318,6 +236,55 @@
           </item>
          </layout>
         </item>
+        <item row="1" column="0" colspan="3">
+         <widget class="QSplitter" name="splitter_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="handleWidth">
+           <number>12</number>
+          </property>
+          <widget class="QLineEdit" name="cmd">
+           <property name="placeholderText">
+            <string>Enter command</string>
+           </property>
+          </widget>
+          <widget class="QWidget" name="layoutWidget">
+           <layout class="QGridLayout" name="gridLayout_5">
+            <item row="0" column="0">
+             <widget class="QLineEdit" name="processSelect">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="placeholderText">
+               <string>Choose running process</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QPushButton" name="bProcessSelect">
+              <property name="minimumSize">
+               <size>
+                <width>32</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="icon">
+               <iconset resource="../res/ressources.qrc">
+                <normaloff>:/images/processSelect.png</normaloff>:/images/processSelect.png</iconset>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+        </item>
         <item row="2" column="2">
          <spacer name="verticalSpacer">
           <property name="orientation">
@@ -334,21 +301,8 @@
           </property>
          </spacer>
         </item>
-        <item row="4" column="2">
-         <widget class="QTextEdit" name="filter">
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>30</height>
-           </size>
-          </property>
-          <property name="placeholderText">
-           <string>Filter</string>
-          </property>
-         </widget>
-        </item>
         <item row="3" column="0" colspan="3">
-         <widget class="QTreeWidget" name="callLogs">
+         <widget class="QTableWidget" name="callLogs">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Ignored" vsizetype="Expanding">
             <horstretch>0</horstretch>
@@ -361,9 +315,30 @@
             <height>0</height>
            </size>
           </property>
-          <property name="rootIsDecorated">
+          <property name="alternatingRowColors">
            <bool>false</bool>
           </property>
+          <attribute name="horizontalHeaderCascadingSectionResizes">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="horizontalHeaderMinimumSectionSize">
+           <number>50</number>
+          </attribute>
+          <attribute name="horizontalHeaderDefaultSectionSize">
+           <number>80</number>
+          </attribute>
+          <attribute name="horizontalHeaderHighlightSections">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="horizontalHeaderStretchLastSection">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
           <column>
            <property name="text">
             <string>ID</string>
@@ -404,6 +379,53 @@
             <string>result</string>
            </property>
           </column>
+         </widget>
+        </item>
+        <item row="4" column="0">
+         <widget class="QPushButton" name="bClearCallLogs">
+          <property name="minimumSize">
+           <size>
+            <width>32</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../res/ressources.qrc">
+            <normaloff>:/images/clean.png</normaloff>:/images/clean.png</iconset>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1">
+         <widget class="QPushButton" name="bPlayPauseTable">
+          <property name="minimumSize">
+           <size>
+            <width>32</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../res/ressources.qrc">
+            <normaloff>:/images/pause.png</normaloff>:/images/pause.png</iconset>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="2">
+         <widget class="QTextEdit" name="filter">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="placeholderText">
+           <string>Filter</string>
+          </property>
          </widget>
         </item>
        </layout>

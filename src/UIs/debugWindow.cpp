@@ -63,23 +63,22 @@ void DebugWindow::changeView(Process& p) {
 
 void DebugWindow::addEntryStart(Syscall& call) const {
 	call.guessName();
-	QTreeWidgetItem* item = new QTreeWidgetItem();
-	UI.callLogs->insertTopLevelItem(0, item);
+	UI.callLogs->insertRow(0);
 
-	item->setText(0, *call.name);
+	UI.callLogs->setItem(0, 0, new QTableWidgetItem(*call.name));
 	// TODO format for arg type
 	for(int i=0;i<6;i++){
-		item->setText(i+1, QString::fromStdString(to_string(call.entry.args[i])));
+		UI.callLogs->setItem(0, i+1, new QTableWidgetItem(QString::number(call.entry.args[i])));
 	}
-	item->setText(7, "?");
+		UI.callLogs->setItem(0, 7, new QTableWidgetItem("?"));
 
 }
 
 void DebugWindow::addEntryEnd(Syscall& call) const {
 	if(call.exit.is_error==0xF){
-		UI.callLogs->topLevelItem(0)->setText(7, "?");
+		UI.callLogs->item(0, 7)->setText("?");
 	}else{
-		UI.callLogs->topLevelItem(0)->setText(7, QString::fromStdString(to_string(call.exit.rval)));
+		UI.callLogs->item(0, 7)->setText(QString::number(call.exit.rval));
 	}
 }
 

@@ -33,7 +33,7 @@ void DebugWindow::handleCallStart(Process& proc) {
 
 			delete proc.calls.front();
 			proc.calls.pop_front();
-			delete UI.callLogs->takeTopLevelItem(config::displayLimit-1);
+			UI.callLogs->removeRow(config::displayLimit-1);
 
 			dataMutex.unlock();
 		}else if(proc.calls.size()>config::displayLimit){
