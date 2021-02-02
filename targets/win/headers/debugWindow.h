@@ -10,10 +10,10 @@
 
 #include "qt/UI_debugWindow.h"
 #include "processSelector.h"
-#include "../../otracer/headers/process.h"
+#include "process.h"
 #include "tracerCore.h"
 
-Q_DECLARE_METATYPE(Syscall*);
+//Q_DECLARE_METATYPE(Syscall*);
 class DebugWindow : public QMainWindow
 {
     Q_OBJECT
@@ -50,12 +50,12 @@ public:
 	void bChooseProcess();
 	void treeClick(QTreeWidgetItem* item);
 
-public slots:
+//public slots:
 	void addEntryStart(Syscall*) const;
 	void addEntryEnd(Syscall*) const;
-signals:
-	void test1(Syscall*);
-	void test2(Syscall*);
+//signals:
+//	void test1(Syscall*);
+//	void test2(Syscall*);
 
 };
 

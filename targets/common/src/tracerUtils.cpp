@@ -1,95 +1,31 @@
 #include <unordered_set>
-#include <dirent.h>
+#include <iostream>
 #include <fstream>
 #include <sstream>
+#include <vector>
+#include <dirent.h>
+#include <csignal>
 
+#include "process.h"
 #include "tracerCore.h"
-#include "../../otracer/headers/process.h"
 
 using namespace std;
 
-Process* Tracer::getProcess(pid_t pid){
-	for (Process *p : processes) {
-		if (p->pid == pid) {
-			return p;
-		}
-	}
-	return nullptr;
-}
-
-void Tracer::KillProcess(){
-	for(Process* p : processes){
-		kill(p->pid, SIGKILL);
-	}
-}
-
-
-// -----------------------------------
-
-void Tracer::handleTracerStart() {
-}
-
-void Tracer::handleTracerStop() {
-}
-
-
-Process* Tracer::handleChildCreate(pid_t pid){ // Warning : Still need to apply Tree Item Widget. besoin = get parent parent from here
-	auto* newChild = new Process(pid);
-	processes.insert(newChild);
-
-	return newChild;
-}
-
-bool Tracer::handleChildExit(pid_t stopped){ // true is there is no more processes
-
-	Process* proc = nullptr;
-	bool empty = true;
-	for (Process *p : processes) {
-		if (p->running){
-			if(p->pid == stopped) {
-				p->running = false;
-				proc = p;
-			}else{
-				empty = false;
-			}
-			if(!empty&&proc!=nullptr)break; // TODO jsp si vraiment opti
-		}
-	}
-	if(proc==nullptr){
-		cerr << "Invalid child exited : " << stopped << endl;
-	}else{
-		return empty;
-	}
-	return false;
-}
-
-
-void Tracer::handleCallEntry(Process& proc) {
-}
-
-
-void Tracer::handleCallExit(Process& proc) {
-}
-
 
 void Tracer::killProcess(){
-	kill(mainProcess->pid, SIGKILL);
+	kill(tracerPID, SIGKILL); // stop loop softly instead ? (threads seems not to like this)
 }
 
-bool Tracer::stopTracer(){
+void Tracer::stopTracer(){
 	killProcess();
-	for(Process* proc : processes){
-		delete proc;
-	}
-	return true;
 }
 
 
 // -----------------------------------
 
 
-void recurPIDs(unordered_set<Process*>* set, Process* p){
-	string ps = to_string(p->pid);
+void recurPIDs(unordered_set<Process*>* set, Process* parent){
+	string ps = to_string(parent->pid);
 	DIR* dir = opendir(("/proc/"+ps+"/task").c_str());
 	if(dir==nullptr){
 		cerr << "Failed to open /proc/"<< ps << "/task directory" << endl;
@@ -104,9 +40,8 @@ void recurPIDs(unordered_set<Process*>* set, Process* p){
 	while((thread = readdir(dir))){
 		pid = atoi(thread->d_name);
 		if(pid){
-			child = new Process(pid);
-			child->setupTreeItem(p->treeItem);
-			set->insert(new Process(pid));  // adding thread
+			child = new Process(pid, parent);
+			set->insert(new Process(pid));
 
 			file.open(("/proc/" + ps + "/task/" + to_string(pid) + "/children").c_str(), std::ifstream::in);
 			if(!file.is_open()){
@@ -130,8 +65,7 @@ void recurPIDs(unordered_set<Process*>* set, Process* p){
 
 				pid = atoi(buf);
 				if(pid) {
-					child = new Process(pid);
-					child->setupTreeItem(p->treeItem);
+					child = new Process(pid, parent);
 					recurPIDs(set, child);
 				}else{
 					cerr << "Got invalid PID in childen file : |" << buf << "|" << endl;

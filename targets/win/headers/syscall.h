@@ -1,6 +1,7 @@
 #ifndef SYSCALL
 #define SYSCALL
 
+#include<QString>
 #include<iostream>
 #include<sys/ptrace.h>
 

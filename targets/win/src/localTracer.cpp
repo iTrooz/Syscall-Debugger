@@ -1,75 +1,87 @@
 #include <string>
+#include <iostream>
 
 #include "localTracer.h"
+#include "tracerUtils.h"
 #include "configFile.h"
 
 using namespace std;
 
-void LocalTracer::handleTracerStart() {
-	Tracer::handleTracerStart();
+void LocalTracer::handleTracerStart(pid_t pid) {
+
+	Process* mainProcess = new Process(pid);
+	recurPIDs(&processes, mainProcess);
+
+	processes.insert(mainProcess);
+
 	mainProcess->treeItem = UI.QtUI.processTree->topLevelItem(0);
 	mainProcess->treeItem->setText(0, QString(to_string(mainProcess->pid).c_str()));
 	UI.displayed = mainProcess;
-	Tracer::handleTracerStart();
 }
 
 void LocalTracer::handleTracerStop() {
-	Tracer::handleTracerStop();
+
 }
 
-Process* LocalTracer::handleChildCreate(pid_t pid){
-	return Tracer::handleChildCreate(pid);
+Process* LocalTracer::handleChildCreate(pid_t pid){ // Warning : Still need to apply Tree Item Widget. besoin = get parent parent from here
+	auto* newChild = new Process(pid);
+	processes.insert(newChild);
+	return newChild;
 }
 
-bool LocalTracer::handleChildExit(pid_t stopped){
-	return Tracer::handleChildExit(stopped);
-}
 
-void LocalTracer::handleCallEntry(Process& proc) {
-	if (UI.tableLocked == 0) {
-		if (UI.displayed->pid == proc.pid) {
-			UI.mutex.lock();
-			UI.addEntryStart(proc.currentCall);
-//			test1(proc.currentCall);
-			UI.mutex.unlock();
+bool LocalTracer::handleChildExit(pid_t stopped) { // returns true is there is no more processes
+
+	Process *proc = nullptr;
+	bool empty = true;
+	for (Process *p : processes) {
+		if (p->running) {
+			if (p->pid == stopped) {
+				p->running = false;
+				proc = p;
+			} else {
+				empty = false;
+			}
+			if (!empty && proc != nullptr)break; // TODO jsp si vraiment opti
 		}
-		if (proc.calls.size() == config::displayLimit) {
-			UI.mutex.lock();
-			delete proc.calls.front();
-			proc.calls.pop_front();
-			UI.QtUI.callLogs->removeRow(config::displayLimit - 1);
-
-			UI.mutex.unlock();
-		} else if (proc.calls.size() > config::displayLimit) {
-			throw runtime_error("Calls list too large !");
-		}
-	} else if (UI.tableLocked == 1)UI.tableLocked = 2;
+	}
+	if (proc == nullptr) {
+		cerr << "Invalid child exited : " << stopped << endl;
+	} else {
+		return empty;
+	}
+	return false;
 }
-void LocalTracer::handleCallExit(Process& proc) {
-	if (config::doChilds && proc.currentCall->entry.id == 56) { // TODO 56 doit pas être hardcodé
-		Process *newChild = getProcess(proc.currentCall->exit.rval);
-		if (newChild == nullptr) {
-			newChild = handleChildCreate(proc.currentCall->exit.rval);
-		}
 
-		newChild->setupTreeItem(proc.treeItem);
+
+void LocalTracer::handleCall(pid_t pid, __ptrace_syscall_info& info) {
+	Process* proc = getProcess(pid);
+	if(proc==nullptr){
+		proc = handleChildCreate(pid);
 	}
 
-	if (UI.tableLocked==0) {
-		d:
-		if (UI.displayed->pid == proc.pid) {
-			UI.mutex.lock();
-			UI.addEntryEnd(proc.currentCall);
-//			UI.test2(proc.currentCall);
-			UI.mutex.unlock();
+	if (info.op == PTRACE_SYSCALL_INFO_ENTRY) {
+		if (proc->currentCall != nullptr) {
+			cerr << "Warning " << pid << " : waiting for syscall exit, got syscall entry" << endl;
+		} else {
+			proc->currentCall = new Syscall();
+			proc->currentCall->entry = info;
+			proc->calls.push_back(proc->currentCall);
+
+			handleCallEntry(*proc);
 		}
-	}else if (UI.tableLocked == 1){
-		UI.tableLocked = 2;
-		goto d;
+
+	} else if (info.op == PTRACE_SYSCALL_INFO_EXIT) {
+		if (proc->currentCall == nullptr) {
+			cerr << "Warning " << pid << " : waiting for syscall entry, got syscall exit" << endl;
+		} else {
+			proc->currentCall->exit = info;
+
+			handleCallExit(*proc);
+
+			proc->currentCall = nullptr;
+		}
+	} else {
+		cerr << "Got unsupported OP " << to_string(info.op) << endl;
 	}
-
-}
-
-LocalTracer::LocalTracer(DebugWindow &UI) : UI(UI){
-
 }

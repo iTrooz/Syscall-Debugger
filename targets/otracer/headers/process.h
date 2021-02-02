@@ -1,31 +1,15 @@
-#ifndef PROCESS
-#define PROCESS
+#ifndef SD_OTRACER_PROCESS_H
+#define SD_OTRACER_PROCESS_H
 
-#include<vector>
-#include <sys/ptrace.h>
-#include <sys/reg.h>
-#include <sys/wait.h>
-#include <unistd.h>
-#include <cstdlib>
-#include <cstdio>
-#include <string>
-#include <list>
+#include "wait.h"
 
-#include "syscall.h"
-
-
-using namespace std;
-
-
-class Process
-{
+// Minimal class, at least needed for recurPIDs()
+class Process {
 public:
-	bool running = true;
-    const pid_t pid;
+	explicit Process(pid_t);
+	Process(pid_t, Process*);
 
-	explicit Process(int);
-	~Process();
-
+	const pid_t pid;
 };
 
 #endif

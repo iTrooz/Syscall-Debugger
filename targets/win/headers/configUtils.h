@@ -1,7 +1,8 @@
 #include <fstream>
 #include <sstream>
-
 #include <utils.h>
+
+using namespace std;
 
 // TODO make a cpp file for this ?
 

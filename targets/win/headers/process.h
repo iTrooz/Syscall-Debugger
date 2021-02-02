@@ -1,15 +1,24 @@
-#ifndef SD_OTRACER_PROCESS_H
-#define SD_OTRACER_PROCESS_H
+#ifndef SD_WIN_PROCESS_H
+#define SD_WIN_PROCESS_H
 
 #include<QTreeWidgetItem>
 
-#include "../../otracer/headers/process.h"
+#include "syscall.h"
 
-class UIProcess : public Process {
+class Process {
 public:
-	void setupTreeItem(QTreeWidgetItem *parent);
-	QTreeWidgetItem* treeItem;
-};
+	bool running = true;
+	const pid_t pid;
+	list<Syscall*> calls;
+	Syscall* currentCall = nullptr;
 
+	QTreeWidgetItem* treeItem;
+
+	explicit Process(pid_t);
+	Process(pid_t, Process*);
+	~Process();
+	void delCalls();
+	void setupTreeItem(QTreeWidgetItem*);
+};
 
 #endif

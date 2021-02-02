@@ -24,8 +24,8 @@ DebugWindow::DebugWindow(){
 
 	connect(QtUI.processTree, &QTreeWidget::itemClicked, this, &DebugWindow::treeClick);
 
-	connect(this, &DebugWindow::test1, this, &DebugWindow::addEntryStart);
-	connect(this, &DebugWindow::test2, this, &DebugWindow::addEntryEnd);
+//	connect(this, &DebugWindow::test1, this, &DebugWindow::addEntryStart);
+//	connect(this, &DebugWindow::test2, this, &DebugWindow::addEntryEnd);
 }
 
 

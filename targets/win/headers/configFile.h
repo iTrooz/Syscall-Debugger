@@ -1,4 +1,3 @@
-
 #ifndef CONFIGFILE
 #define CONFIGFILE
 

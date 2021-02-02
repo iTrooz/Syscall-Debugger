@@ -3,7 +3,7 @@
 
 #include "tcpTracer.h"
 
-class UITcpTracer : public TCPTracer {
+class UITcpTracer : public TcpTracer {
 
 };
 
