@@ -1,6 +1,6 @@
 #include <iostream>
-#include "common/syscall.h"
-#include "common/utils.h"
+#include "syscall.h"
+#include "utils.h"
 
 using namespace std;
 

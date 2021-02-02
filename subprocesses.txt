@@ -1,4 +1,0 @@
-fork
-vfork
-clone
-ptrace?

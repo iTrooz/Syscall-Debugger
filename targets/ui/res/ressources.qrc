@@ -1,8 +1,0 @@
-<RCC>
-  <qresource prefix="images">
-    <file>clean.png</file>
-    <file>processSelect.png</file>
-    <file>play.png</file>
-    <file>pause.png</file>
-  </qresource>
-</RCC>

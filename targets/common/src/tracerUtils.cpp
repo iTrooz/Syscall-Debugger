@@ -3,8 +3,8 @@
 #include <fstream>
 #include <sstream>
 
-#include "tracer.h"
-#include "process.h"
+#include "tracerCore.h"
+#include "../../otracer/headers/process.h"
 
 using namespace std;
 
@@ -17,7 +17,7 @@ Process* Tracer::getProcess(pid_t pid){
 	return nullptr;
 }
 
-void Tracer::killProcesses(){
+void Tracer::KillProcess(){
 	for(Process* p : processes){
 		kill(p->pid, SIGKILL);
 	}
@@ -26,7 +26,10 @@ void Tracer::killProcesses(){
 
 // -----------------------------------
 
-void Tracer::handleTraceStart() {
+void Tracer::handleTracerStart() {
+}
+
+void Tracer::handleTracerStop() {
 }
 
 
@@ -66,6 +69,19 @@ void Tracer::handleCallEntry(Process& proc) {
 
 
 void Tracer::handleCallExit(Process& proc) {
+}
+
+
+void Tracer::killProcess(){
+	kill(mainProcess->pid, SIGKILL);
+}
+
+bool Tracer::stopTracer(){
+	killProcess();
+	for(Process* proc : processes){
+		delete proc;
+	}
+	return true;
 }
 
 
