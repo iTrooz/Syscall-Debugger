@@ -1,4 +1,4 @@
-#include "debugWindow.h"
+#include "ui/debugWindow.h"
 #include "configFile.h"
 #include <asm-generic/int-ll64.h>
 

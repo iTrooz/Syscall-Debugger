@@ -2,16 +2,6 @@
 #include "configFile.h"
 
 using namespace std;
-
-Process* LocalTracer::getProcess(pid_t pid){
-	for (Process *p : processes) {
-		if (p->pid == pid) {
-			return p;
-		}
-	}
-	return nullptr;
-}
-
 void LocalTracer::handleCallEntry(Process& proc) {
 	if (UI.tableLocked == 0) {
 		if (UI.displayed->pid == proc.pid) {
@@ -54,18 +44,5 @@ void LocalTracer::handleCallExit(Process& proc) {
 	}else if (UI.tableLocked == 1){
 		UI.tableLocked = 2;
 		goto d;
-	}
-
-}
-
-LocalTracer::LocalTracer(DebugWindow &UI) : UI(UI){
-
-}
-
-void LocalTracer::stopTracer() {
-	Tracer::stopTracer();
-
-	for(Process* proc : processes){
-		delete proc;
 	}
 }

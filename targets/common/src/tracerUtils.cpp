@@ -7,16 +7,12 @@
 #include <csignal>
 
 #include "process.h"
-#include "tracerCore.h"
+#include "baseTracer.h"
 
 using namespace std;
 
 
-void Tracer::killProcess(){
-	kill(tracerPID, SIGKILL); // stop loop softly instead ? (threads seems not to like this)
-}
-
-void Tracer::stopTracer(){
+void BaseTracer::stopTracer(){
 	killProcess();
 }
 

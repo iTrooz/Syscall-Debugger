@@ -2,7 +2,7 @@
 #include <QMessageBox>
 #include <iostream>
 
-#include "debugWindow.h"
+#include "ui/debugWindow.h"
 #include "configFile.h"
 #include "configUtils.h"
 #include "utils.h"
