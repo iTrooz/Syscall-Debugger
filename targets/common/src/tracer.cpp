@@ -5,6 +5,7 @@
 #include <sys/ptrace.h>
 #include <unistd.h>
 #include <wait.h>
+#include <thread>
 
 #include "tracer.h"
 #include "utils.h"
@@ -23,8 +24,12 @@ void Tracer::cleanUp(){
 	processes.clear();
 }
 
-
 void Tracer::createProcess(const string& cmd) {
+	thread thr(&Tracer::createProcessInternal, this, cmd);
+	thr.detach();
+}
+
+void Tracer::createProcessInternal(const string& cmd) {
 	cleanUp();
 	tracerPID = gettid();
 
@@ -40,11 +45,18 @@ void Tracer::createProcess(const string& cmd) {
 		waitpid(child, nullptr, 0);
 
 		uiConnect->handleTracerStart(child);
-		startTracer(child);
+
+		Tracer::startTracer(child);
 	}
 }
 
 void Tracer::setupProcess(pid_t pid) {
+	thread thr(&Tracer::setupProcessInternal, this, pid);
+	thr.detach();
+}
+
+
+void Tracer::setupProcessInternal(pid_t pid) {
 	cleanUp();
 	tracerPID = gettid();
 
@@ -60,7 +72,7 @@ void Tracer::setupProcess(pid_t pid) {
 	uiConnect->handleTracerStartBulk(processes);
 
 
-	startTracer(pid);
+	Tracer::startTracer(pid);
 }
 
 bool Tracer::waitProcess(pid_t& stopped) {

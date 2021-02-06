@@ -21,7 +21,9 @@ public:
 
 	// methods inherited from TracerConnect
 	void createProcess(const string&) override;
+	void createProcessInternal(const string&);
 	void setupProcess(pid_t tracee) override;
+	void setupProcessInternal(pid_t pid);
 	void startTracer(pid_t);
 
 	void killProcess() override;
