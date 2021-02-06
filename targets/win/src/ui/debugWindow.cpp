@@ -10,6 +10,7 @@ using namespace std;
 
 DebugWindow::DebugWindow(){
 	QtUI.setupUi(this);
+	tracerConnect = new Tracer(this);
 	// -----
 
 	connect(QtUI.bRun, &QPushButton::clicked, this, &DebugWindow::bRun);
@@ -36,7 +37,7 @@ void DebugWindow::cleanUI() {
 	bClearCallLogs();
 
 	QtUI.processTree->topLevelItem(0)->setText(0, "NA");
-	for(auto* i : QtUI.processTree->topLevelItem(0)->takeChildren()) { // TODO jsp si utile (si utile, faire la même pour le tree des syscalls ?)
+	for(auto* i : QtUI.processTree->topLevelItem(0)->takeChildren()) {
 		delete i;
 	}
 }
@@ -99,7 +100,12 @@ void DebugWindow::setState(char s) const {
 	}
 }
 
-void DebugWindow::reset(){
+void DebugWindow::cleanUp(){
 	cleanUI();
-	// TODO
+
+	if(!tracerConnect->isLocal){
+		for(auto* proc : tracerConnect->processes){
+			delete proc;
+		}
+	}
 }

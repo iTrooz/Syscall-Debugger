@@ -12,11 +12,20 @@
 using namespace std;
 
 Tracer::Tracer(UIConnect *ui) {
+	isLocal = true;
 	uiConnect = ui;
+}
+
+void Tracer::cleanUp(){
+	for(auto* proc : processes){
+		delete proc;
+	}
+	processes.clear();
 }
 
 
 void Tracer::createProcess(const string& cmd) {
+	cleanUp();
 	tracerPID = gettid();
 
 	char** cmdArgs = convert(cmd);
@@ -36,6 +45,7 @@ void Tracer::createProcess(const string& cmd) {
 }
 
 void Tracer::setupProcess(pid_t pid) {
+	cleanUp();
 	tracerPID = gettid();
 
 	long temp = ptrace(PTRACE_ATTACH, pid, 0, 0);
@@ -81,7 +91,7 @@ bool Tracer::waitProcess(pid_t& stopped) {
 	}
 }
 
-void Tracer::startTracer(pid_t mainProcess) { // TODO way to kill tracerConnect ?
+void Tracer::startTracer(pid_t mainProcess) {
 
 	int temp, stopped;
 
@@ -115,4 +125,8 @@ void Tracer::startTracer(pid_t mainProcess) { // TODO way to kill tracerConnect 
 
 void Tracer::killProcess(){
 	kill(tracerPID, SIGKILL); // stop loop softly instead ? (threads seems not to like this)
+}
+
+Tracer::~Tracer() {
+	cleanUp();
 }

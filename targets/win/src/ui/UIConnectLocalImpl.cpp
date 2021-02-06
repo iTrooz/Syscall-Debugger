@@ -79,7 +79,7 @@ bool DebugWindow::handleChildExit(pid_t stopped) { // returns true is there is n
 			} else {
 				empty = false;
 			}
-			if (!empty && proc != nullptr)break; // TODO jsp si vraiment opti
+			if (!empty && proc != nullptr)break;
 		}
 	}
 	if (proc == nullptr) {

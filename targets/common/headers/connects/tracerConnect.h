@@ -9,14 +9,17 @@ using namespace std;
 
 class TracerConnect {
 public:
+	bool isLocal;
 	virtual void createProcess(const string& cmd) = 0;
 	virtual void setupProcess(pid_t tracee) = 0;
 
 	virtual void killProcess() = 0;
 
 	/*
-	 * Tracer init this when process setup (bulk)
+	 * In case of shared list :
+	 * Tracer init it when process setup (bulk)
 	 * Else init/updated by window
+	 * deleted by process
 	 */
 	list<Process*> processes;
 };

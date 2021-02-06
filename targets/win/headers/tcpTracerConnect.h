@@ -4,7 +4,10 @@
 #include "tracer.h"
 
 // TODO
-class TcpTracerConnect : public TracerConnect {
+class TcpTracerConnect : public virtual TracerConnect {
+public:
+	TcpTracerConnect();
+
 	void killProcess() override;
 };
 

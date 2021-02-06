@@ -16,8 +16,7 @@ void Syscall::guessName() {
 
 syscall_entry& syscall_entry::operator=(const __ptrace_syscall_info &info) {
 
-	// TODO memcpy()
-	for (int i = 0; i < 6; i++)args[i] = info.entry.args[i];
+	memcpy(args, info.entry.args, sizeof(__uint64_t)*6);
 	id = info.entry.nr;
 	return *this;
 }

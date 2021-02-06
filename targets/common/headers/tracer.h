@@ -10,15 +10,17 @@
 
 using namespace std;
 
-class Tracer : public TracerConnect {
+class Tracer : public virtual TracerConnect {
 public:
 	// internal
 	UIConnect* uiConnect;
-	Tracer(UIConnect* ui);
-	bool waitProcess(pid_t& stopped);
+	explicit Tracer(UIConnect*);
+	~Tracer();
+	bool waitProcess(pid_t&);
+	void cleanUp();
 
 	// methods inherited from TracerConnect
-	void createProcess(const string& cmd) override;
+	void createProcess(const string&) override;
 	void setupProcess(pid_t tracee) override;
 	void startTracer(pid_t);
 

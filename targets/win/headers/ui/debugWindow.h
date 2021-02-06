@@ -22,7 +22,6 @@ class DebugWindow : public QMainWindow, public UIConnect
 public:
 	// internal
 	DebugWindow();
-    void reset();
 	Ui_DebugWindow QtUI{};
 	TracerConnect* tracerConnect = nullptr;
 
@@ -64,6 +63,7 @@ public:
 	void setPID(char* pid) const;
 	void setState(char s) const;
 
+	void cleanUp();
 	void cleanUI();
 	void killProcess();
 	void changeView(Process &p);

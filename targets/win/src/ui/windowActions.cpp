@@ -40,7 +40,7 @@ void DebugWindow::bClearCallLogs() {
 }
 
 void DebugWindow::bRun(){
-	reset();
+	cleanUp();
 
 	QString qs = QtUI.cmd->text();
 	if(qs.isEmpty()){
@@ -53,7 +53,6 @@ void DebugWindow::bRun(){
 		return;
 	}
 
-	tracerConnect = new Tracer(this);
 	tracerConnect->createProcess(qs.toStdString());
 }
 
@@ -61,6 +60,5 @@ void DebugWindow::bChooseProcess(){
 	int a = test.exec();
 	cout << "Want : " << a << endl;
 
-	tracerConnect = new Tracer(this);
 	tracerConnect->setupProcess(a);
 }

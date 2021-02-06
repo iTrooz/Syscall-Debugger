@@ -14,7 +14,6 @@ Process::Process(pid_t t, Process* parent) : pid(t){
 
 Process::~Process() {
 	delCalls();
-//	delete treeItem; // TODO pas nécessaire ? jsp
 }
 
 void Process::setupTreeItem(QTreeWidgetItem* parent){

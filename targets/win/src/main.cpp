@@ -14,17 +14,6 @@ unordered_map<int, QString*> syscalls;
 void load_syscalls();
 
 
-//int main(){
-//	unordered_set<Process*> set;
-//	Process p(108093);
-//	p.treeItem = new QTreeWidgetItem;
-//	recur2(&set, &p);
-//	cout << "-----" << endl;
-//	for(auto i : set){
-//		cout << i << endl;
-//	}
-//}
-
 int main(int argc, char *argv[]){
 	QApplication app(argc, argv);
 
