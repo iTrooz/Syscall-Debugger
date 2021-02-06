@@ -20,7 +20,7 @@ void DebugWindow::bPauseTable(){
 }
 
 void DebugWindow::treeClick(QTreeWidgetItem* item){
-	for(Process* proc : tracerConnection->processes){
+	for(Process* proc : tracerConnect->processes){
 		if(proc->treeItem==item){
 			changeView(*proc);
 			return;
@@ -53,11 +53,14 @@ void DebugWindow::bRun(){
 		return;
 	}
 
-	tracerConnection->createProcess(qs.toStdString());
+	tracerConnect = new Tracer(this);
+	tracerConnect->createProcess(qs.toStdString());
 }
 
 void DebugWindow::bChooseProcess(){
 	int a = test.exec();
 	cout << "Want : " << a << endl;
-	tracerConnection->setupProcess(a);
+
+	tracerConnect = new Tracer(this);
+	tracerConnect->setupProcess(a);
 }

@@ -1,9 +1,0 @@
-syscallPath : path different for Ubuntu/(Manjaro|Arch)/Kali (others?)
-
-Do not disconnect/reconnect TCP for each new process
-
-appels à regarder ?
-fork
-vfork
-clone
-ptrace?

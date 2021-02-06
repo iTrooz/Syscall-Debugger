@@ -5,26 +5,52 @@
 #include <QMutex>
 #include <QComboBox>
 #include <QStringListModel>
-#include <unordered_set>
 #include <QStandardItemModel>
+#include <tcpTracerConnect.h>
 
 #include "qt/UI_debugWindow.h"
 #include "ui/processSelector.h"
 #include "process.h"
-#include "uiTracer.h"
+#include "connects/tracerConnect.h"
+#include "connects/uiConnect.h"
 
 //Q_DECLARE_METATYPE(Syscall*);
-class DebugWindow : public QMainWindow
+class DebugWindow : public QMainWindow, public UIConnect
 {
     Q_OBJECT
 
 public:
-	// base
+	// internal
 	DebugWindow();
     void reset();
 	Ui_DebugWindow QtUI{};
-	UITracer* tracerConnection;
+	TracerConnect* tracerConnect = nullptr;
 
+	//
+	// ---------- PROCESS MANAGER
+	//
+
+	// inherited from UIConnect
+	void handleCall(pid_t, __ptrace_syscall_info&) override;
+	void handleTracerStart(pid_t) override;
+	void handleTracerStartBulk(list<Process*>&) override;
+	void handleTracerStop() override;
+	Process* handleChildCreate(pid_t) override;
+	bool handleChildExit(pid_t) override;
+
+	// related handlers
+	void handleCallEntry(Process& proc);
+	void handleCallExit(Process& proc);
+	void handleTracerStartCommon(Process* proc);
+
+	Process* getProcess(pid_t) const;
+
+
+
+
+	//
+	// ----------
+	//
 
 	// others ?
 	ProcessSelector test;

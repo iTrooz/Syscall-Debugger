@@ -1,9 +1,6 @@
 #include <iostream>
 #include <QMessageBox>
 #include <QProcess>
-#include <QComboBox>
-#include <QTreeView>
-#include <QStandardItemModel>
 
 #include "qt/UI_debugWindow.h"
 #include "ui/debugWindow.h"
@@ -13,13 +10,12 @@ using namespace std;
 
 DebugWindow::DebugWindow(){
 	QtUI.setupUi(this);
-
 	// -----
 
 	connect(QtUI.bRun, &QPushButton::clicked, this, &DebugWindow::bRun);
 	connect(QtUI.bStop, &QPushButton::clicked, this, &DebugWindow::killProcess);
 	connect(QtUI.bClearCallLogs, &QPushButton::clicked, this, &DebugWindow::bClearCallLogs);
-	connect(QtUI.bPlayPauseTable, &QPushButton::clicked, this, &DebugWindow::bPauseTable);
+	connect(QtUI.bPauseTable, &QPushButton::clicked, this, &DebugWindow::bPauseTable);
 	connect(QtUI.bProcessSelect, &QPushButton::clicked, this, &DebugWindow::bChooseProcess);
 
 	connect(QtUI.processTree, &QTreeWidget::itemClicked, this, &DebugWindow::treeClick);
@@ -31,7 +27,7 @@ DebugWindow::DebugWindow(){
 
 void DebugWindow::killProcess() {
 	if (mainProcess != nullptr) {
-		tracerConnection->killProcess();
+		tracerConnect->killProcess();
 		mainProcess = nullptr;
 	}
 }
@@ -104,6 +100,6 @@ void DebugWindow::setState(char s) const {
 }
 
 void DebugWindow::reset(){
-	tracerConnection->stopTracer();
 	cleanUI();
+	// TODO
 }

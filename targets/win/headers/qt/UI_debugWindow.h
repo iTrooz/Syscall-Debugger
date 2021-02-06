@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading QtUI file 'debuggeryqfrDh.ui_build'
+** Form generated from reading UI file 'debuggerYflePG.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.2
 **
-** WARNING! All changes made in this file will be lost when recompiling QtUI file!
+** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef DEBUGGERYQFRDH_H
-#define DEBUGGERYQFRDH_H
+#ifndef DEBUGGERYFLEPG_H
+#define DEBUGGERYFLEPG_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
@@ -70,7 +70,7 @@ public:
 	QSpacerItem *verticalSpacer;
 	QTableWidget *callLogs;
 	QPushButton *bClearCallLogs;
-	QPushButton *bPlayPauseTable;
+	QPushButton *bPauseTable;
 	QTextEdit *filter;
 	QMenuBar *menubar;
 	QMenu *menu_File;
@@ -280,7 +280,7 @@ public:
 		callLogs->horizontalHeader()->setDefaultSectionSize(80);
 		callLogs->horizontalHeader()->setHighlightSections(true);
 		callLogs->horizontalHeader()->setProperty("showSortIndicator", QVariant(false));
-		callLogs->horizontalHeader()->setStretchLastSection(false);
+		callLogs->horizontalHeader()->setStretchLastSection(true);
 		callLogs->verticalHeader()->setVisible(false);
 
 		gridLayout_3->addWidget(callLogs, 3, 0, 1, 3);
@@ -294,14 +294,14 @@ public:
 
 		gridLayout_3->addWidget(bClearCallLogs, 4, 0, 1, 1);
 
-		bPlayPauseTable = new QPushButton(frame);
-		bPlayPauseTable->setObjectName(QString::fromUtf8("bPauseTable"));
-		bPlayPauseTable->setMinimumSize(QSize(32, 0));
+		bPauseTable = new QPushButton(frame);
+		bPauseTable->setObjectName(QString::fromUtf8("bPauseTable"));
+		bPauseTable->setMinimumSize(QSize(32, 0));
 		QIcon icon2;
 		icon2.addFile(QString::fromUtf8(":/images/pause.png"), QSize(), QIcon::Normal, QIcon::Off);
-		bPlayPauseTable->setIcon(icon2);
+		bPauseTable->setIcon(icon2);
 
-		gridLayout_3->addWidget(bPlayPauseTable, 4, 1, 1, 1);
+		gridLayout_3->addWidget(bPauseTable, 4, 1, 1, 1);
 
 		filter = new QTextEdit(frame);
 		filter->setObjectName(QString::fromUtf8("filter"));
@@ -399,7 +399,7 @@ public:
 		QTableWidgetItem *___qtablewidgetitem7 = callLogs->horizontalHeaderItem(7);
 		___qtablewidgetitem7->setText(QCoreApplication::translate("DebugWindow", "result", nullptr));
 		bClearCallLogs->setText(QString());
-		bPlayPauseTable->setText(QString());
+		bPauseTable->setText(QString());
 		filter->setPlaceholderText(QCoreApplication::translate("DebugWindow", "Filter", nullptr));
 		menu_File->setTitle(QCoreApplication::translate("DebugWindow", "&File", nullptr));
 		menu_Tools->setTitle(QCoreApplication::translate("DebugWindow", "&Tools", nullptr));
@@ -415,4 +415,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // DEBUGGERYQFRDH_H
+#endif // DEBUGGERYFLEPG_H
