@@ -11,10 +11,14 @@ using namespace std;
 
 DebugWindow* mainWindow;
 unordered_map<int, QString*> syscalls;
+string execPath;
+
 void load_syscalls();
 
 
-int main(int argc, char *argv[]){
+int main(int argc, char** argv){
+	execPath = argv[0];
+
 	QApplication app(argc, argv);
 
 	try{

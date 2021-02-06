@@ -16,3 +16,5 @@ classes :
 - DebugWindow (UI)
 - TracerConnect
 - TracerTCPConnect
+
+#include "proc/readproc.h" maybe useful ?

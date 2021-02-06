@@ -55,7 +55,6 @@ void Tracer::setupProcess(pid_t pid) {
 	thr.detach();
 }
 
-
 void Tracer::setupProcessInternal(pid_t pid) {
 	cleanUp();
 	tracerPID = gettid();

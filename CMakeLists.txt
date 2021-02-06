@@ -22,7 +22,9 @@ target_include_directories(SD_otracer PUBLIC targets/otracer/headers)
 find_package(Qt5Widgets REQUIRED)
 target_link_libraries(SD_win Qt5::Widgets)
 target_link_libraries(SD_win pthread)
+target_link_libraries(SD_win cap)
 
-target_link_libraries(SD_win libexplain.so)
-target_link_libraries(SD_otracer libexplain.so)
+target_link_libraries(SD_otracer pthread)
+target_link_libraries(SD_otracer cap)
 
+#target_link_libraries(SD_win libexplain.so)
