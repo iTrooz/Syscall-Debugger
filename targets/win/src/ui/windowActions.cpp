@@ -63,6 +63,7 @@ void DebugWindow::bChooseProcess(){
 		cout << "yep" << endl;
 		int a = test.exec();
 		cout << "Want : " << a << endl;
+		if(a==0)return;
 
 		tracerConnect->setupProcess(a);
 	}else{

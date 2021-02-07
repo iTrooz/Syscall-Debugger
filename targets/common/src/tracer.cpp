@@ -67,6 +67,9 @@ void Tracer::setupProcessInternal(pid_t pid) {
 	waitpid(pid, nullptr, 0);
 
 	Process* mainProcess = new Process(pid);
+	#ifdef TARGET_WIN
+	mainWindow.
+	#endif
 	recurPIDs(processes, mainProcess);
 	uiConnect->handleTracerStartBulk(processes);
 
