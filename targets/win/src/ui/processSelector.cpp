@@ -6,15 +6,15 @@
 using namespace std;
 
 ProcessSelector::ProcessSelector() {
-	UI.setupUi(this);
+	QtUI.setupUi(this);
 	updateProcs("");
 
-	connect(UI.lineEdit, &QLineEdit::textEdited, this, &ProcessSelector::updateProcs);
-	connect(UI.tableWidget, &QTableWidget::itemDoubleClicked, this, &ProcessSelector::processChosen);
+	connect(QtUI.lineEdit, &QLineEdit::textEdited, this, &ProcessSelector::updateProcs);
+	connect(QtUI.tableWidget, &QTableWidget::itemDoubleClicked, this, &ProcessSelector::processChosen);
 
 }
 void ProcessSelector::processChosen(QTableWidgetItem* item){
-	item = UI.tableWidget->item(item->row(), 0);
+	item = QtUI.tableWidget->item(item->row(), 0);
 	bool ok;
 	int a = item->text().toInt(&ok);
 	if(ok)done(a);
@@ -25,7 +25,7 @@ void ProcessSelector::processChosen(QTableWidgetItem* item){
 
 void ProcessSelector::updateProcs(const QString& searchText) {
 
-	UI.tableWidget->setRowCount(0);
+	QtUI.tableWidget->setRowCount(0);
 
 	DIR* dir = opendir("/proc");
 	if(dir==nullptr){
@@ -38,21 +38,22 @@ void ProcessSelector::updateProcs(const QString& searchText) {
 	QString name;
 
 	bool flag = false;
-	char buf[128];
+	#define READ_SIZE 64
+	char buf[READ_SIZE];
 	int res;
 	char* pos;
 	while((pidFile = readdir(dir))){
 		if(atoi(pidFile->d_name)){
 
 			pid = pidFile->d_name;
-			if(pid.startsWith(searchText, Qt::CaseInsensitive)) flag = true;
+			if(pid.startsWith(searchText, Qt::CaseSensitive)) flag = true;
 
 			FILE* f = fopen(("/proc/"+pid.toStdString()+"/stat").c_str(), "r");
 			if(f==nullptr){
 				cerr << "failed to open stat file of PID " << pidFile->d_name << endl;
 				continue;
 			}
-			res = fread(buf,1,64,f); // ~number, useless to read more, QtUI would not even display it entirely
+			res = fread(buf,1, READ_SIZE, f); // ~number, useless to read more, QtUI would not even display it entirely
 			fclose(f);
 
 			pos = std::find(buf, buf+res, ')');
@@ -60,12 +61,12 @@ void ProcessSelector::updateProcs(const QString& searchText) {
 			pos = std::find(buf, buf+res, '(');
 			name = pos+1;
 
-			if(name.contains(searchText, Qt::CaseSensitive)) flag = true;
+			if(name.contains(searchText, Qt::CaseInsensitive)) flag = true;
 
 			if(flag){
-				UI.tableWidget->insertRow(0);
-				UI.tableWidget->setItem(0, 0, new QTableWidgetItem(pid));
-				UI.tableWidget->setItem(0, 1, new QTableWidgetItem(name));
+				QtUI.tableWidget->insertRow(0);
+				QtUI.tableWidget->setItem(0, 0, new QTableWidgetItem(pid));
+				QtUI.tableWidget->setItem(0, 1, new QTableWidgetItem(name));
 
 				flag = false;
 			}

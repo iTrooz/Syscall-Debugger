@@ -9,6 +9,7 @@
 
 #include "tracer.h"
 #include "utils.h"
+#include "plateform.h"
 
 using namespace std;
 
@@ -66,15 +67,12 @@ void Tracer::setupProcessInternal(pid_t pid) {
 	}
 	waitpid(pid, nullptr, 0);
 
-	Process* mainProcess = new Process(pid);
-	#ifdef TARGET_WIN
-	mainWindow.
-	#endif
-	recurPIDs(processes, mainProcess);
-	uiConnect->handleTracerStartBulk(processes);
+	list<pdata> pids;
+	parseProc(pids, pid);
 
+	uiConnect->handleTracerStartBulk(pid, pids);
 
-	Tracer::startTracer(pid);
+	startTracer(pid);
 }
 
 bool Tracer::waitProcess(pid_t& stopped) {

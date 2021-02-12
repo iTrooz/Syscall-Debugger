@@ -8,7 +8,7 @@ public:
 	ProcessSelector();
 	void updateProcs(const QString&);
 
-	Ui_SProc UI{};
+	Ui_SProc QtUI{};
 
 	void processChosen(QTableWidgetItem *item);
 };

@@ -34,7 +34,7 @@ void DebugWindow::treeClick(QTreeWidgetItem* item){
 
 void DebugWindow::bClearCallLogs() {
 	mutex.lock();
-	QtUI.callLogs->clear();
+	QtUI.callLogs->clearContents();
 	if(displayed!=nullptr){
 		displayed->delCalls();
 	}
@@ -60,9 +60,8 @@ void DebugWindow::bRun(){
 
 void DebugWindow::bChooseProcess(){
 	if(can_ptrace_running()){
-		cout << "yep" << endl;
-		int a = test.exec();
-		cout << "Want : " << a << endl;
+		ProcessSelector select;
+		int a = select.exec();
 		if(a==0)return;
 
 		tracerConnect->setupProcess(a);

@@ -4,12 +4,13 @@
 #include <sys/ptrace.h>
 #include <unistd.h>
 
+#include "plateform.h"
 #include "process.h"
 
 class UIConnect {
 public:
 	virtual void handleTracerStart(pid_t) = 0; // create
-	virtual void handleTracerStartBulk(list<Process*>&) = 0; // setup
+	virtual void handleTracerStartBulk(pid_t, list<pdata>&) = 0; // setup
 	virtual void handleTracerStop() = 0;
 	virtual Process* handleChildCreate(pid_t stopped) = 0;
 	virtual bool handleChildExit(pid_t stopped) = 0;

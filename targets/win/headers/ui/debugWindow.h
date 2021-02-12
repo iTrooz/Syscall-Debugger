@@ -32,7 +32,7 @@ public:
 	// inherited from UIConnect
 	void handleCall(pid_t, __ptrace_syscall_info&) override;
 	void handleTracerStart(pid_t) override;
-	void handleTracerStartBulk(list<Process*>&) override;
+	void handleTracerStartBulk(pid_t, list<pdata>&) override;
 	void handleTracerStop() override;
 	Process* handleChildCreate(pid_t) override;
 	bool handleChildExit(pid_t) override;
@@ -52,7 +52,6 @@ public:
 	//
 
 	// others ?
-	ProcessSelector test;
 	QMutex mutex; // for access to QTable and calls list
 	char tableLocked = 0;
 

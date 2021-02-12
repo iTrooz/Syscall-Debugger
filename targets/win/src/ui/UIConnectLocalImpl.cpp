@@ -39,22 +39,34 @@ void DebugWindow::handleCall(pid_t pid, __ptrace_syscall_info& info) {
 
 void DebugWindow::handleTracerStartCommon(Process* proc) {
 	mainProcess = proc;
+	tracerConnect->processes.push_back(mainProcess);
 	mainProcess->treeItem = QtUI.processTree->topLevelItem(0);
 	mainProcess->treeItem->setText(0, QString(to_string(mainProcess->pid).c_str()));
 	displayed = mainProcess;
 }
 
 void DebugWindow::handleTracerStart(pid_t pid) {
-	Process* proc = new Process(pid);
-	tracerConnect->processes.push_back(proc);
-	handleTracerStartCommon(proc);
+	handleTracerStartCommon(new Process(pid));
 }
 
 // only trigerred with local&&bulk, just after handleTracerStart
 // TODO make the distant&&bulk method (directly in TcpTracerConnect ?)
-void DebugWindow::handleTracerStartBulk(list<Process*>& bulk) {
+void DebugWindow::handleTracerStartBulk(pid_t main, list<pdata>& bulk) {
+	handleTracerStartCommon(new Process(main));
 	// here bulk is normally the same as tracerConnect->processes
-	handleTracerStartCommon(bulk.front());
+
+	Process* tmp;
+	list<Process*> stack;
+	stack.push_back(mainProcess);
+	for(auto p : bulk){
+		if(p.valid){
+			tmp = new Process(p.pid, stack.back());
+			stack.push_back(tmp);
+			tracerConnect->processes.push_back(tmp);
+		}else{
+			stack.pop_back();
+		}
+	}
 }
 
 void DebugWindow::handleTracerStop() {
@@ -126,7 +138,7 @@ void DebugWindow::handleCallExit(Process& proc) {
 		if (displayed->pid == proc.pid) {
 			mutex.lock();
 			addEntryEnd(proc.currentCall);
-//			UI.test2(proc.currentCall);
+//			QtUI.test2(proc.currentCall);
 			mutex.unlock();
 		}
 	}else if (tableLocked == 1){

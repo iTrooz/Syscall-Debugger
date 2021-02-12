@@ -13,6 +13,5 @@ extern unordered_map<int, QString*> syscalls;
 extern string execPath;
 
 char** convert(const string& cmd);
-void recurPIDs(list<Process*>&, Process*);
 
 #endif
