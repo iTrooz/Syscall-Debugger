@@ -15,7 +15,6 @@ public:
 	QTreeWidgetItem* treeItem;
 
 	explicit Process(pid_t);
-	Process(pid_t, Process*);
 	~Process();
 	void delCalls();
 	void setupTreeItem(QTreeWidgetItem*);

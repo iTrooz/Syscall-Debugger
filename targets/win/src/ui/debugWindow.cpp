@@ -1,6 +1,7 @@
 #include <iostream>
 #include <QMessageBox>
 #include <QProcess>
+#include <QDebug>
 
 #include "qt/UI_debugWindow.h"
 #include "ui/debugWindow.h"
@@ -8,8 +9,14 @@
 
 using namespace std;
 
+//template<typename... CArgs>
+//void DebugWindow::execFunc(void (*func)(CArgs...), CArgs&&... args) {
+//	func(args...);
+//}
+
 DebugWindow::DebugWindow(){
 	QtUI.setupUi(this);
+
 	tracerConnect = new Tracer(this);
 	// -----
 
@@ -21,8 +28,10 @@ DebugWindow::DebugWindow(){
 
 	connect(QtUI.processTree, &QTreeWidget::itemClicked, this, &DebugWindow::treeClick);
 
-//	connect(this, &DebugWindow::test1, this, &DebugWindow::addEntryStart);
-//	connect(this, &DebugWindow::test2, this, &DebugWindow::addEntryEnd);
+	connect(this, &DebugWindow::SIG_AddEntryStart, this, &DebugWindow::addEntryStart);
+	connect(this, &DebugWindow::SIG_addEntryEnd, this, &DebugWindow::addEntryEnd);
+	connect(this, &DebugWindow::SIG_removeLastEntry, this, &DebugWindow::removeLastEntry);
+
 }
 
 
@@ -38,35 +47,32 @@ void DebugWindow::cleanUI() {
 
 	QtUI.processTree->topLevelItem(0)->setText(0, "NA");
 	for(auto* i : QtUI.processTree->topLevelItem(0)->takeChildren()) {
-		delete i;
+//		delete i;
 	}
 }
 
 void DebugWindow::changeView(Process& p) {
-	mutex.lock();
 	displayed = &p;
-	QtUI.callLogs->clear();
+//	QtUI.callLogs->clear();
 	for(Syscall* call : p.calls){
 		addEntryStart(call);
 		addEntryEnd(call);
 	}
-	mutex.unlock();
 }
 
-void DebugWindow::addEntryStart(Syscall* call) const {
+void DebugWindow::addEntryStart(Syscall* call) {
 	call->guessName();
 	QtUI.callLogs->insertRow(0);
 
 	QtUI.callLogs->setItem(0, 0, new QTableWidgetItem(*call->name));
-	// TODO format for arg type
+
 	for(int i=0;i<6;i++){
 		QtUI.callLogs->setItem(0, i+1, new QTableWidgetItem(QString::number(call->entry.args[i])));
 	}
-		QtUI.callLogs->setItem(0, 7, new QTableWidgetItem("?"));
-
+	QtUI.callLogs->setItem(0, 7, new QTableWidgetItem("?"));
 }
 
-void DebugWindow::addEntryEnd(Syscall* call) const {
+void DebugWindow::addEntryEnd(Syscall* call) {
 	if(call->exit.is_error==0xF){
 		QtUI.callLogs->item(0, 7)->setText("?");
 	}else{
@@ -74,12 +80,15 @@ void DebugWindow::addEntryEnd(Syscall* call) const {
 	}
 }
 
+void DebugWindow::removeLastEntry(){
+	QtUI.callLogs->removeRow(config::displayLimit - 1);
+}
 
-void DebugWindow::setPID(char* pid) const {
+void DebugWindow::setPID(char* pid) {
 	QtUI.labelPID->setText(QString(pid));
 }
 
-void DebugWindow::setState(char s) const {
+void DebugWindow::setState(char s) {
 	switch(s){
 		case 0:{
 			QtUI.labelState->setText("NONE");
@@ -105,7 +114,7 @@ void DebugWindow::cleanUp(){
 
 	if(!tracerConnect->isLocal){
 		for(auto* proc : tracerConnect->processes){
-			delete proc;
+//			delete proc;
 		}
 	}
 }

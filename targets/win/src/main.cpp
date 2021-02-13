@@ -19,16 +19,7 @@ void load_syscalls();
 
 
 int main(int argc, char** argv){
-
-//	list<pdata> list;
-//	parseProc(list, 4218);
-//
-//	for(auto i : list)cout << i.pid << endl;
-//
-//	return 0;
-
 	execPath = argv[0];
-
 	QApplication app(argc, argv);
 
 	try{

@@ -33,12 +33,10 @@ void DebugWindow::treeClick(QTreeWidgetItem* item){
 }
 
 void DebugWindow::bClearCallLogs() {
-	mutex.lock();
 	QtUI.callLogs->clearContents();
 	if(displayed!=nullptr){
 		displayed->delCalls();
 	}
-	mutex.unlock();
 }
 
 void DebugWindow::bRun(){
@@ -70,7 +68,7 @@ void DebugWindow::bChooseProcess(){
 		msg.setIcon(QMessageBox::Critical);
 		msg.setText("CAP_SYS_PTRACE capability not activated");
 		QString ps;
-		ps.push_back("You can activate it by the following way :");
+		ps.push_back("You can activate it by the following ways :");
 		ps.push_back("\n");
 		ps.push_back("- run the program using sudo");
 		ps.push_back("\n");

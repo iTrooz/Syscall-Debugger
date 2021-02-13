@@ -52,15 +52,14 @@ public:
 	//
 
 	// others ?
-	QMutex mutex; // for access to QTable and calls list
 	char tableLocked = 0;
 
 
 	// visual
 	Process* mainProcess = nullptr;
 	Process* displayed = nullptr;
-	void setPID(char* pid) const;
-	void setState(char s) const;
+	void setPID(char* pid);
+	void setState(char s);
 
 	void cleanUp();
 	void cleanUI();
@@ -75,12 +74,14 @@ public:
 	void bChooseProcess();
 	void treeClick(QTreeWidgetItem* item);
 
-//public slots:
-	void addEntryStart(Syscall*) const;
-	void addEntryEnd(Syscall*) const;
-//signals:
-//	void test1(Syscall*);
-//	void test2(Syscall*);
+private slots:
+	void addEntryStart(Syscall*);
+	void addEntryEnd(Syscall*);
+	void removeLastEntry();
+signals:
+	void SIG_AddEntryStart(Syscall*);
+	void SIG_addEntryEnd(Syscall*);
+	void SIG_removeLastEntry();
 
 };
 

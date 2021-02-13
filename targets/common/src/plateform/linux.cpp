@@ -83,7 +83,6 @@ bool parseThread(list<pdata>& l, string& parent, pid_t toLoop){
 
 		p.pid = atoi(buf);
 		if (p.pid) {
-			cerr << "subproc pushed " << p.pid << endl;
 			l.push_back(p);
 			parseProc(l, p.pid);
 			l.push_back(nullData);
@@ -114,7 +113,6 @@ bool parseProc(list<pdata>& l, pid_t toLoop){
 		p.pid = atoi(thread->d_name);
 		if (p.pid) {
 			if (p.pid != toLoop) {
-				cerr << "thread pushed " << p.pid << endl;
 				l.push_back(p);
 				l.push_back(nullData);
 			}

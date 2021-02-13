@@ -20,7 +20,7 @@ Tracer::Tracer(UIConnect *ui) {
 
 void Tracer::cleanUp(){
 	for(auto* proc : processes){
-		delete proc;
+//		delete proc;
 	}
 	processes.clear();
 }
@@ -104,7 +104,6 @@ bool Tracer::waitProcess(pid_t& stopped) {
 }
 
 void Tracer::startTracer(pid_t mainProcess) {
-
 	int temp, stopped;
 
 	temp = ptrace(PTRACE_SETOPTIONS, mainProcess, 0, PTRACE_O_TRACESYSGOOD|PTRACE_O_TRACEFORK|PTRACE_O_TRACEVFORK|
@@ -136,7 +135,7 @@ void Tracer::startTracer(pid_t mainProcess) {
 
 
 void Tracer::killProcess(){
-	kill(tracerPID, SIGKILL); // stop loop softly instead ? (threads seems not to like this)
+	kill(tracerPID, SIGKILL); // stop loop softly instead ? (threads seems not to like to be killed)
 }
 
 Tracer::~Tracer() {

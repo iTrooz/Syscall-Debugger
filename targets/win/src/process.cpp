@@ -8,10 +8,6 @@ Process::Process(pid_t t) : pid(t){
 
 }
 
-Process::Process(pid_t t, Process* parent) : pid(t){
-	setupTreeItem(parent->treeItem);
-}
-
 Process::~Process() {
 	delCalls();
 }
@@ -23,7 +19,7 @@ void Process::setupTreeItem(QTreeWidgetItem* parent){
 }
 void Process::delCalls(){
 	for(Syscall* c : calls){
-		delete c;
+//		delete c;
 	}
 	calls.clear();
 }
