@@ -6,13 +6,14 @@
 #include <QComboBox>
 #include <QStringListModel>
 #include <QStandardItemModel>
-#include <tcpTracerConnect.h>
+#include <connect/tcpTracerConnect.h>
 
 #include "qt/UI_debugWindow.h"
 #include "ui/processSelector.h"
 #include "process.h"
-#include "connects/tracerConnect.h"
-#include "connects/uiConnect.h"
+#include "connect/tracerConnect.h"
+#include "connect/uiConnect.h"
+#include "config/winConfig.h"
 
 //Q_DECLARE_METATYPE(Syscall*);
 class DebugWindow : public QMainWindow, public UIConnect
@@ -20,10 +21,12 @@ class DebugWindow : public QMainWindow, public UIConnect
     Q_OBJECT
 
 public:
-	// internal
+	// base
 	DebugWindow();
+    WinConfig config;
 	Ui_DebugWindow QtUI{};
 	TracerConnect* tracerConnect = nullptr;
+
 
 	//
 	// ---------- PROCESS MANAGER
@@ -56,15 +59,16 @@ public:
 
 
 	// visual
-	Process* mainProcess = nullptr;
+	Process* mainProcess = nullptr; // null mean no process running
 	Process* displayed = nullptr;
 	void setPID(char* pid);
 	void setState(char s);
 
 	void cleanUp();
 	void cleanUI();
-	void killProcess();
+//	void killProcess();
 	void changeView(Process &p);
+	bool preRunTests();
 
 
 	// Window actions

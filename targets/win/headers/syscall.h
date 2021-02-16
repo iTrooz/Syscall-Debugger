@@ -4,6 +4,7 @@
 #include<QString>
 #include<iostream>
 #include<sys/ptrace.h>
+#include<plateform.h>
 
 using namespace std;
 
@@ -24,8 +25,8 @@ struct syscall_exit {
 
 class Syscall {
 public:
-	void guessName();
-	QString* name = nullptr;
+	void guessName(SYSCALLS_LIST&);
+	QString name = nullptr;
 	syscall_entry entry{};
 	syscall_exit exit{};
 

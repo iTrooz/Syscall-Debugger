@@ -3,6 +3,7 @@
 #include <list>
 #include <sys/capability.h>
 #include <dirent.h>
+#include <unordered_map>
 
 #include "plateform.h"
 
@@ -120,4 +121,26 @@ bool parseProc(list<pdata>& l, pid_t toLoop){
 		}
 	}
 	return true;
+}
+
+
+void loadSyscalls(std::string& path, SYSCALLS_LIST& syscalls){
+	ifstream file(path);
+
+	string line;
+	size_t t;
+	while (getline(file,line)) {
+		if(line.size()<13)continue;
+		if(line.substr(0, 13)!="#define __NR_")continue;
+		line = line.erase(0, 13);
+
+		t = line.find(' ');
+		if(t==string::npos)continue;
+
+		try{
+			syscalls.insert({stoi(line.substr(t+1)), new string(line.substr(0, t))});
+		}catch(invalid_argument& e){
+			throw runtime_error("Invalid number "+line.substr(t+1)+" for syscall"+line.substr(0, t));
+		}
+	}
 }

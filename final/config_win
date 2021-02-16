@@ -1,0 +1,5 @@
+doChilds=1
+quickCmd=1
+quickPID=0
+displayLimit=1000
+ignoredSyscalls=

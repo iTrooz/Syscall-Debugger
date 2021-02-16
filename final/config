@@ -1,6 +1,0 @@
-syscallPath=/usr/include/asm/unistd_64.h
-ignoredSysCalls=fork,vfork,clone
-doChilds=1
-quickCmd=1
-quickPID=0
-displayLimit=1000

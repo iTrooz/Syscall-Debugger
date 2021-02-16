@@ -2,6 +2,8 @@
 #define SD_COMMON_LINUX_H
 
 #include <list>
+#include <string>
+#include <unordered_map>
 
 struct pdata {
 	int valid : 1 = 1;
@@ -13,5 +15,8 @@ bool can_ptrace_running();
 bool parseProc(std::list<pdata>& l, pid_t toLoop);
 int getPPID(pid_t);
 
-#endif
 
+#define SYSCALLS_LIST std::unordered_map<int, std::string*>
+void loadSyscalls(std::string&, SYSCALLS_LIST&);
+
+#endif
