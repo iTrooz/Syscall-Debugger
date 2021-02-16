@@ -1,6 +1,5 @@
 #include <iostream>
 #include "syscall.h"
-#include "utils.h"
 
 using namespace std;
 

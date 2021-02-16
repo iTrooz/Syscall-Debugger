@@ -5,6 +5,12 @@
     <sourceRoots>
       <file path="$PROJECT_DIR$/headers" />
       <file path="$PROJECT_DIR$/src" />
+      <file path="$PROJECT_DIR$/targets/common/headers" />
+      <file path="$PROJECT_DIR$/targets/common/src" />
+      <file path="$PROJECT_DIR$/targets/otracer/headers" />
+      <file path="$PROJECT_DIR$/targets/otracer/src" />
+      <file path="$PROJECT_DIR$/targets/win/headers" />
+      <file path="$PROJECT_DIR$/targets/win/src" />
     </sourceRoots>
     <excludeRoots>
       <file path="$PROJECT_DIR$/out" />

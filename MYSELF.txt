@@ -1,0 +1,17 @@
+syscallPath : path different for Ubuntu/(Manjaro|Arch)/Kali (others?)
+
+Do not disconnect/reconnect TCP for each new process ?
+
+classes :
+- Tracer
+- UIConnect
+- UITCPConnect
+
+- DebugWindow (UI)
+- TracerConnect
+- TracerTCPConnect
+
+#include "proc/readproc.h" maybe useful ?
+
+Par défaut, les actions sur l'interface commune TracerConnect sont faites par Win.
+On utilise des #ifdef TARGET_OTRACER dans le traceur pour les simuler dans le cas d'une liaison TCP

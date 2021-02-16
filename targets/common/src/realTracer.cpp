@@ -6,12 +6,14 @@
 #include <unistd.h>
 #include <wait.h>
 #include <thread>
+#include <vector>
 
 #include "realTracer.h"
-#include "utils.h"
 #include "plateform.h"
 
 using namespace std;
+
+char** convert(const string& cmd);
 
 RealTracer::RealTracer(UIConnect *ui) {
 	isLocal = true;
@@ -51,7 +53,7 @@ void RealTracer::createProcessInternal(const string& cmd) {
 
 		uiConnect->handleTracerStart(mainProcess);
 
-		startTracer(mainProcess);
+		startTracer();
 	}
 }
 
@@ -76,7 +78,7 @@ void RealTracer::setupProcessInternal(pid_t pid) {
 
 	uiConnect->handleTracerStartBulk(pid, pids);
 
-	startTracer(pid);
+	startTracer();
 }
 
 bool RealTracer::waitProcess(pid_t& stopped) {
@@ -107,7 +109,7 @@ bool RealTracer::waitProcess(pid_t& stopped) {
 	}
 }
 
-void RealTracer::startTracer(pid_t mainProcess) {
+void RealTracer::startTracer() {
 	int temp, stopped;
 
 	temp = ptrace(PTRACE_SETOPTIONS, mainProcess, 0, PTRACE_O_TRACESYSGOOD|PTRACE_O_TRACEFORK|PTRACE_O_TRACEVFORK|
@@ -144,4 +146,24 @@ void RealTracer::killProcess(){
 
 RealTracer::~RealTracer() {
 	cleanUp();
+}
+
+
+
+
+
+char** convert(const string& cmd){
+	stringstream a(cmd);
+	vector<string> vec;
+	string s;
+	while (getline(a, s, ' ')) {
+		vec.push_back(s);
+	}
+
+	const char **cmdArgs = new const char* [vec.size() + 1];
+	for (int i=0; i<vec.size(); i++){
+		cmdArgs[i] = vec[i].c_str();
+	}
+	cmdArgs[vec.size()] = nullptr;
+	return (char**)cmdArgs;
 }

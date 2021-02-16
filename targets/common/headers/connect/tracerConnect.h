@@ -22,9 +22,7 @@ public:
 	 * Else init/updated by window
 	 */
 	list<Process*> processes;
-	#ifdef TARGET_WIN
 	SYSCALLS_LIST syscalls;
-	#endif
 };
 
 

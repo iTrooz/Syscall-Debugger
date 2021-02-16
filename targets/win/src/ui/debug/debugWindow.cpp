@@ -5,7 +5,6 @@
 
 #include "qt/UI_debugWindow.h"
 #include "ui/debugWindow.h"
-#include "utils.h"
 
 using namespace std;
 

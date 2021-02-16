@@ -4,6 +4,9 @@
 #include <list>
 #include <string>
 #include <unordered_map>
+#include <string>
+
+extern std::string execPath;
 
 struct pdata {
 	int valid : 1 = 1;

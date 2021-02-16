@@ -25,7 +25,7 @@ public:
 	void createProcessInternal(const string&);
 	void setupProcess(pid_t tracee) override;
 	void setupProcessInternal(pid_t pid);
-	void startTracer(pid_t);
+	void startTracer();
 
 	void killProcess() override;
 	pid_t mainProcess = 0;
