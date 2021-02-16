@@ -28,7 +28,7 @@ public:
 	void startTracer(pid_t);
 
 	void killProcess() override;
-	pid_t tracerPID = 0;
+	pid_t mainProcess = 0;
 
 };
 

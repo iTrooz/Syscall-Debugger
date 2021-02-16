@@ -23,30 +23,30 @@ DebugWindow::DebugWindow(){
 
 	// -----
 
-	connect(QtUI.bRun, &QPushButton::clicked, this, &DebugWindow::bRun);
-	connect(QtUI.bStop, &QPushButton::clicked, this, &DebugWindow::killProcess);
-	connect(QtUI.bClearCallLogs, &QPushButton::clicked, this, &DebugWindow::bClearCallLogs);
-	connect(QtUI.bPauseTable, &QPushButton::clicked, this, &DebugWindow::bPauseTable);
-	connect(QtUI.bProcessSelect, &QPushButton::clicked, this, &DebugWindow::bChooseProcess);
+	connect(QtUI.bRun, &QPushButton::clicked, this, &DebugWindow::ACT_bRun);
+	connect(QtUI.bStop, &QPushButton::clicked, this, &DebugWindow::ACT_killProcess);
+	connect(QtUI.bClearCallLogs, &QPushButton::clicked, this, &DebugWindow::ACT_bClearCallLogs);
+	connect(QtUI.bPauseTable, &QPushButton::clicked, this, &DebugWindow::ACT_bPauseTable);
+	connect(QtUI.bProcessSelect, &QPushButton::clicked, this, &DebugWindow::ACT_bChooseProcess);
 
-	connect(QtUI.processTree, &QTreeWidget::itemClicked, this, &DebugWindow::treeClick);
+	connect(QtUI.processTree, &QTreeWidget::itemClicked, this, &DebugWindow::ACT_treeClick);
 
-	connect(this, &DebugWindow::SIG_AddEntryStart, this, &DebugWindow::addEntryStart);
-	connect(this, &DebugWindow::SIG_addEntryEnd, this, &DebugWindow::addEntryEnd);
-	connect(this, &DebugWindow::SIG_removeLastEntry, this, &DebugWindow::removeLastEntry);
+	connect(this, &DebugWindow::SIG_AddEntryStart, this, &DebugWindow::SLOT_addEntryStart);
+	connect(this, &DebugWindow::SIG_addEntryEnd, this, &DebugWindow::SLOT_addEntryEnd);
+	connect(this, &DebugWindow::SIG_removeLastEntry, this, &DebugWindow::SLOT_removeLastEntry);
 
 }
 
 
-//void DebugWindow::killProcess() { // todo virer ?
-//	if (mainProcess != nullptr) {
-//		tracerConnect->killProcess();
-//		mainProcess = nullptr;
-//	}
-//}
+void DebugWindow::ACT_killProcess() { // todo virer ?
+	if (mainProcess != nullptr) {
+		tracerConnect->killProcess();
+		mainProcess = nullptr;
+	}
+}
 
 void DebugWindow::cleanUI() {
-	bClearCallLogs();
+	ACT_bClearCallLogs();
 
 	QtUI.processTree->topLevelItem(0)->setText(0, "NA");
 	for(auto* i : QtUI.processTree->topLevelItem(0)->takeChildren()) {
@@ -58,12 +58,12 @@ void DebugWindow::changeView(Process& p) {
 	displayed = &p;
 //	QtUI.callLogs->clear();
 	for(Syscall* call : p.calls){
-		addEntryStart(call);
-		addEntryEnd(call);
+		SLOT_addEntryStart(call);
+		SLOT_addEntryEnd(call);
 	}
 }
 
-void DebugWindow::addEntryStart(Syscall* call) {
+void DebugWindow::SLOT_addEntryStart(Syscall* call) {
 	call->guessName(tracerConnect->syscalls);
 	QtUI.callLogs->insertRow(0);
 
@@ -75,7 +75,7 @@ void DebugWindow::addEntryStart(Syscall* call) {
 	QtUI.callLogs->setItem(0, 7, new QTableWidgetItem("?"));
 }
 
-void DebugWindow::addEntryEnd(Syscall* call) {
+void DebugWindow::SLOT_addEntryEnd(Syscall* call) {
 	if(call->exit.is_error==0xF){
 		QtUI.callLogs->item(0, 7)->setText("?");
 	}else{
@@ -83,7 +83,7 @@ void DebugWindow::addEntryEnd(Syscall* call) {
 	}
 }
 
-void DebugWindow::removeLastEntry(){
+void DebugWindow::SLOT_removeLastEntry(){
 	QtUI.callLogs->removeRow(config.displayLimit - 1);
 }
 

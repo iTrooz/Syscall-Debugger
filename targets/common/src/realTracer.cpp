@@ -37,22 +37,21 @@ void RealTracer::createProcess(const string& cmd) {
 
 void RealTracer::createProcessInternal(const string& cmd) {
 	cleanUp();
-	tracerPID = gettid();
 
 	char** cmdArgs = convert(cmd);
 
-	pid_t child = fork();
-	if(child==0){
+	mainProcess = fork();
+	if(mainProcess==0){
 		ptrace(PTRACE_TRACEME);
 		kill(getpid(), SIGSTOP);
 		execvp(cmdArgs[0], cmdArgs); // stop le flow du code
 		throw runtime_error("NOT SUPPOSED TO HAPPEN : PROCESS ESCAPED"); // au cas ou
 	}else {
-		waitpid(child, nullptr, 0);
+		waitpid(mainProcess, nullptr, 0);
 
-		uiConnect->handleTracerStart(child);
+		uiConnect->handleTracerStart(mainProcess);
 
-		RealTracer::startTracer(child);
+		startTracer(mainProcess);
 	}
 }
 
@@ -63,7 +62,7 @@ void RealTracer::setupProcess(pid_t pid) {
 
 void RealTracer::setupProcessInternal(pid_t pid) {
 	cleanUp();
-	tracerPID = gettid();
+	mainProcess = pid;
 
 	long temp = ptrace(PTRACE_ATTACH, pid, 0, 0);
 	if (temp != 0) {
@@ -140,7 +139,7 @@ void RealTracer::startTracer(pid_t mainProcess) {
 
 
 void RealTracer::killProcess(){
-	kill(tracerPID, SIGKILL); // stop loop softly instead ? (threads seems not to like to be killed)
+	kill(mainProcess, SIGKILL); // stop loop softly instead ? (threads seems not to like to be killed)
 }
 
 RealTracer::~RealTracer() {

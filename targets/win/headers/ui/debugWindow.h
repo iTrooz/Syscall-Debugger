@@ -64,24 +64,23 @@ public:
 	void setPID(char* pid);
 	void setState(char s);
 
-	void cleanUp();
 	void cleanUI();
-//	void killProcess();
 	void changeView(Process &p);
 	bool preRunTests();
 
 
 	// Window actions
-	void bClearCallLogs();
-	void bPauseTable();
-	void bRun();
-	void bChooseProcess();
-	void treeClick(QTreeWidgetItem* item);
+	void ACT_bClearCallLogs();
+	void ACT_bPauseTable();
+	void ACT_bRun();
+	void ACT_bChooseProcess();
+	void ACT_treeClick(QTreeWidgetItem* item);
+	void ACT_killProcess();
 
 private slots:
-	void addEntryStart(Syscall*);
-	void addEntryEnd(Syscall*);
-	void removeLastEntry();
+	void SLOT_addEntryStart(Syscall*);
+	void SLOT_addEntryEnd(Syscall*);
+	void SLOT_removeLastEntry();
 signals:
 	void SIG_AddEntryStart(Syscall*);
 	void SIG_addEntryEnd(Syscall*);

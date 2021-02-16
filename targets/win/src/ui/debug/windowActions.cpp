@@ -7,7 +7,7 @@
 
 using namespace std;
 
-void DebugWindow::bPauseTable(){
+void DebugWindow::ACT_bPauseTable(){
 	/*
 	 * 0 = enabled
 	 * 1 waiting for syscall end/disabled
@@ -21,7 +21,7 @@ void DebugWindow::bPauseTable(){
 	}
 }
 
-void DebugWindow::treeClick(QTreeWidgetItem* item){
+void DebugWindow::ACT_treeClick(QTreeWidgetItem* item){
 	for(Process* proc : tracerConnect->processes){
 		if(proc->treeItem==item){
 			changeView(*proc);
@@ -32,7 +32,7 @@ void DebugWindow::treeClick(QTreeWidgetItem* item){
 	cerr << "NOT SUPPOSED TO HAPPEN : Clicked process not found" << endl;
 }
 
-void DebugWindow::bClearCallLogs() {
+void DebugWindow::ACT_bClearCallLogs() {
 	QtUI.callLogs->clearContents();
 	if(displayed!=nullptr){
 		displayed->delCalls();
@@ -44,7 +44,14 @@ bool DebugWindow::preRunTests(){
 		if (config.warnARunning) {
 			auto msg = QMessageBox();
 			msg.setIcon(QMessageBox::Warning);
-			msg.setText("Process already running");
+			msg.setWindowTitle("Process already running");
+			QString qs;
+			qs.push_back("A process is already being traced !");
+			qs.push_back("\n");
+			qs.push_back("Click \"Kill\" button to kill it, and continue the action");
+			qs.push_back("\n");
+			qs.push_back("Click \"Cancel\" button to abort action");
+			msg.setText(qs);
 			// do not switch order : will switch .exec values
 			msg.setDefaultButton(msg.addButton("Cancel", QMessageBox::ButtonRole::RejectRole));
 			msg.addButton("Kill", QMessageBox::ButtonRole::AcceptRole);
@@ -60,14 +67,14 @@ bool DebugWindow::preRunTests(){
 	return true;
 }
 
-void DebugWindow::bRun(){
+void DebugWindow::ACT_bRun(){
 	QString qs = QtUI.cmd->text();
 	if(qs.isEmpty()){
 		QMessageBox msg = QMessageBox();
 		msg.setIcon(QMessageBox::Warning);
 
-		msg.setWindowTitle("Warning");
-		msg.setText("No command set !");
+		msg.setWindowTitle("No command set !");
+		msg.setText("You didn't set any command to run !");
 		msg.show();
 		return;
 	}
@@ -76,7 +83,7 @@ void DebugWindow::bRun(){
 	}
 }
 
-void DebugWindow::bChooseProcess(){
+void DebugWindow::ACT_bChooseProcess(){
 	if(can_ptrace_running()){
 		ProcessSelector select;
 		int a = select.exec();
@@ -89,15 +96,15 @@ void DebugWindow::bChooseProcess(){
 		auto msg = QMessageBox();
 		msg.setIcon(QMessageBox::Critical);
 		msg.setText("CAP_SYS_PTRACE capability not activated");
-		QString ps;
-		ps.push_back("You can activate it by the following ways :");
-		ps.push_back("\n");
-		ps.push_back("- run the program using sudo");
-		ps.push_back("\n");
-		ps.push_back("- add the CAP_SYS_PTRACE capability to the executable");
-		ps.push_back("\n\n");
-		ps.push_back("Click the \"Add capability\" button to try to automatically add the capability to the executable, and stop the program");
-		msg.setInformativeText(ps);
+		QString qs;
+		qs.push_back("You can activate it by the following ways :");
+		qs.push_back("\n");
+		qs.push_back("- run the program using sudo");
+		qs.push_back("\n");
+		qs.push_back("- add the CAP_SYS_PTRACE capability to the executable");
+		qs.push_back("\n\n");
+		qs.push_back("Click the \"Add capability\" button to try to automatically add the capability to the executable, and stop the program");
+		msg.setInformativeText(qs);
 		// do not switch order : will switch .exec values
 		msg.setDefaultButton(msg.addButton("Cancel", QMessageBox::ButtonRole::RejectRole));
 		msg.addButton("Add capability", QMessageBox::ButtonRole::AcceptRole);

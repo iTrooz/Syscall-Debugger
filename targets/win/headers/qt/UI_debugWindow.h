@@ -155,7 +155,7 @@ public:
 		horizontalLayout = new QHBoxLayout();
 		horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
 		bRun = new QPushButton(frame);
-		bRun->setObjectName(QString::fromUtf8("bRun"));
+		bRun->setObjectName(QString::fromUtf8("ACT_bRun"));
 		QSizePolicy sizePolicy2(QSizePolicy::Maximum, QSizePolicy::Fixed);
 		sizePolicy2.setHorizontalStretch(0);
 		sizePolicy2.setVerticalStretch(0);
@@ -286,7 +286,7 @@ public:
 		gridLayout_3->addWidget(callLogs, 3, 0, 1, 3);
 
 		bClearCallLogs = new QPushButton(frame);
-		bClearCallLogs->setObjectName(QString::fromUtf8("bClearCallLogs"));
+		bClearCallLogs->setObjectName(QString::fromUtf8("ACT_bClearCallLogs"));
 		bClearCallLogs->setMinimumSize(QSize(32, 0));
 		QIcon icon1;
 		icon1.addFile(QString::fromUtf8(":/images/clean.png"), QSize(), QIcon::Normal, QIcon::Off);
@@ -295,7 +295,7 @@ public:
 		gridLayout_3->addWidget(bClearCallLogs, 4, 0, 1, 1);
 
 		bPauseTable = new QPushButton(frame);
-		bPauseTable->setObjectName(QString::fromUtf8("bPauseTable"));
+		bPauseTable->setObjectName(QString::fromUtf8("ACT_bPauseTable"));
 		bPauseTable->setMinimumSize(QSize(32, 0));
 		QIcon icon2;
 		icon2.addFile(QString::fromUtf8(":/images/pause.png"), QSize(), QIcon::Normal, QIcon::Off);
