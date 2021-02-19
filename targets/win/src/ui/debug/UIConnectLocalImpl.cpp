@@ -14,6 +14,7 @@ void DebugWindow::handleTracerStart(pid_t pid) {
 	handleTracerStartCommon(new Process(pid));
 }
 
+// (maybe obsolete)
 // only trigerred with local&&bulk, just after handleTracerStart
 // TODO make the distant&&bulk method (directly in TcpTracerConnect ?)
 void DebugWindow::handleTracerStartBulk(pid_t main, list<pdata>& bulk) {
