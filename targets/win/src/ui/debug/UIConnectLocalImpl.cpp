@@ -1,3 +1,4 @@
+#include <csignal>
 #include "ui/debugWindow.h"
 
 
@@ -35,8 +36,7 @@ void DebugWindow::handleTracerStartBulk(pid_t main, list<pdata>& bulk) {
 }
 
 void DebugWindow::handleTracerStop() {
-//	tracerConnect->
-
+	mainProcess = nullptr;
 }
 
 Process* DebugWindow::handleChildCreate(pid_t pid){ // Warning : Still need to apply Tree Item Widget. besoin = get parent parent from here
@@ -76,7 +76,6 @@ bool DebugWindow::handleChildExit(pid_t stopped) { // returns true is there is n
 void DebugWindow::handleCall(pid_t pid, __ptrace_syscall_info& info) {
 	Process* proc = getProcess(pid);
 	if(proc==nullptr){
-		cout << "create" << endl;
 		proc = handleChildCreate(pid);
 	}
 

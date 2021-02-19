@@ -32,30 +32,61 @@ bool can_ptrace_running(){
 	return ret;
 }
 
-int getPPID(pid_t child){
-	FILE* f = fopen(("/proc/"+to_string(child)+"/stat").c_str(), "r");
-	if(f==nullptr){
-		cerr << "getPPID | failed to open stat of PID " << child << endl;
-		return 0;
-	}
-	#define READ_SIZE 64
-	char tmp[READ_SIZE];
-	char* buf = reinterpret_cast<char*>(tmp); // thx cpp;
-	int res = fread(buf,1,READ_SIZE,f); // ~number, useless to read more
-	char* bufEnd = buf+res;
-	fclose(f);
-
-	char* pos;
-	for(int i=0;i<3;i++){
-		pos = std::find(buf, bufEnd, ' ');
-		if(pos==bufEnd){
-			cerr << "getPPID | could not find " << i+1 << " space in stat of PID " << child << endl;
-			return 0;
+void search(ifstream& stream, const string& key, string& val){
+	int in;
+	while (getline(stream,val)) {
+		in = val.find(':');
+		if(in==string::npos)throw std::runtime_error("search | Found invalid line : "+val);
+		if(val.substr(0, in)==key){
+			in++;
+			while(val.at(in)=='\t'){
+				in++;
+			}
+			val = val.substr(in);
+			return;
 		}
-		buf = pos+1;
 	}
-	return atoi(buf);
+	if(val.empty())throw std::runtime_error("Key "+key+" not found");
 }
+
+int getPPID(pid_t child){
+	ifstream conf("/proc/"+to_string(child)+"/status");
+	if(!conf.is_open())throw std::runtime_error("getPPID | Could not open status of "+to_string(child));
+	string val;
+	search(conf, "Tgid", val);
+	int a = std::stoi(val);
+	if(a==child){ // true == subprocess
+		val.clear();
+		search(conf, "PPid", val);
+		return std::stoi(val);
+	}else{
+		return a;
+	}
+}
+//int getPPID(pid_t child){
+//	FILE* f = fopen(("/proc/"+to_string(child)+"/stat").c_str(), "r");
+//	if(f==nullptr){
+//		cerr << "getPPID | failed to open stat of PID " << child << endl;
+//		return 0;
+//	}
+//	#define READ_SIZE 64
+//	char tmp[READ_SIZE];
+//	char* buf = reinterpret_cast<char*>(tmp); // thx cpp;
+//	int res = fread(buf,1,READ_SIZE,f); // ~number, useless to read more
+//	char* bufEnd = buf+res;
+//	fclose(f);
+//
+//	char* pos;
+//	for(int i=0;i<3;i++){
+//		pos = std::find(buf, bufEnd, ' ');
+//		if(pos==bufEnd){
+//			cerr << "getPPID | could not find " << i+1 << " space in stat of PID " << child << endl;
+//			return 0;
+//		}
+//		buf = pos+1;
+//	}
+//	return atoi(buf);
+//}
 
 bool parseProc(list<pdata>& l, pid_t toLoop);
 
