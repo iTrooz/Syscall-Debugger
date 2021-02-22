@@ -74,7 +74,7 @@ bool DebugWindow::handleChildExit(pid_t stopped) { // returns true is there is n
 }
 
 
-void DebugWindow::handleCall(pid_t pid, __ptrace_syscall_info& info) {
+void DebugWindow::handleCall(pid_t pid, native_syscall_info& info) {
 	Process* proc = getProcess(pid);
 	if(proc==nullptr){
 		proc = handleChildCreate(pid);

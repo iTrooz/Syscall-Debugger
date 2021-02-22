@@ -120,8 +120,8 @@ void RealTracer::startTracer() {
 	if (temp != 0)throw runtime_error("FIRST PTRACE_SYSCALL failed : " +
 									  to_string(temp));
 
-	__ptrace_syscall_info info{};
-	int size = sizeof(__ptrace_syscall_info);
+	native_syscall_info info{};
+	int size = sizeof(native_syscall_info);
 
 	while (true) {
 		if (waitProcess(stopped)) {

@@ -33,7 +33,7 @@ public:
 	//
 
 	// inherited from UIConnect
-	void handleCall(pid_t, __ptrace_syscall_info&) override;
+	void handleCall(pid_t, native_syscall_info&) override;
 	void handleTracerStart(pid_t) override;
 	void handleTracerStartBulk(pid_t, list<pdata>&) override;
 	void handleTracerStop() override;

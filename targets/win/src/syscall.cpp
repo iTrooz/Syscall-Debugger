@@ -1,5 +1,7 @@
 #include <iostream>
+
 #include "syscall.h"
+#include "realTracer.h"
 
 using namespace std;
 
@@ -13,7 +15,7 @@ void Syscall::guessName(SYSCALLS_LIST& syscalls) {
 	}
 }
 
-syscall_entry& syscall_entry::operator=(const __ptrace_syscall_info &info) {
+syscall_entry& syscall_entry::operator=(const native_syscall_info &info) {
 
 	memcpy(args, info.entry.args, sizeof(__uint64_t)*6);
 	id = info.entry.nr;
@@ -21,7 +23,7 @@ syscall_entry& syscall_entry::operator=(const __ptrace_syscall_info &info) {
 }
 
 
-syscall_exit& syscall_exit::operator=(const __ptrace_syscall_info &info) {
+syscall_exit& syscall_exit::operator=(const native_syscall_info &info) {
 	rval = info.exit.rval;
 	is_error = info.exit.is_error;
 	return *this;

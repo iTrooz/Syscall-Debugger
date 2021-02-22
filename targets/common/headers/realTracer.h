@@ -1,5 +1,5 @@
-#ifndef SYSCALLDEBUGGER_TRACER_H
-#define SYSCALLDEBUGGER_TRACER_H
+#ifndef SD_COMMON_TRACER_H
+#define SD_COMMON_TRACER_H
 
 #include<string>
 #include<sys/ptrace.h>
@@ -7,8 +7,6 @@
 
 #include "connect/uiConnect.h"
 #include "connect/tracerConnect.h"
-
-using namespace std;
 
 class RealTracer : public virtual TracerConnect {
 public:
