@@ -96,7 +96,7 @@ void DebugWindow::handleCallEntry(pid_t pid, syscall_entry& info) {
 			SIG_AddEntryStart(proc->currentCall);
 		}
 		if (proc->calls.size() == config.displayLimit) {
-//			delete proc.calls.front();
+			delete proc->calls.front();
 			proc->calls.pop_front();
 			SIG_removeLastEntry();
 

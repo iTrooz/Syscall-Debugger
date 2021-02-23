@@ -44,7 +44,7 @@ void DebugWindow::cleanUI() {
 
 	QtUI.processTree->topLevelItem(0)->setText(0, "NA");
 	for(auto* i : QtUI.processTree->topLevelItem(0)->takeChildren()) {
-//		delete i;
+		delete i;
 	}
 }
 

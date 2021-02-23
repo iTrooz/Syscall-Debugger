@@ -19,7 +19,7 @@ void Process::setupTreeItem(QTreeWidgetItem* parent){
 }
 void Process::delCalls(){
 	for(Syscall* c : calls){
-//		delete c;
+		delete c;
 	}
 	calls.clear();
 }

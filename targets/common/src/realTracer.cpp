@@ -27,7 +27,7 @@ RealTracer::RealTracer(UIConnect *ui) {
 
 void RealTracer::cleanUp(){
 	for(auto* proc : processes){
-//		delete proc;
+		delete proc;
 	}
 	processes.clear();
 }
