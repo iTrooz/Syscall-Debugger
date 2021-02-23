@@ -8,16 +8,17 @@
 
 using namespace std;
 
-DebugWindow* mainWindow;
 string execPath;
 
 int main(int argc, char** argv){
+
 	execPath = argv[0];
 	QApplication app(argc, argv);
 
 	try{
-		mainWindow = new DebugWindow;
+		DebugWindow* mainWindow = new DebugWindow;
 		mainWindow->show();
+	    return QApplication::exec();
 	}catch(exception& e) {
 		cerr << "An error occured !" << endl;
 		cerr << e.what() << endl;
@@ -29,6 +30,6 @@ int main(int argc, char** argv){
 		msg.setInformativeText(QString::fromStdString("Raison : "+(string) e.what()));
 		msg.setWindowTitle("Syscall Debugger - Startup Error");
 		msg.show();
+	    return QApplication::exec();
 	}
-    return QApplication::exec();
 }

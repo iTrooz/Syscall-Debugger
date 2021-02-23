@@ -8,11 +8,6 @@
 
 using namespace std;
 
-//template<typename... CArgs>
-//void DebugWindow::execFunc(void (*func)(CArgs...), CArgs&&... args) {
-//	func(args...);
-//}
-
 DebugWindow::DebugWindow(){
 	QtUI.setupUi(this);
 	tracerConnect = new RealTracer(this);

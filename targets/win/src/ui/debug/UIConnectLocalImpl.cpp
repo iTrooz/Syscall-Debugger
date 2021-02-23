@@ -74,34 +74,56 @@ bool DebugWindow::handleChildExit(pid_t stopped) { // returns true is there is n
 }
 
 
-void DebugWindow::handleCall(pid_t pid, __ptrace_syscall_info& info) {
-	Process* proc = getProcess(pid);
-	if(proc==nullptr){
-		proc = handleChildCreate(pid);
+Process* DebugWindow::INT_handleCall(pid_t pid) {
+	Process *proc = getProcess(pid);
+	if (proc == nullptr) return handleChildCreate(pid);
+	else return proc;
+}
+
+
+void DebugWindow::handleCallEntry(pid_t pid, syscall_entry& info) {
+	Process *proc = INT_handleCall(pid);
+	if (proc->currentCall != nullptr) {
+		cerr << "Warning " << pid << " : waiting for syscall exit, got syscall entry" << endl;
+		return;
+	}
+	proc->currentCall = new Syscall();
+	proc->currentCall->entry = info;
+	proc->calls.push_back(proc->currentCall);
+
+	if (tableLocked == 0) {
+		if (displayed->pid == proc->pid) {
+			SIG_AddEntryStart(proc->currentCall);
+		}
+		if (proc->calls.size() == config.displayLimit) {
+//			delete proc.calls.front();
+			proc->calls.pop_front();
+			SIG_removeLastEntry();
+
+		} else if (proc->calls.size() > config.displayLimit) {
+			throw runtime_error("Calls list too large !");
+		}
+	} else if (tableLocked == 1)tableLocked = 2;
+
+}
+
+void DebugWindow::handleCallExit(pid_t pid, syscall_exit& info) {
+	Process *proc = INT_handleCall(pid);
+	if (proc->currentCall == nullptr) {
+		cerr << "Warning " << pid << " : waiting for syscall entry, got syscall exit" << endl;
+		return;
+	}
+	proc->currentCall->exit = info;
+
+	if (tableLocked == 0) {
+		d:
+		if (displayed->pid == proc->pid) {
+			SIG_addEntryEnd(proc->currentCall);
+		}
+	} else if (tableLocked == 1) {
+		tableLocked = 2;
+		goto d;
 	}
 
-	if (info.op == PTRACE_SYSCALL_INFO_ENTRY) {
-		if (proc->currentCall != nullptr) {
-			cerr << "Warning " << pid << " : waiting for syscall exit, got syscall entry" << endl;
-		} else {
-			proc->currentCall = new Syscall();
-			proc->currentCall->entry = info;
-			proc->calls.push_back(proc->currentCall);
-
-			handleCallEntry(*proc);
-		}
-
-	} else if (info.op == PTRACE_SYSCALL_INFO_EXIT) {
-		if (proc->currentCall == nullptr) {
-			cerr << "Warning " << pid << " : waiting for syscall entry, got syscall exit" << endl;
-		} else {
-			proc->currentCall->exit = info;
-
-			handleCallExit(*proc);
-
-			proc->currentCall = nullptr;
-		}
-	} else {
-		cerr << "Got unsupported OP " << to_string(info.op) << endl;
-	}
+	proc->currentCall = nullptr;
 }

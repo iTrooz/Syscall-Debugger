@@ -33,16 +33,15 @@ public:
 	//
 
 	// inherited from UIConnect
-	void handleCall(pid_t, __ptrace_syscall_info&) override;
 	void handleTracerStart(pid_t) override;
 	void handleTracerStartBulk(pid_t, list<pdata>&) override;
 	void handleTracerStop() override;
 	Process* handleChildCreate(pid_t) override;
 	bool handleChildExit(pid_t) override;
+	void handleCallEntry(pid_t, syscall_entry&) override;
+	void handleCallExit(pid_t, syscall_exit&) override;
 
 	// related handlers
-	void handleCallEntry(Process& proc);
-	void handleCallExit(Process& proc);
 	void handleTracerStartCommon(Process* proc);
 
 	Process* getProcess(pid_t) const;
@@ -76,6 +75,10 @@ public:
 	void ACT_bChooseProcess();
 	void ACT_treeClick(QTreeWidgetItem* item);
 	void ACT_killProcess();
+
+	// internal
+private:
+	Process *INT_handleCall(pid_t pid);
 
 private slots:
 	void SLOT_addEntryStart(Syscall*);

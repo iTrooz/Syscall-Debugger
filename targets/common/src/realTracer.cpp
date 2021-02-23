@@ -120,8 +120,8 @@ void RealTracer::startTracer() {
 	if (temp != 0)throw runtime_error("FIRST PTRACE_SYSCALL failed : " +
 									  to_string(temp));
 
-	__ptrace_syscall_info info{};
-	int size = sizeof(__ptrace_syscall_info);
+	native_syscall_info info{};
+	int size = sizeof(native_syscall_info);
 
 	while (true) {
 		if (waitProcess(stopped)) {
@@ -130,7 +130,15 @@ void RealTracer::startTracer() {
 		}
 
 		ptrace(PTRACE_GET_SYSCALL_INFO, stopped, size, &info);
-		uiConnect->handleCall(stopped, info);
+		if(info.op==PTRACE_SYSCALL_INFO_ENTRY) {
+			syscall_entry tmp(info);
+			uiConnect->handleCallEntry(stopped, tmp);
+		}else if(info.op==PTRACE_SYSCALL_INFO_EXIT){
+			syscall_exit tmp(info);
+			uiConnect->handleCallExit(stopped, tmp);
+		}else{
+			cerr << "Received unknown OP : "+to_string(info.op) << endl;
+		}
 
 		temp = ptrace(PTRACE_SYSCALL, stopped, 0, 0); // restart le thread + l'arrête au prochain syscall
 		if(temp!=0)cerr << "PTRACE_SYSCALL in-loop failed : " << temp << endl;

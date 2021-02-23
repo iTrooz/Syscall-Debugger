@@ -6,22 +6,9 @@
 #include<sys/ptrace.h>
 #include<plateform.h>
 
+#include "syscall_structs.h"
+
 using namespace std;
-
-struct syscall_entry {
-	__uint64_t id{};
-	__uint64_t args[6]{};
-
-	syscall_entry& operator=(const __ptrace_syscall_info& other);
-};
-
-struct syscall_exit {
-
-	__int64_t rval{};
-	__uint8_t is_error = 0xF;
-
-	syscall_exit& operator=(const __ptrace_syscall_info& other);
-};
 
 class Syscall {
 public:
